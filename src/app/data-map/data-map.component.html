@@ -1,0 +1,15 @@
+<div class="map-container">
+  <div id="map"></div>
+  <div class="map-footer">
+    <div class="box-right-corner">
+      <div class="coordinate-box">
+        <span class="coordinate" id="cord"></span>
+      </div>
+      <div class="scale-box">
+        <label id="customScaleControl"></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-data-catalogue *ngIf="_dataMapService.showCatalogue"></app-data-catalogue>

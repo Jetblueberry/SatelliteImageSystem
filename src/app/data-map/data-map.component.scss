@@ -1,0 +1,18 @@
+
+.map-footer {
+  position: absolute;
+  display: flex;
+  z-index: 1000;
+  height: 30px;
+  width: calc(100% - 350px);
+  background: white;
+  bottom: 0px;
+  align-items: center;
+  font-size: 14px;
+}
+.box-right-corner {
+  display: flex;
+  position: absolute;
+  right: 0px;
+  left: auto;
+}

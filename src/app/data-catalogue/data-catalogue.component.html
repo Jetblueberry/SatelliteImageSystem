@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="header">
+      <div class="data-catalogue-area">
+        <button class="data-catalogue-btn">Data Catalogue</button>
+      </div>
+      <div class="done-area">
+        <button class="done-btn" (click)="closeDataCatalogue()">Done</button>
+      </div>
+    </div>
+    <div class="body col-md-12">
+      <div class="col-md-4" style="background-color: #f3f1f1;">
+        <div class="data-catalogue-explorer">
+          <div class="input-area">
+            <div class="input-block">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input placeholder="Search catalogue">
+            </div>
+          </div>
+          <div class="folder-area">
+            <ul class="catalog-group">
+              <li class="data-catalog-group" >
+                <button type="button" class="catalog-group-btn" (click)="OpenCloseLandSatData()">
+                  <span class="btn-text">Landsat</span>
+                  <span class="btn-icon">
+                    <i class="fa-solid fa-caret-up" id="landsat-icon"></i>
+                  </span>
+                </button>
+                <ul *ngIf="displayLandsatData" class="catalog-group-datasets">
+                  <li class="data-catalog-group-datasets">
+                    <button type="button" class="catalog-group-datasets-btn">
+                      <span class="btn-text">Landsat-8</span>
+                      <span class="btn-icon">
+                        <i class="fa-solid fa-circle-plus"></i>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </li>
+              <li class="data-catalog-group">
+                <button type="button" class="catalog-group-btn">
+                  <span class="btn-text">Sentinel</span>
+                  <span class="btn-icon">
+                    <i class="fa-solid fa-caret-up"></i>
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="data-catalogue-details">
+          hahah
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.container-fluid {
+  width: 350px;
+  padding: 0px;
+}
+.container {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+  height: 100vh;
+  padding: 0px;
+}
+.root-menu {
+  display: block;
+}
+.root-menu img {
+  width: 100%;
+  height: 50%;
+}
+.layout-menu-block {
+  padding: 20px;
+}
+.btn-explore {
+  width: 200px;
+  height: 40px;
+  background-color: #395490;
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+}
