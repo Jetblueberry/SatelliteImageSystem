@@ -1,4 +1,3 @@
-
 .map-footer {
   position: absolute;
   display: flex;
@@ -15,4 +14,22 @@
   position: absolute;
   right: 0px;
   left: auto;
+}
+
+.box-panel-info {
+  background: #3f4854;
+  color: white;
+  position: absolute;
+  top: 60px;
+  left: 500px;
+  z-index: 10000;
+  cursor: move;
+}
+.panel-header {
+  padding-right: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid white;
+}
+.dimension-panel {
+  height: 40px;
 }

@@ -1,69 +1,55 @@
 import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as L from 'leaflet';
-import { DataMapService } from '../services/data-map-services/data-map.service';
+import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
+import { MapTypeLists } from '../services/map-services/map-type-lists.service';
 
 @Component({
   selector: 'app-data-map',
   templateUrl: './data-map.component.html',
-  styleUrls: ['./data-map.component.scss']
+  styleUrls: ['./data-map.component.scss'],
 })
 export class DataMapComponent {
-
+  urlLink: any;
   constructor(
-    public _dataMapService: DataMapService,
+    public _dataCatalogueService: DataCatalogueService,
+    public http: HttpClient,
+    public mapTypesLists: MapTypeLists
   ) {}
 
   ngOnInit() {
     this.initMap();
   }
 
-  initMap() {
-    var map = L.map('map').setView([20.048736, 105.890330], 7);
-    var scaleControl = L.control.scale({
-      metric: true,
-      maxWidth: 100,
-      position: "topright",
-    }).addTo(map);
+  async initMap() {
+    var map = L.map('map').setView([20.048736, 105.89033], 7);
+    var scaleControl = L.control
+      .scale({
+        metric: true,
+        maxWidth: 100,
+        position: 'topright',
+      })
+      .addTo(map);
 
     // Coordinates
-    map.on('mousemove', function(e: any) {
-      var cnt = document.getElementById("cord");
-      if(cnt)
-      cnt.innerHTML = `Lat  ${e.latlng.lat}   Lng  ${e.latlng.lng}`
-    })
-
-    // OSM layer
-    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    map.on('mousemove', function (e: any) {
+      var cnt = document.getElementById('cord');
+      if (cnt) cnt.innerHTML = `Lat  ${e.latlng.lat}   Lng  ${e.latlng.lng}`;
     });
-    // osm.addTo(map);
+    map.on('click', function (e: any) {
+      var cnt = document.getElementById('cord-point');
+      if (cnt) cnt.innerHTML = `Lat  ${e.latlng.lat}   Lng  ${e.latlng.lng}`;
+    });
 
-
-    var WorldPhysicalMap = L.tileLayer(
-      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
-	      attribution: 'Tiles &copy; Esri &mdash; Source: US National Park Service',
-	      maxZoom: 8
-      });
-      WorldPhysicalMap.addTo(map); // Map chính
+    // Map chính
+    var WorldPhysicalMap = this.mapTypesLists.WorldPhysicalMap;
 
     //Google map layer
-    var googleStreets = L.tileLayer(
-      'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
-      {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-      }
-    );
+    var googleStreets = this.mapTypesLists.googleStreets;
 
     //Satellite layer
-    var googleSat = L.tileLayer(
-      'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-      {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-      }
-    );
+    var googleSat = this.mapTypesLists.googleSat;
+    googleSat.addTo(map);
 
     //Layer Control
     var baseLayers = {
@@ -71,8 +57,25 @@ export class DataMapComponent {
       Satellite: googleSat,
       'Google Map': googleStreets,
     };
-    L.control.layers(baseLayers).addTo(map);
 
-
+    var vietnamStTile = L.tileLayer.wms(
+      'http://localhost:8080/geoserver/adUcation/wms',
+      {
+        layers: 'adUcation:Vietnam_Map_groupLayers',
+        format: 'image/png', // or any other supported format
+        transparent: true, // if transparency is needed
+        crs: L.CRS.EPSG3857,
+      }
+    );
+    vietnamStTile.addTo(map);
   }
+  // async getUrlLink() {
+  //   const res = (await this.getObject());
+  //   this.urlLink = res.url;
+  //   return this.urlLink;
+  // }
+
+  // async getObject() {
+  //   return this.http.get<any>("https://localhost:7021/api/landsat").toPromise();
+  // }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import { DataMapComponent } from '../data-map/data-map.component';
+import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
+import { DataDetailsService } from '../services/data-details-services/data-details.service';
 
 @Component({
   selector: 'app-left-menu',
@@ -8,11 +10,13 @@ import { DataMapComponent } from '../data-map/data-map.component';
   styleUrls: ['./left-menu.component.scss']
 })
 export class LeftMenuComponent {
+  opacityValue: number = 100;
 
   constructor(
-    public _dataMapCatalogue: DataMapService,
+    public _dataCatalogueService: DataCatalogueService,
+    public _dataDetailsService: DataDetailsService,
   ) {}
   openCatalogue() {
-    this._dataMapCatalogue.showCatalogue = true;
+    this._dataCatalogueService.showCatalogue = true;
   }
 }

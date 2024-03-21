@@ -6,5 +6,5 @@ import { Injectable, Injector} from '@angular/core';
 })
 
 export class DataMapService {
-  showCatalogue = false;
+
 }

@@ -12,4 +12,16 @@
   </div>
 </div>
 
-<app-data-catalogue *ngIf="_dataMapService.showCatalogue"></app-data-catalogue>
+<app-data-catalogue *ngIf="_dataCatalogueService.showCatalogue"></app-data-catalogue>
+
+<div class="box-panel-info">
+  <div class="panel-header">
+    <span>Feature Infomation</span>
+  </div>
+  <div class="panel-body">
+    <div class="data-details-panel"></div>
+    <div class="dimension-panel">
+      <span class="coordinate" id="cord-point"></span>
+    </div>
+  </div>
+</div>

@@ -20,16 +20,16 @@
           <div class="folder-area">
             <ul class="catalog-group">
               <li class="data-catalog-group" >
-                <button type="button" class="catalog-group-btn" (click)="OpenCloseLandSatData()">
+                <button type="button" class="catalog-group-btn" (click)="OpenCloseLandSatData('landsat')">
                   <span class="btn-text">Landsat</span>
                   <span class="btn-icon">
                     <i class="fa-solid fa-caret-up" id="landsat-icon"></i>
                   </span>
                 </button>
-                <ul *ngIf="displayLandsatData" class="catalog-group-datasets">
-                  <li class="data-catalog-group-datasets">
+                <ul *ngIf="displayData['landsat']" class="catalog-group-datasets">
+                  <li *ngFor="let i of this.landsat_lst" class="data-catalog-group-datasets" (click)="selectDataset(i.id)">
                     <button type="button" class="catalog-group-datasets-btn">
-                      <span class="btn-text">Landsat-8</span>
+                      <span class="btn-text">{{i.name}}</span>
                       <span class="btn-icon">
                         <i class="fa-solid fa-circle-plus"></i>
                       </span>
@@ -38,12 +38,22 @@
                 </ul>
               </li>
               <li class="data-catalog-group">
-                <button type="button" class="catalog-group-btn">
+                <button type="button" class="catalog-group-btn" (click)="OpenCloseLandSatData('sentinel')">
                   <span class="btn-text">Sentinel</span>
                   <span class="btn-icon">
-                    <i class="fa-solid fa-caret-up"></i>
+                    <i class="fa-solid fa-caret-up" id="sentinel-icon"></i>
                   </span>
                 </button>
+                <ul *ngIf="displayData['sentinel']" class="catalog-group-datasets">
+                  <li *ngFor="let i of this.sentinel_lst" class="data-catalog-group-datasets" (click)="selectDataset(i.id)">
+                    <button type="button" class="catalog-group-datasets-btn">
+                      <span class="btn-text">{{i.name}}</span>
+                      <span class="btn-icon">
+                        <i class="fa-solid fa-circle-plus"></i>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -51,7 +61,7 @@
       </div>
       <div class="col-md-8">
         <div class="data-catalogue-details">
-          hahah
+
         </div>
       </div>
     </div>
