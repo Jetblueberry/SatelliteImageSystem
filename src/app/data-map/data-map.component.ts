@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as L from 'leaflet';
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
 import { MapTypeLists } from '../services/map-services/map-type-lists.service';
+import { DataMapService } from '../services/data-map-services/data-map.service';
 
 @Component({
   selector: 'app-data-map',
@@ -13,6 +14,7 @@ export class DataMapComponent {
   urlLink: any;
   constructor(
     public _dataCatalogueService: DataCatalogueService,
+    public _dataMapService: DataMapService,
     public http: HttpClient,
     public mapTypesLists: MapTypeLists
   ) {}
@@ -58,15 +60,7 @@ export class DataMapComponent {
       'Google Map': googleStreets,
     };
 
-    var vietnamStTile = L.tileLayer.wms(
-      'http://localhost:8080/geoserver/adUcation/wms',
-      {
-        layers: 'adUcation:Vietnam_Map_groupLayers',
-        format: 'image/png', // or any other supported format
-        transparent: true, // if transparency is needed
-        crs: L.CRS.EPSG3857,
-      }
-    );
+    var vietnamStTile = this._dataMapService.vietnamStTile;
     vietnamStTile.addTo(map);
   }
   // async getUrlLink() {
