@@ -6,6 +6,5 @@ import { Injectable, Injector} from '@angular/core';
 })
 
 export class DataDetailsService {
-  showDetails = false;
-  lstDataChoosen: any = [];
+
 }

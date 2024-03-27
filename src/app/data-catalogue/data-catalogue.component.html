@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="true">
   <div class="container">
     <div class="header">
       <div class="data-catalogue-area">
@@ -20,17 +20,17 @@
           <div class="folder-area">
             <ul class="catalog-group">
               <li class="data-catalog-group" >
-                <button type="button" class="catalog-group-btn" (click)="OpenCloseLandSatData('landsat')">
+                <button type="button" class="catalog-group-btn" (click)="OpenCloseListData('landsat')">
                   <span class="btn-text">Landsat</span>
                   <span class="btn-icon">
                     <i class="fa-solid fa-caret-up" id="landsat-icon"></i>
                   </span>
                 </button>
                 <ul *ngIf="displayData['landsat']" class="catalog-group-datasets">
-                  <li *ngFor="let i of this.landsat_lst" class="data-catalog-group-datasets" (click)="selectDataset(i.id)">
+                  <li *ngFor="let i of this.list" class="data-catalog-group-datasets" >
                     <button type="button" class="catalog-group-datasets-btn">
-                      <span class="btn-text">{{i.name}}</span>
-                      <span class="btn-icon">
+                      <span class="btn-text" (click)="selectDataset(i.idData)">{{i.tenData}}</span>
+                      <span class="btn-icon" (click)="addDatasetToMap(i.idData)">
                         <i class="fa-solid fa-circle-plus"></i>
                       </span>
                     </button>
@@ -38,17 +38,17 @@
                 </ul>
               </li>
               <li class="data-catalog-group">
-                <button type="button" class="catalog-group-btn" (click)="OpenCloseLandSatData('sentinel')">
+                <button type="button" class="catalog-group-btn" (click)="OpenCloseListData('sentinel')">
                   <span class="btn-text">Sentinel</span>
                   <span class="btn-icon">
                     <i class="fa-solid fa-caret-up" id="sentinel-icon"></i>
                   </span>
                 </button>
                 <ul *ngIf="displayData['sentinel']" class="catalog-group-datasets">
-                  <li *ngFor="let i of this.sentinel_lst" class="data-catalog-group-datasets" (click)="selectDataset(i.id)">
+                  <li *ngFor="let i of this.sentinel_lst" class="data-catalog-group-datasets" >
                     <button type="button" class="catalog-group-datasets-btn">
                       <span class="btn-text">{{i.name}}</span>
-                      <span class="btn-icon">
+                      <span class="btn-icon" (click)="addDatasetToMap(i.id)">
                         <i class="fa-solid fa-circle-plus"></i>
                       </span>
                     </button>
@@ -60,10 +60,50 @@
         </div>
       </div>
       <div class="col-md-8">
-        <div class="data-catalogue-details">
-
+        <div *ngIf="lsd" class="data-catalogue-details">
+          <div>
+            <div class="preview-map"></div>
+            <div class="preview-info">
+              <div class="preview-name">
+                <h3>{{lsd.tenData}}</h3>
+              </div>
+              <div class="preview-details">
+                <div class="box-sc">
+                  <button class="btn-description" (click)="OpenClosePreviewInfo('description')">
+                    <i class="fa-solid fa-caret-down" id="description-icon" style="margin-right: 10px;"></i>
+                    <span class="">Web Map Service Layer Description</span>
+                  </button>
+                  <div class="group-description" *ngIf="!displayData['description']">
+                    <p class="text-description">{{lsd.description1}}</p>
+                    <p class="text-description">{{lsd.description2}}</p>
+                    <p class="text-description">{{lsd.description3}}</p>
+                  </div>
+                </div>
+                <div class="box-sc">
+                  <button class="btn-description" (click)="OpenClosePreviewInfo('contact')">
+                    <i class="fa-solid fa-caret-down" id="contact-icon" style="margin-right: 10px;"></i>
+                    <span class="">Service Description</span>
+                  </button>
+                  <div class="group-description" *ngIf="!displayData['contact']">
+                    <p class="text-description">{{lsd.description2}}</p>
+                  </div>
+                </div>
+                <div class="box-sc">
+                  <button class="btn-description" (click)="OpenClosePreviewInfo('url')">
+                    <i class="fa-solid fa-caret-down" id="url-icon" style="margin-right: 10px;"></i>
+                    <span class="">Get Data Url</span>
+                  </button>
+                  <div class="group-description" *ngIf="!displayData['url']">
+                    <p class="text-description">{{lsd.description3}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-data-details *ngIf="displayDetails" [lst_choosen]="choosen_lst"></app-data-details>

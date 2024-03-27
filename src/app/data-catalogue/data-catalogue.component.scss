@@ -131,3 +131,39 @@
 .catalog-group-datasets-btn:hover {
   background-color: rgb(238, 175, 48);
 }
+
+
+//catalogue-details
+.data-catalogue-details {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin: 0 5px;
+  padding: 20px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.preview-info {
+  margin: 20px 0;
+}
+.preview-name h3 {
+  font-size: 1.1rem;
+  margin: .5em 0;
+  font-weight: 600;
+}
+.preview-details {
+  font-size: 14px;
+}
+.btn-description {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+}
+.text-description {
+  margin-top: 14px;
+  margin-bottom: 14px;
+}

@@ -6,6 +6,8 @@ import * as L from 'leaflet';
 })
 
 export class DataMapService {
+  showLayerMap = false;
+
   wmsUrl = 'http://localhost:8080/geoserver/adUcation/wms'
   layer = 'adUcation:Vietnam_Map_groupLayers'
 
@@ -17,4 +19,8 @@ export class DataMapService {
       crs: L.CRS.EPSG3857,
     }
   );
+
+  initMap() {
+    
+  }
 }

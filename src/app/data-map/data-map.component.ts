@@ -12,6 +12,7 @@ import { DataMapService } from '../services/data-map-services/data-map.service';
 })
 export class DataMapComponent {
   urlLink: any;
+  mapSave: any;
   constructor(
     public _dataCatalogueService: DataCatalogueService,
     public _dataMapService: DataMapService,
@@ -61,7 +62,9 @@ export class DataMapComponent {
     };
 
     var vietnamStTile = this._dataMapService.vietnamStTile;
-    vietnamStTile.addTo(map);
+    if(this._dataMapService.showLayerMap) {
+      vietnamStTile.addTo(map);
+    }
   }
   // async getUrlLink() {
   //   const res = (await this.getObject());
@@ -72,4 +75,12 @@ export class DataMapComponent {
   // async getObject() {
   //   return this.http.get<any>("https://localhost:7021/api/landsat").toPromise();
   // }
+  OpenLayer() {
+    if(this._dataMapService.showLayerMap) {
+      console.warn(this._dataMapService.showLayerMap);
+      var vietnamStTile = this._dataMapService.vietnamStTile;
+      vietnamStTile.addTo(this.mapSave);
+    }
+  }
+
 }

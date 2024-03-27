@@ -5,62 +5,13 @@
       <label></label>
     </span>
     <div class="layout-menu-block">
-      <div class="btn-explore" (click)="openCatalogue()">
+      <div class="btn-explore" (click)="OpenCatalogue()">
         <span>Explore map</span>
       </div>
       <div class="btn-upload"></div>
     </div>
-    <div class="layout-details-block" *ngIf="this._dataDetailsService.showDetails">
-      <div class="box-summary-datasets">
-        <span>DATA SETS</span>
-        <div class="remove-details-area">
-          <span class="remove-btn">Remove</span>
-        </div>
-      </div>
-      <ul class="list-details-datasets">
-        <perfect-scrollbar style="height: 300px;">
-          <li *ngFor="let i of _dataDetailsService.lstDataChoosen" class="box-details">
-            <div class="box-details-header">
-              <span class="dataset-name">{{i.name}}</span>
-              <div style="color: white; font-size: 14px; padding: 5px;">
-                <i class="fa-solid fa-caret-down"></i>
-              </div>
-            </div>
-            <div class="box-details-body">
-              <div class="row-1 box-summary-details">
-                <button class="summary-detail">Dataset Summary</button>
-                <button class="menu-btn">
-                  <i class="fa-solid fa-bars"></i>
-                </button>
-              </div>
-              <div class="row-2 box-opacity-details">
-                <label class="opacity">Opacity: {{opacityValue}}%</label>
-                <div class="slidercontainer">
-                  <input type="range" class="slider" min="1" max="100" [(ngModel)]="opacityValue">
-                </div>
-              </div>
-              <div class="row-3 box-time-details">
-                <span>Time:</span>
-                <div style="display: flex;">
-                  <div class="box-range-time">
-                    <span>01/01/2020, 07:00:00</span>
-                  </div>
-                  <button type="button" class="time-btn">
-                    <i class="fa-solid fa-timeline"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="row-4 box-filter-location">
-                <button class="btn-filter">
-                  <span>Filter by location</span>
-                </button>
-              </div>
-            </div>
-          </li>
-        </perfect-scrollbar>
-      </ul>
-    </div>
   </div>
 </div>
 
+<app-data-catalogue [openCatalogue]="displayCatalogue" (closeCatalogue)="closeCatalogue($event)"></app-data-catalogue>
 
