@@ -6,7 +6,7 @@ import * as L from 'leaflet';
 })
 
 export class DataMapService {
-  showLayerMap = false;
+  map: any;
 
   wmsUrl = 'http://localhost:8080/geoserver/adUcation/wms'
   layer = 'adUcation:Vietnam_Map_groupLayers'
@@ -20,7 +20,21 @@ export class DataMapService {
     }
   );
 
-  initMap() {
-    
+  AddDataToMap(): void {
+    if (this.map) {
+      this.vietnamStTile.addTo(this.map);
+    }
+  }
+
+  RemoveDataFromMap(): void {
+    if(this.map) {
+      this.vietnamStTile.remove();
+    }
+  }
+
+  SetOpacityForData(opacityValue: any): void {
+    if(this.map) {
+      this.vietnamStTile.setOpacity(opacityValue);
+    }
   }
 }

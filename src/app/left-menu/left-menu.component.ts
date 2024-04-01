@@ -10,7 +10,7 @@ import { DataDetailsService } from '../services/data-details-services/data-detai
   styleUrls: ['./left-menu.component.scss']
 })
 export class LeftMenuComponent {
-  displayCatalogue = false;
+  openCatalogue = false;
 
   opacityValue: number = 100;
 
@@ -18,10 +18,10 @@ export class LeftMenuComponent {
     public _dataCatalogueService: DataCatalogueService,
     public _dataDetailsService: DataDetailsService,
   ) {}
-  OpenCatalogue() {
-    this.displayCatalogue = true;
+  OpenDataCatalogue() {
+    this.openCatalogue = true;
   }
-  closeCatalogue(closeCatalogue: any) {
-    this.displayCatalogue = closeCatalogue;
+  closeDataCatalogue(closeCatalogue: any) {
+    this.openCatalogue = closeCatalogue;
   }
 }

@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="true">
+<div class="container-fluid" *ngIf="openCatalogue">
   <div class="container">
     <div class="header">
       <div class="data-catalogue-area">
@@ -21,37 +21,39 @@
             <ul class="catalog-group">
               <li class="data-catalog-group" >
                 <button type="button" class="catalog-group-btn" (click)="OpenCloseListData('landsat')">
+                  <i class="fa-solid fa-folder-open"></i>
                   <span class="btn-text">Landsat</span>
-                  <span class="btn-icon">
+                  <span class="btn-icon-folder">
                     <i class="fa-solid fa-caret-up" id="landsat-icon"></i>
                   </span>
                 </button>
                 <ul *ngIf="displayData['landsat']" class="catalog-group-datasets">
                   <li *ngFor="let i of this.list" class="data-catalog-group-datasets" >
-                    <button type="button" class="catalog-group-datasets-btn">
-                      <span class="btn-text" (click)="selectDataset(i.idData)">{{i.tenData}}</span>
-                      <span class="btn-icon" (click)="addDatasetToMap(i.idData)">
-                        <i class="fa-solid fa-circle-plus"></i>
-                      </span>
+                    <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
+                      <span class="btn-text">{{i.tenData}}</span>
                     </button>
+                    <span class="btn-icon" (click)="addDatasetToMap(i.idData)">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </span>
                   </li>
                 </ul>
               </li>
               <li class="data-catalog-group">
                 <button type="button" class="catalog-group-btn" (click)="OpenCloseListData('sentinel')">
+                  <i class="fa-solid fa-folder-open"></i>
                   <span class="btn-text">Sentinel</span>
-                  <span class="btn-icon">
+                  <span class="btn-icon-folder">
                     <i class="fa-solid fa-caret-up" id="sentinel-icon"></i>
                   </span>
                 </button>
                 <ul *ngIf="displayData['sentinel']" class="catalog-group-datasets">
                   <li *ngFor="let i of this.sentinel_lst" class="data-catalog-group-datasets" >
-                    <button type="button" class="catalog-group-datasets-btn">
+                    <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
                       <span class="btn-text">{{i.name}}</span>
-                      <span class="btn-icon" (click)="addDatasetToMap(i.id)">
-                        <i class="fa-solid fa-circle-plus"></i>
-                      </span>
                     </button>
+                    <span class="btn-icon" (click)="addDatasetToMap(i.id)">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </span>
                   </li>
                 </ul>
               </li>
@@ -71,7 +73,7 @@
                 <div class="box-sc">
                   <button class="btn-description" (click)="OpenClosePreviewInfo('description')">
                     <i class="fa-solid fa-caret-down" id="description-icon" style="margin-right: 10px;"></i>
-                    <span class="">Web Map Service Layer Description</span>
+                    <span class="">Layer Description</span>
                   </button>
                   <div class="group-description" *ngIf="!displayData['description']">
                     <p class="text-description">{{lsd.description1}}</p>
@@ -85,16 +87,105 @@
                     <span class="">Service Description</span>
                   </button>
                   <div class="group-description" *ngIf="!displayData['contact']">
-                    <p class="text-description">{{lsd.description2}}</p>
+                    <div class="box-table-service">
+                      <table class="service-desciption-table">
+                        <tbody>
+                          <tr>
+                            <th>Tên Service</th>
+                            <td>{{lsd.tenService}}</td>
+                          </tr>
+                          <tr>
+                            <th>Title Service</th>
+                            <td>{{lsd.titleService}}</td>
+                          </tr>
+                          <tr>
+                            <th>Địa điểm</th>
+                            <td>
+                              <table class="service-td-table">
+                                <tbody>
+                                  <tr>
+                                    <th>Địa chỉ</th>
+                                    <td>{{lsd.diaChi}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>Quốc gia</th>
+                                    <td>{{lsd.quocGia}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Số lớp</th>
+                            <td>{{lsd.soLop}}</td>
+                          </tr>
+                          <tr>
+                            <th>Chiều dài tối đa</th>
+                            <td>{{lsd.maxChieuDai}}</td>
+                          </tr>
+                          <tr>
+                            <th>Chiều rộng tối đa</th>
+                            <td>{{lsd.maxChieuRong}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
                 <div class="box-sc">
                   <button class="btn-description" (click)="OpenClosePreviewInfo('url')">
                     <i class="fa-solid fa-caret-down" id="url-icon" style="margin-right: 10px;"></i>
-                    <span class="">Get Data Url</span>
+                    <span class="">Dimension Description</span>
                   </button>
                   <div class="group-description" *ngIf="!displayData['url']">
-                    <p class="text-description">{{lsd.description3}}</p>
+                    <div class="box-table-service">
+                      <table class="service-desciption-table">
+                        <tbody>
+                          <tr>
+                            <th>Loại Vệ tinh</th>
+                            <td>{{lsd.loaiVeTinh}}</td>
+                          </tr>
+                          <tr>
+                            <th>Kinh độ</th>
+                            <td>
+                              <table class="service-td-table">
+                                <tbody>
+                                  <tr>
+                                    <th>Kinh độ tây</th>
+                                    <td>{{lsd.kinhDo_Tay}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>Kinh độ đông</th>
+                                    <td>{{lsd.kinhDo_Dong}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Vĩ độ</th>
+                            <td>
+                              <table class="service-td-table">
+                                <tbody>
+                                  <tr>
+                                    <th>Vĩ độ bắc</th>
+                                    <td>{{lsd.viDo_Bac}}</td>
+                                  </tr>
+                                  <tr>
+                                    <th>Vĩ độ Nam</th>
+                                    <td>{{lsd.viDo_Nam}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Ngày mặc định hiển thị</th>
+                            <td>{{lsd.defaultDate | date: 'dd/MM/YYYY'}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -106,4 +197,9 @@
   </div>
 </div>
 
-<app-data-details *ngIf="displayDetails" [lst_choosen]="choosen_lst"></app-data-details>
+<app-data-details
+  *ngIf="displayDetails"
+  [lst_choosen]="choosen_lst"
+  (openCatalogue)="openDataCatalogue($event)"
+  >
+</app-data-details>

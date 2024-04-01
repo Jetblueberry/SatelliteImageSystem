@@ -11,14 +11,15 @@
         <perfect-scrollbar style="height: 300px;">
           <li *ngFor="let i of lst_choosen" class="box-details">
             <div class="box-details-header">
-              <span class="dataset-name">{{i.name}}</span>
+              <button class="display-btn" (click)="hideDataMap()"></button>
+              <span class="dataset-name">{{i.tenData}}</span>
               <div style="color: white; font-size: 14px; padding: 5px;">
                 <i class="fa-solid fa-caret-down"></i>
               </div>
             </div>
             <div class="box-details-body">
               <div class="row-1 box-summary-details">
-                <button class="summary-detail">Dataset Summary</button>
+                <button class="summary-detail" (click)="openSummary()">Dataset Summary</button>
                 <button class="menu-btn">
                   <i class="fa-solid fa-bars"></i>
                 </button>
@@ -26,7 +27,7 @@
               <div class="row-2 box-opacity-details">
                 <label class="opacity">Opacity: {{opacityValue}}%</label>
                 <div class="slidercontainer">
-                  <input type="range" class="slider" min="1" max="100" [(ngModel)]="opacityValue">
+                  <input type="range" class="slider" min="1" max="100" [(ngModel)]="opacityValue" (change)="setOpacity()">
                 </div>
               </div>
               <div class="row-3 box-time-details">

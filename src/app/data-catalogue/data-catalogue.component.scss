@@ -8,7 +8,7 @@
 }
 .header {
   height: 50px;
-  background-color: rgb(238, 175, 48);
+  background: linear-gradient(45deg, #00f260, #0575e6);
   display: flex;
 }
 .data-catalogue-area {
@@ -61,9 +61,9 @@
   display: flex;
   background-color: white;
   height: 40px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 40px;
+  align-items: center;
+  padding-left: 10px;
+  border-radius: 40px;
 }
 .input-block input {
   border: none;
@@ -76,7 +76,7 @@
   padding-top: 5px;
   list-style-type: none;
 }
-.catalog-group .btn-icon {
+.btn-icon-folder {
   position: absolute;
   display: flex;
   align-items: center;
@@ -88,7 +88,7 @@
   display: flex;
   text-align: left;
   font-size: .8125rem;
-  padding: 8px 40px;
+  padding: 8px 15px;
   padding-right: 0;
   min-height: 35px;
   width: 100%;
@@ -96,6 +96,9 @@
   line-height: normal;
   position: relative;
   border: none;
+}
+.catalog-group-btn .btn-text {
+  margin-left: 30px;
 }
 .catalog-group-btn:hover {
   background-color: rgb(238, 175, 48);
@@ -109,11 +112,12 @@
   list-style-type: none;
 }
 .catalog-group-datasets .btn-icon {
-  position: absolute;
   display: flex;
   align-items: center;
-  right: 10px;
-  font-size: 16px;
+  margin-right: 7px;
+}
+.data-catalog-group-datasets {
+  display: flex;
 }
 .catalog-group-datasets-btn {
   display: flex;
@@ -147,6 +151,9 @@
 .preview-info {
   margin: 20px 0;
 }
+.preview-name {
+  margin-bottom: 30px;
+}
 .preview-name h3 {
   font-size: 1.1rem;
   margin: .5em 0;
@@ -166,4 +173,36 @@
 .text-description {
   margin-top: 14px;
   margin-bottom: 14px;
+}
+//Service Description
+.box-table-service {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.service-desciption-table { // Bảng service to
+  width: 100%;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: linear-gradient(45deg, #00f260, #0575e6);
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+.service-desciption-table th {
+  border: 1px solid #ced4da!important;
+  font-weight: 600;
+  font-size: 14px;
+  min-height: 30px;
+  width: 130px;
+  padding: 0.5rem!important;
+}
+.service-desciption-table td {
+  border: 1px solid #ced4da!important;
+  height: 30px;
+  word-wrap: break-word;
+  padding: 0.5rem!important;
+}
+
+.service-td-table { // Bảng Service nhỏ
+  width: 100%;
+  border-radius: 5px;
+  font-size: 1rem;
 }

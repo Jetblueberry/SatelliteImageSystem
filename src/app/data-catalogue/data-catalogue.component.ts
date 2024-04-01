@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
 import { DataDetailsService } from '../services/data-details-services/data-details.service';
 import {landsat_data} from '../data/landsat_data';
-import {sentinel_data} from '../data/sentinel_data'
+import {sentinel_data} from '../data/sentinel_data';
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import { DataMapComponent } from '../data-map/data-map.component';
 
@@ -51,6 +51,10 @@ export class DataCatalogueComponent {
 
   closeDataCatalogue() {
     this.closeCatalogue.emit(false);
+    this.openCatalogue = false;
+  }
+  openDataCatalogue(openCatalogue: any) {
+    this.openCatalogue = openCatalogue;
   }
 
   // Left catalogue list
@@ -85,13 +89,12 @@ export class DataCatalogueComponent {
     }
   }
 
-  addDatasetToMap(idData: any) {
-    for(const item of this.total_lst) {
-      if(item.id == idData) {
-        this.choosen_lst.push(item);
-      }
-    }
-    this._dataMapService.showLayerMap = true;
+  async addDatasetToMap(idData: any) {
+    const item = await this._dataCatalogueService.getDataLandsatById(idData);
+    this.choosen_lst.push(item);
+    console.warn(this.choosen_lst)
+
+    this._dataMapService.AddDataToMap();
 
     this.closeCatalogue.emit(false);
     this.displayDetails = true;

@@ -5,7 +5,7 @@
       <label></label>
     </span>
     <div class="layout-menu-block">
-      <div class="btn-explore" (click)="OpenCatalogue()">
+      <div class="btn-explore" (click)="OpenDataCatalogue()">
         <span>Explore map</span>
       </div>
       <div class="btn-upload"></div>
@@ -13,5 +13,5 @@
   </div>
 </div>
 
-<app-data-catalogue [openCatalogue]="displayCatalogue" (closeCatalogue)="closeCatalogue($event)"></app-data-catalogue>
+<app-data-catalogue [openCatalogue]="openCatalogue" (closeCatalogue)="closeDataCatalogue($event)"></app-data-catalogue>
 

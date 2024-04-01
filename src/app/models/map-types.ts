@@ -1,9 +1,4 @@
-import { Injectable, Injector} from '@angular/core';
 import * as L from 'leaflet';
-
-@Injectable({
-  providedIn: 'root',
-})
 
 export class MapTypeLists {
   WorldPhysicalMap = L.tileLayer(
@@ -14,7 +9,6 @@ export class MapTypeLists {
       maxZoom: 8,
     }
   );
-  //WorldPhysicalMap.addTo(map); // Map chính
 
   //Google map layer
   googleStreets = L.tileLayer(
