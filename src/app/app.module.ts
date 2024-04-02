@@ -14,6 +14,7 @@ import { DataCatalogueComponent } from './data-catalogue/data-catalogue.componen
 import { DataDetailsComponent } from './data-details/data-details.component';
 import { DataMapComponent } from './data-map/data-map.component';
 import { MapTypeLists } from './models/map-types';
+import { PreviewMapComponent } from './preview-map/preview-map.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MapTypeLists } from './models/map-types';
     LeftMenuComponent,
     DataCatalogueComponent,
     DataDetailsComponent,
-    DataMapComponent
+    DataMapComponent,
+    PreviewMapComponent
   ],
   imports: [
     BrowserModule,

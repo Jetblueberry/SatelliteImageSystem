@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="openCatalogue">
+<div class="container-fluid" *ngIf="true">
   <div class="container">
     <div class="header">
       <div class="data-catalogue-area">
@@ -64,7 +64,9 @@
       <div class="col-md-8">
         <div *ngIf="lsd" class="data-catalogue-details">
           <div>
-            <div class="preview-map"></div>
+            <div class="preview-map">
+              <!-- <app-preview-map></app-preview-map> -->
+            </div>
             <div class="preview-info">
               <div class="preview-name">
                 <h3>{{lsd.tenData}}</h3>

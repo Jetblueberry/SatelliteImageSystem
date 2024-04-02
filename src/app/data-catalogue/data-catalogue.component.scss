@@ -87,7 +87,7 @@
 .catalog-group-btn {
   display: flex;
   text-align: left;
-  font-size: .8125rem;
+  font-size: 14px;
   padding: 8px 15px;
   padding-right: 0;
   min-height: 35px;
@@ -96,12 +96,17 @@
   line-height: normal;
   position: relative;
   border: none;
+  margin-top: 3px;
 }
 .catalog-group-btn .btn-text {
   margin-left: 30px;
 }
 .catalog-group-btn:hover {
   background-color: rgb(238, 175, 48);
+}
+.catalog-group-btn:focus {
+  background-color: rgb(238, 175, 48);
+  outline: rgb(195, 144, 249) solid 3px;
 }
 
 //catalog-datasets
@@ -110,11 +115,13 @@
   padding-left: 0px;
   border-left: 1px solid #9e9e9e;
   list-style-type: none;
+  margin-top: 3px;
 }
 .catalog-group-datasets .btn-icon {
   display: flex;
   align-items: center;
   margin-right: 7px;
+  margin-left: 7px;
 }
 .data-catalog-group-datasets {
   display: flex;
@@ -122,18 +129,21 @@
 .catalog-group-datasets-btn {
   display: flex;
   text-align: left;
-  font-size: .8125rem;
+  font-size: 14px;
   padding: 8px 40px;
   padding-right: 0;
+  margin-top: 3px;
   min-height: 35px;
   width: 100%;
-  font-weight: bold;
   line-height: normal;
   position: relative;
   border: none;
 }
 .catalog-group-datasets-btn:hover {
-  background-color: rgb(238, 175, 48);
+  color: rgb(238, 175, 48);
+}
+.catalog-group-datasets-btn:focus {
+  outline: rgb(195, 144, 249) solid 3px;
 }
 
 
@@ -146,6 +156,10 @@
   padding: 20px;
   position: relative;
   box-sizing: border-box;
+}
+.preview-map {
+  width: 100%;
+  height: 200px;
 }
 
 .preview-info {

@@ -4,7 +4,8 @@ import { DataDetailsService } from '../services/data-details-services/data-detai
 import {landsat_data} from '../data/landsat_data';
 import {sentinel_data} from '../data/sentinel_data';
 import { DataMapService } from '../services/data-map-services/data-map.service';
-import { DataMapComponent } from '../data-map/data-map.component';
+import * as L from 'leaflet';
+import { MapTypeLists } from '../models/map-types';
 
 @Component({
   selector: 'app-data-catalogue',
@@ -17,6 +18,7 @@ export class DataCatalogueComponent {
 
   list: any = [];
   lsd: any;
+  mymap: any;
   displayDetails = false;
 
   displayData: any = {};
@@ -29,6 +31,7 @@ export class DataCatalogueComponent {
     private _dataCatalogueService: DataCatalogueService,
     public _dataDetailsService: DataDetailsService,
     public _dataMapService: DataMapService,
+    public mapTypesLists: MapTypeLists
   ) {}
 
   ngOnInit() {

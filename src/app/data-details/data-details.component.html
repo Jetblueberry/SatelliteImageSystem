@@ -11,7 +11,7 @@
         <perfect-scrollbar style="height: 300px;">
           <li *ngFor="let i of lst_choosen" class="box-details">
             <div class="box-details-header">
-              <button class="display-btn" (click)="hideDataMap()"></button>
+              <button class="display-btn" id="display-btn" (click)="hideShowDataMap()"></button>
               <span class="dataset-name">{{i.tenData}}</span>
               <div style="color: white; font-size: 14px; padding: 5px;">
                 <i class="fa-solid fa-caret-down"></i>

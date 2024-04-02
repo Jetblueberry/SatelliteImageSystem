@@ -12,6 +12,7 @@ export class DataDetailsComponent {
   @Output() openCatalogue = new EventEmitter<any>;
 
   opacityValue = 100;
+  displayOnMap = true;
 
   constructor(public _dataMapService: DataMapService) {}
   ngOnInit() {
@@ -22,11 +23,20 @@ export class DataDetailsComponent {
     this.openCatalogue.emit(true);
   }
 
-  hideDataMap() {
-    this._dataMapService.RemoveDataFromMap();
-  }
-  showDataMap() {
-    this._dataMapService.AddDataToMap();
+  hideShowDataMap() {
+    var btn = document.getElementById("display-btn")
+    if(btn) {
+      if(this.displayOnMap) {
+        btn.style.backgroundColor = "white";
+        this.displayOnMap = false;
+        this._dataMapService.RemoveDataFromMap();
+      }
+      else {
+        btn.style.backgroundColor = "aqua";
+        this.displayOnMap = true;
+        this._dataMapService.AddDataToMap();
+      }
+    }
   }
   setOpacity() {
     this._dataMapService.SetOpacityForData(this.opacityValue/100);
