@@ -2,9 +2,15 @@
   padding: 0px;
   z-index: 10000;
   position: absolute;
-  width: 1000px;
-  top: 54px;
-  left: 399px;
+  width: calc(100vw - 350px);
+  top: 0px;
+  left: 350px;
+  background-color: transparent;
+}
+.container {
+  padding: 50px 150px;
+  margin: 0px;
+  width: 100%;
 }
 .header {
   height: 50px;
@@ -26,7 +32,6 @@
 }
 .done-area {
   display: flex;
-  position: absolute;
   left: auto;
   right: 10px;
 }

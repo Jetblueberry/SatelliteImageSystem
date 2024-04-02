@@ -7,34 +7,49 @@ import * as L from 'leaflet';
 
 export class DataMapService {
   map: any;
+  wmsUrl = 'http://localhost:8080/geoserver/Landsat_Workspace/wms'
+  defaultLayer: any = {}; // Khởi tạo layer dạng object dynamic
 
-  wmsUrl = 'http://localhost:8080/geoserver/adUcation/wms'
-  layer = 'adUcation:Vietnam_Map_groupLayers'
+  ngOnInit() {}
 
-  vietnamStTile = L.tileLayer.wms(this.wmsUrl,
-    {
-      layers: this.layer,
-      format: 'image/png', // or any other supported format
-      transparent: true, // if transparency is needed
-      crs: L.CRS.EPSG3857,
-    }
-  );
+  // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
+  InitialDataLayerByName(nameData: any) {
+    var layer = `Landsat_Workspace:${nameData}`;
 
-  AddDataToMap(): void {
+    this.defaultLayer[layer] = L.tileLayer.wms(this.wmsUrl,
+      {
+        layers:layer,
+        format: 'image/png', // or any other supported format
+        transparent: true, // if transparency is needed
+        crs: L.CRS.EPSG3857,
+      }
+    );
+    return this.defaultLayer[layer];
+  }
+
+  // Khi đã khởi tạo layer rồi
+  getDataLayerByName(nameData: any) {
+    var layer = `Landsat_Workspace:${nameData}`;
+    return this.defaultLayer[layer];
+  }
+
+  // Thêm layer vào bản đồ thì phải khởi tạo trc đã
+  async AddDataToMap(nameData: any) {
     if (this.map) {
-      this.vietnamStTile.addTo(this.map);
+      await this.InitialDataLayerByName(nameData).addTo(this.map);
     }
   }
 
-  RemoveDataFromMap(): void {
+  // Xóa layer khỏi bản đồ khi đã khởi tạo rồi
+  async RemoveDataFromMap(nameData: any) {
     if(this.map) {
-      this.vietnamStTile.remove();
+      await this.getDataLayerByName(nameData).removeFrom(this.map);
     }
   }
 
-  SetOpacityForData(opacityValue: any): void {
+  async SetOpacityForData(nameData: any, opacityValue: any) {
     if(this.map) {
-      this.vietnamStTile.setOpacity(opacityValue);
+      await this.getDataLayerByName(nameData).setOpacity(opacityValue);
     }
   }
 }

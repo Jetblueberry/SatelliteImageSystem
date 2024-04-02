@@ -97,7 +97,7 @@ export class DataCatalogueComponent {
     this.choosen_lst.push(item);
     console.warn(this.choosen_lst)
 
-    this._dataMapService.AddDataToMap();
+    this._dataMapService.AddDataToMap(item.tenData);
 
     this.closeCatalogue.emit(false);
     this.displayDetails = true;
