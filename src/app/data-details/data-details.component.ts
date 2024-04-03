@@ -1,8 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnInit,
+import { Component, Input,
   Output,
   EventEmitter,
 } from '@angular/core';
@@ -29,6 +25,8 @@ export class DataDetailsComponent {
   ) {}
 
   ngOnInit() {
+    this.genLstStyles();
+    console.warn(this.lstStyles);
   }
 
   openSummary() {
@@ -43,7 +41,7 @@ export class DataDetailsComponent {
         this.displayOnMap = false;
         await this._dataMapService.RemoveDataFromMap(nameData);
       } else {
-        btn.style.backgroundColor = 'aqua';
+        btn.style.backgroundColor = 'rgb(51, 51, 51)';
         this.displayOnMap = true;
         this._dataMapService.AddDataToMap(nameData);
       }
@@ -54,7 +52,7 @@ export class DataDetailsComponent {
     this._dataMapService.SetOpacityForData(nameData, this.opacityValue / 100);
   }
 
-  async genLstStyles(lst_Styles: any) {
-    return await this._dataDetailsService.CustomListChosen(lst_Styles);
+  async genLstStyles() {
+    this.lstStyles = this._dataDetailsService.CustomListChosen(this.lst_choosen[0].ListStyles);
   }
 }

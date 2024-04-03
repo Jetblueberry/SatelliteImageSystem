@@ -13,7 +13,7 @@
             <div class="box-details-header">
               <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData)"></button>
               <span class="dataset-name">{{i.tenData}}</span>
-              <div style="color: white; font-size: 14px; padding: 5px;">
+              <div class="icon-grp-area">
                 <i class="fa-solid fa-caret-down"></i>
               </div>
             </div>
@@ -45,6 +45,15 @@
                 <button class="btn-filter">
                   <span>Filter by location</span>
                 </button>
+              </div>
+              <div class="row-5 box-style-list">
+                <p-dropdown
+                  placeholder="Default Layer"
+                  [options]="lstStyles"
+                  [showClear]="true"
+                  [filter]="true"
+                  [(ngModel)]="i.style"
+                ></p-dropdown>
               </div>
             </div>
           </li>

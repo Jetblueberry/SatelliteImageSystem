@@ -33,33 +33,3 @@ export enum Operator {
   isCurrentUser = 'isCurrentUser',
   isCurrentCanBo = 'isCurrentCanBo'
 }
-
-export const TrangThai = [
-  {
-    id: 0,
-    ten: ""
-  },
-  {
-    id: 1,
-    ten: "Đã liên hệ"
-  },
-  {
-    id: 2,
-    ten: "Đã phản hồi"
-  }
-]
-
-export const CachThu = [
-  {
-    id: 0,
-    ten: ""
-  },
-  {
-    id: 1,
-    ten: "Trực tiếp"
-  },
-  {
-    id: 2,
-    ten: "Chuyển khoản"
-  }
-]
