@@ -5,6 +5,6 @@ import * as L from 'leaflet';
   providedIn: 'root',
 })
 
-export class MapBaseService {
-
+export class WmsService {
+  wmsUrl = 'http://localhost:8080/geoserver/Landsat_Workspace/wms';
 }

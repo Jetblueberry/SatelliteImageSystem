@@ -1,4 +1,5 @@
 import { Injectable, Injector} from '@angular/core';
+import { WmsService } from '../wms.service';
 import * as L from 'leaflet';
 
 @Injectable({
@@ -7,15 +8,17 @@ import * as L from 'leaflet';
 
 export class DataMapService {
   map: any;
-  wmsUrl = 'http://localhost:8080/geoserver/Landsat_Workspace/wms'
+  wmsUrl: any;
   defaultLayer: any = {}; // Khởi tạo layer dạng object dynamic
 
   displayZoom = true;
 
-  ngOnInit() {}
+
+  constructor(public _wmsService: WmsService) {}
 
   // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
   InitialDataLayerByName(nameData: any) {
+    this.wmsUrl = this._wmsService.wmsUrl;
     var layer = `Landsat_Workspace:${nameData}`;
 
     this.defaultLayer[layer] = L.tileLayer.wms(this.wmsUrl,

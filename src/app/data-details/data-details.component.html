@@ -49,9 +49,8 @@
               <div class="row-5 box-style-list">
                 <p-dropdown
                   placeholder="Default Layer"
-                  [options]="cities"
-                  [(ngModel)]="selectedCity1"
-                  optionLabel="name"
+                  [options]="genLstStyles(i.listStyles)"
+                  [(ngModel)]="selectedOption"
                   [filter]="true"
                 ></p-dropdown>
               </div>

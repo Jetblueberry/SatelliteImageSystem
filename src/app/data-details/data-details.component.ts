@@ -5,10 +5,6 @@ import { Component, Input,
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import { DataDetailsService } from '../services/data-details-services/data-details.service';
 
-interface City {
-  name: string,
-  code: string
-}
 @Component({
   selector: 'app-data-details',
   templateUrl: './data-details.component.html',
@@ -23,27 +19,13 @@ export class DataDetailsComponent {
 
   lstStyles: any[] = [];
   selectedOption: string = "";
-  cities: City[];
-
-  selectedCity1: City = {name: '', code: ''};;
 
   constructor(
     public _dataMapService: DataMapService,
     public _dataDetailsService: DataDetailsService,
-  ) {
-    this.cities = [
-      {name: 'New York', code: 'NY'},
-      {name: 'Rome', code: 'RM'},
-      {name: 'London', code: 'LDN'},
-      {name: 'Istanbul', code: 'IST'},
-      {name: 'Paris', code: 'PRS'}
-    ];
-  }
+  ) {}
 
-  ngOnInit() {
-    this.lstStyles = this.lst_choosen[0].ListStyles.split(',')
-
-  }
+  ngOnInit() {}
 
   openSummary() {
     this.openCatalogue.emit(true);
@@ -69,7 +51,7 @@ export class DataDetailsComponent {
     this._dataMapService.SetOpacityForData(nameData, this.opacityValue / 100);
   }
 
-  // async genLstStyles() {
-  //   this.lstStyles = this._dataDetailsService.CustomListChosen(this.lst_choosen[0].ListStyles);
-  // }
+  genLstStyles(listStyles: any) {
+    return this._dataDetailsService.CustomListChosen(listStyles);
+  }
 }

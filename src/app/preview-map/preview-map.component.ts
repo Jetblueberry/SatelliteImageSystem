@@ -29,7 +29,7 @@ export class PreviewMapComponent {
         position: 'topright',
       })
       .addTo(this.map);
-    var googleSat = this.mapTypesLists.googleSat;
+    var googleSat = this.mapTypesLists.WorldPhysicalMap;
     googleSat.addTo(this.map);
   }
 }
