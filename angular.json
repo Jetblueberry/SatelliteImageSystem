@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "satellite-image-system-demo": {
+    "QuanLyHopDong": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/satellite-image-system-demo",
+            "outputPath": "dist/quan-ly-hop-dong",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -30,6 +30,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
@@ -68,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "satellite-image-system-demo:build:production"
+              "browserTarget": "QuanLyHopDong:build:production"
             },
             "development": {
-              "browserTarget": "satellite-image-system-demo:build:development"
+              "browserTarget": "QuanLyHopDong:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "satellite-image-system-demo:build"
+            "browserTarget": "QuanLyHopDong:build"
           }
         },
         "test": {
@@ -105,6 +108,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "be2b94d2-8d22-44fa-bd5c-df5efaadc571"
   }
 }

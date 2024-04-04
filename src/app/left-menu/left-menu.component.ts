@@ -17,11 +17,14 @@ export class LeftMenuComponent {
   constructor(
     public _dataCatalogueService: DataCatalogueService,
     public _dataDetailsService: DataDetailsService,
+    public _dataMapService: DataMapService,
   ) {}
   OpenDataCatalogue() {
     this.openCatalogue = true;
+    this._dataMapService.displayZoom = false;
   }
   closeDataCatalogue(closeCatalogue: any) {
     this.openCatalogue = closeCatalogue;
+    this._dataMapService.displayZoom = true;
   }
 }

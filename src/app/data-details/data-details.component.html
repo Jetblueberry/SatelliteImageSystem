@@ -34,7 +34,7 @@
                 <span>Time:</span>
                 <div style="display: flex;">
                   <div class="box-range-time">
-                    <span>01/01/2020, 07:00:00</span>
+                    <span>{{i.defaultDate | date: "dd/MM/yyyy"}}</span>
                   </div>
                   <button type="button" class="time-btn">
                     <i class="fa-solid fa-timeline"></i>
@@ -49,10 +49,10 @@
               <div class="row-5 box-style-list">
                 <p-dropdown
                   placeholder="Default Layer"
-                  [options]="lstStyles"
-                  [showClear]="true"
+                  [options]="cities"
+                  [(ngModel)]="selectedCity1"
+                  optionLabel="name"
                   [filter]="true"
-                  [(ngModel)]="i.style"
                 ></p-dropdown>
               </div>
             </div>

@@ -3,7 +3,15 @@
   <div class="map-footer">
     <div class="box-right-corner">
       <div class="coordinate-box">
-        <span class="coordinate" id="cord"></span>
+        <div class="location-lat">
+          <span class="location-style">Lat</span>
+          <span class="coordinate-lat" id="cord-lat"></span>
+        </div>
+        <div class="location-lng">
+          <span class="location-style">Lng</span>
+          <span class="coordinate-lng" id="cord-lng"></span>
+        </div>
+        <i class="fa-solid fa-satellite icon-coordinate"></i>
       </div>
       <div class="scale-box">
         <label id="customScaleControl"></label>
@@ -12,14 +20,31 @@
   </div>
 </div>
 
-<div class="box-panel-info" *ngIf="false">
+<div class="zoom-area" *ngIf="_dataMapService.displayZoom">
+  <button class="btn-zoomIn" (click)="zoom_in()">
+    <i class="fa-solid fa-plus"></i>
+  </button>
+  <button class="btn-home">
+    <i class="fa-solid fa-house"></i>
+  </button>
+  <button class="btn-zoomOut" (click)="zoom_out()">
+    <i class="fa-solid fa-minus"></i>
+  </button>
+</div>
+
+<div class="box-panel-info" *ngIf="displayPanel">
   <div class="panel-header">
     <span>Feature Infomation</span>
   </div>
   <div class="panel-body">
     <div class="data-details-panel"></div>
     <div class="dimension-panel">
-      <span class="coordinate" id="cord-point"></span>
+      <span class="panel-text">Lat/Lng</span>
+      <div class="point-area">
+        <span class="coordinate" id="point-lat"></span>
+        <span>/ </span>
+        <span class="coordinate" id="point-lng"></span>
+      </div>
     </div>
   </div>
 </div>

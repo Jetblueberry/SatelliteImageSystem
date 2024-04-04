@@ -2,9 +2,9 @@
   width: 350px;
     padding: 0px;
     padding: 0px;
-    z-index: 10000;
+    z-index: 1000;
     position: absolute;
-    top: 290px;
+    top: 257px;
 }
 .container {
   padding: 0px;
@@ -151,4 +151,25 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+::ng-deep p-dropdown {
+  .p-dropdown {
+    border: 1px solid white;
+    padding: 5px;
+    width: 100%;
+  }
+  .p-hidden-accessible input {
+    border: none;
+    width: 295px;
+    outline: none;
+  }
+  .p-dropdown-trigger {
+    background-color: white;
+    color: black;
+  }
+  .p-dropdown-clearable, .p-disabled {
+    width: 100%!important;
+    border: 2px solid #767676;
+  }
 }

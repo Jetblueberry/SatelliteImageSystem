@@ -1,29 +1,26 @@
 .map-footer {
-  position: absolute;
+  position: fixed;
   display: flex;
   z-index: 1000;
   height: 30px;
-  width: calc(100% - 350px);
-  background: white;
+  width: calc(100vw - 350px);
+  background: linear-gradient(45deg, #00f260, #0057ae);
+  color: white;
   bottom: 0px;
   align-items: center;
   font-size: 14px;
 }
-.box-right-corner {
-  display: flex;
-  position: absolute;
-  right: 0px;
-  left: auto;
-}
 
+//Panel
 .box-panel-info {
   background: #3f4854;
   color: white;
   position: absolute;
   top: 60px;
   left: 500px;
-  z-index: 10000;
-  cursor: move;
+  z-index: 1000;
+  width: 350px;
+  cursor: pointer;
 }
 .panel-header {
   padding-right: 40px;
@@ -32,4 +29,78 @@
 }
 .dimension-panel {
   height: 40px;
+  display: flex;
+}
+.point-area {
+  display: flex;
+  margin-right: 10px;
+  margin-left: auto;
+}
+
+// Coordinates
+.box-right-corner {
+  display: flex;
+  position: absolute;
+  right: 0px;
+  left: auto;
+  height: 30px;
+  align-items: center;
+}
+.coordinate-box {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin-right: 3px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.coordinate-box:hover {
+  background: linear-gradient(45deg, #018234, #00356a);
+  outline: rgb(195, 144, 249) solid 3px;
+}
+.coordinate-box:focus {
+  outline: rgb(195, 144, 249) solid 3px;
+}
+.location-lat, .location-lng {
+  display: flex;
+  padding-right: 20px;
+}
+.location-style {
+  margin-right: 10px;
+}
+@keyframes rotate {
+  from {
+    transform: rotate3d(1,-1,0,0deg);
+  }
+  to {
+    transform: rotate3d(1,-1,0,360deg);
+  }
+}
+.icon-coordinate {
+  animation: rotate 2s linear infinite;
+  margin-right: 20px;
+}
+
+
+// Zoom
+.zoom-area {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  z-index: 1000;
+}
+.btn-zoomIn, .btn-zoomOut, .btn-home {
+  display: block;
+  width: 32px;
+  margin: 0px;
+  border: 0px;
+  padding: 5px;
+  color: white;
+  background: #496cf5;
+}
+.btn-zoomIn {
+  border-radius: 50% 50% 0 0;
+}
+.btn-zoomOut {
+  border-radius: 0 0 50% 50%;
 }

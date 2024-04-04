@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +10,7 @@ import {ScrollerModule} from 'primeng/scroller';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar'
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
+import {ButtonModule} from 'primeng/button';
 
 // Components
 import { AppComponent } from './app.component';
@@ -31,6 +34,8 @@ import { MapTypeLists } from './models/map-types';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
     AppRoutingModule,
     SliderModule,
     FormsModule,
@@ -39,6 +44,7 @@ import { MapTypeLists } from './models/map-types';
     HttpClientModule,
     TableModule,
     DropdownModule,
+    ButtonModule,
   ],
   providers: [MapTypeLists],
   bootstrap: [AppComponent]

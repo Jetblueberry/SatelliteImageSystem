@@ -15,17 +15,36 @@
   height: 50%;
 }
 .layout-menu-block {
-  padding: 20px;
+  padding: 10px;
+  border-bottom: 1px solid black;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .btn-explore {
-  width: 200px;
+  width: 100%;
   height: 40px;
   background-color: #395490;
   color: white;
   border-radius: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
   font-size: 15px;
   cursor: pointer;
+}
+.icon-plus {
+  display: flex;
+  padding: 10px;
+  margin-left: 10px;
+}
+.icon-globe {
+  padding: 10px;
+  display: flex;
+  margin-right: 10px;
+  margin-left: auto;
+}
+.icon-plus i, .icon-globe i {
+  transform: scale(2.5);
+}
+.text-span {
+  font-size: 16px;
+  margin-left: 20px;
 }

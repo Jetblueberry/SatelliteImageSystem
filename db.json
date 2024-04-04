@@ -1,0 +1,31 @@
+{
+  "notifications": [
+    {
+      "actTag": "kien-thuc",
+      "testTag": "HSA",
+      "title": "Phổ điểm bài thi HSA ổn định qua các đợt tháng 3-4/2023",
+      "date": "28/04/2023, 13:25",
+      "img": "https://cet.vnu.edu.vn/gw/imageresize/unsafe/267x181/smart/cet.vnu.edu.vn/gw/file/v5/FileObject/public/23a1572d-dd76-43d4-8a75-c8b6fc51c607/download",
+      "short": "Phổ điểm thi của 4 đợt đầu tiên theo phân bổ chuẩn, điểm trung bình 75,2/150; trung vị là 75,0/150; độ lệch chuẩn 13,7. Thí sinh đạt điểm cao nhất 129/150, thấp nhất 31/150. So với cùng kỳ năm 2022, điểm trung bình năm 2023 giảm 2,4 điểm. Phổ điểm ổn định theo từng đợt thi, số thí sinh đạt từ 100 điểm trở lên chiếm 4,4%, trên 75 điểm chiếm 50,8%.",
+      "id": 1
+    },
+    {
+      "actTag": "kien-thuc",
+      "testTag": "HSA",
+      "title": "Hoàn thành đợt thi HSA thứ tư năm 2023",
+      "date": "23/04/2023, 16:58",
+      "img": "https://cet.vnu.edu.vn/assets/images/TTKT/no-image.png",
+      "short": "Đợt thi Đánh giá năng lực học sinh trung học phổ thông (HSA) lần thứ tư (đợt thi 304) đã được tổ chức tại 10 điểm thi gồm Trung tâm Khảo thí Đại học Quốc gia Hà Nội (ĐHQGHN), Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQGHN, Trường Đại học Kinh tế Quốc dân, Trường Đại học Tài nguyên Môi trường Hà Nội, Trường Đại học Công nghiệp Hà Nội, Trường Đại học Thăng Long, Học viện Ngân hàng, Trung tâm Khảo thí và Quản lý chất lượng - ĐH Thái Nguyên, Trường Đại học Vinh (Nghệ An) và Sở Giáo dục & Đào tạo",
+      "id": 2
+    },
+    {
+      "actTag": "thkt",
+      "testTag": "dai hoc",
+      "title": "Hội nghị Sơ kết công tác giữa nhiệm kỳ Đại hội nhiệm kỳ 2020-2025 và Lễ kết nạp Đảng viên mới năm 2023",
+      "date": "31/03/2023, 17:06",
+      "img": "https://cet.vnu.edu.vn/gw/imageresize/unsafe/267x181/smart/cet.vnu.edu.vn/gw/file/v5/FileObject/public/80a1abd7-bc4e-448a-89e5-bf004a664f01/download",
+      "short": "Chiều ngày 30/03/2023 tại Tòa HT2, Khu đô thị Đại học Quốc gia Hà Nội (ĐHQGHN) tại Hòa Lạc, Chi bộ Trung tâm Khảo thí ĐHQGHN đã tổ chức Hội nghị Sơ kết công tác giữa nhiệm kỳ Đại hội nhiệm kỳ 2020-202 và Lễ kết nạp Đảng viên mới năm 2023",
+      "id": 3
+    }
+  ]
+}

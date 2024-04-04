@@ -10,6 +10,8 @@ export class DataMapService {
   wmsUrl = 'http://localhost:8080/geoserver/Landsat_Workspace/wms'
   defaultLayer: any = {}; // Khởi tạo layer dạng object dynamic
 
+  displayZoom = true;
+
   ngOnInit() {}
 
   // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
