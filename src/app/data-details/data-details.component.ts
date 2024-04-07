@@ -13,6 +13,7 @@ import { DataDetailsService } from '../services/data-details-services/data-detai
 export class DataDetailsComponent {
   @Input() lst_choosen: any;
   @Output() openCatalogue = new EventEmitter<any>();
+  @Output() closeDetails = new EventEmitter<any>();
 
   opacityValue = 100;
   displayOnMap = true;
@@ -45,6 +46,12 @@ export class DataDetailsComponent {
         this._dataMapService.AddDataToMap(nameData);
       }
     }
+  }
+  removeAllDetails() {
+    for(let x of this.lst_choosen) {
+      this._dataMapService.RemoveDataFromMap(x.tenData);
+    }
+    this.closeDetails.emit(false);
   }
 
   setOpacity(nameData: any) {

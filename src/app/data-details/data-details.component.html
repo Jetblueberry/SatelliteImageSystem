@@ -3,12 +3,12 @@
     <div class="layout-details-block">
       <div class="box-summary-datasets">
         <span>DATA SETS</span>
-        <div class="remove-details-area">
-          <span class="remove-btn">Remove</span>
+        <div class="remove-details-area" (click)="removeAllDetails()">
+          <span class="remove-btn">Remove All</span>
         </div>
       </div>
       <ul class="list-details-datasets">
-        <perfect-scrollbar style="height: 300px;">
+        <perfect-scrollbar style="height: 360px;" class="scroll-bar">
           <li *ngFor="let i of lst_choosen" class="box-details">
             <div class="box-details-header">
               <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData)"></button>

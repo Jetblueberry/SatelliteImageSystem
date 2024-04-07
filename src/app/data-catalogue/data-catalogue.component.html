@@ -208,8 +208,9 @@
 </div>
 
 <app-data-details
-  *ngIf="displayDetails"
+  *ngIf="openDetails"
   [lst_choosen]="choosen_lst"
   (openCatalogue)="openDataCatalogue($event)"
+  (closeDetails)="closeDataDetails($event)"
   >
 </app-data-details>

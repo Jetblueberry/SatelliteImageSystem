@@ -12,7 +12,6 @@ import { DataMapService } from '../services/data-map-services/data-map.service';
 })
 export class DataMapComponent {
   map: any;
-  displayPanel = false;
   displayZoom: any;
 
   constructor(
@@ -27,7 +26,7 @@ export class DataMapComponent {
   }
 
   async initMap() {
-    this._dataMapService.map = L.map('map', { zoomControl: false }).setView([20.048736, 105.89033], 7);
+    this._dataMapService.map = L.map('map', { zoomControl: false }).setView([20.048736, 105.89033], 6);
     this.map = this._dataMapService.map;
 
     // Map chính
@@ -38,7 +37,9 @@ export class DataMapComponent {
 
     //Satellite layer
     var googleSat = this.mapTypesLists.googleSat;
-    googleSat.addTo(this.map);
+
+    var Esri_WorldImagery = this.mapTypesLists.Esri_WorldImagery;
+    Esri_WorldImagery.addTo(this.map);
 
     //Layer Control
     var baseLayers = {
@@ -46,6 +47,8 @@ export class DataMapComponent {
       Satellite: googleSat,
       'Google Map': googleStreets,
     };
+
+    // L.control.layers(baseLayers).addTo(this.map);
 
     // Scale
     L.control.scale({
@@ -71,7 +74,8 @@ export class DataMapComponent {
 
     //Coordinate panel
     await this.map.on('click', (e: any) => {
-      this.displayPanel = true;
+       var box = document.getElementById("box-panel-info");
+       if(box) box.style.zIndex = "1001";
        //latitude
        var cord_lat = document.getElementById('point-lat');
        const lat = this.customLatitudeValue(e.latlng.lat.toFixed(5));
@@ -113,5 +117,13 @@ export class DataMapComponent {
   }
   zoom_out() {
     this.map.zoomOut();
+  }
+  set_zoom_home() {
+    this.map.setView([20.048736, 105.89033], 7);
+  }
+
+  closePanel() {
+    var box = document.getElementById("box-panel-info");
+    if(box) box.style.zIndex = "-10";
   }
 }

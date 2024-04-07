@@ -2,6 +2,22 @@
   display: flex;
   margin: 0px;
   padding: 0px;
+
+}
+img {
+  position: absolute;
+  width: calc(100vw - 335px);
+  height: 100vh;
+  z-index: -10;
+}
+.contain-all {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  margin: 0px;
+  padding: 0px;
 }
 app-data-catalogue {
   position: absolute;

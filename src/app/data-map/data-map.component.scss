@@ -1,43 +1,89 @@
-.map-footer {
-  position: fixed;
-  display: flex;
-  z-index: 1000;
-  height: 30px;
-  width: calc(100vw - 350px);
-  background: linear-gradient(45deg, #00f260, #0057ae);
-  color: white;
-  bottom: 0px;
-  align-items: center;
-  font-size: 14px;
+#map {
+  height: calc(100vh - 30px);
+}
+::ng-deep #map .leaflet-bottom {
+  display: none;
 }
 
+
 //Panel
+@keyframes moveBox {
+  0% {
+    top: 10px;
+    left: 10px;
+  }
+  25% {
+    top: 10px;
+    left: -10px;
+  }
+  50% {
+    top: -10px;
+    left: -10px;
+  }
+  75% {
+    top: -10px;
+    left: 10px;
+  }
+  100% {
+    top: 10px;
+    left: 10px;
+  }
+}
 .box-panel-info {
-  background: #3f4854;
+  background: #2a4d81;
   color: white;
   position: absolute;
   top: 60px;
   left: 500px;
   z-index: 1000;
   width: 350px;
-  cursor: pointer;
+  cursor: move;
+  z-index: -10;
+  transform: translate(100px, 100px);
+  border: 1px solid white;
+  border-radius: 10px;
 }
 .panel-header {
-  padding-right: 40px;
+  display: flex;
   line-height: 40px;
+  align-items: center;
   border-bottom: 1px solid white;
 }
 .dimension-panel {
   height: 40px;
   display: flex;
+  align-items: center;
+}
+.panel-text {
+  margin-left: 10px;
 }
 .point-area {
   display: flex;
+  align-items: center;
   margin-right: 10px;
   margin-left: auto;
 }
+.icon-cl {
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
 
 // Coordinates
+.map-footer {
+  position: fixed;
+  display: flex;
+  z-index: 1000;
+  height: 30px;
+  width: calc(100vw - 350px);
+  background: linear-gradient(90deg,rgba(0, 175, 70, 0.7), rgba(5, 117, 230, 0.7));
+  color: white;
+  bottom: 0px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+}
 .box-right-corner {
   display: flex;
   position: absolute;
@@ -45,17 +91,20 @@
   left: auto;
   height: 30px;
   align-items: center;
+  background: linear-gradient(45deg, #2E88A9, #0575e6);
 }
 .coordinate-box {
   display: flex;
   align-items: center;
-  height: 24px;
+  height: 30px;
   margin-right: 3px;
-  padding-left: 10px;
+  width: 336px;
   cursor: pointer;
+  padding-left: 5px;
+  box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.25);
 }
 .coordinate-box:hover {
-  background: linear-gradient(45deg, #018234, #00356a);
+  background: linear-gradient(90deg, #018234, #00356a);
   outline: rgb(195, 144, 249) solid 3px;
 }
 .coordinate-box:focus {
@@ -64,6 +113,9 @@
 .location-lat, .location-lng {
   display: flex;
   padding-right: 20px;
+}
+.location-lat #cord-lat, .location-lng #cord-lng {
+  width: 100px;
 }
 .location-style {
   margin-right: 10px;
@@ -103,4 +155,59 @@
 }
 .btn-zoomOut {
   border-radius: 0 0 50% 50%;
+}
+
+
+// Map setting
+.setting-area {
+  position: absolute;
+  right: 150px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  height: 32px;
+  border-radius: 50px 50px 50px 50px;
+  background: #496cf5;
+  z-index: 1000;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+.map-type-area {
+  position: absolute;
+  top: 56px;
+  right: 150px;
+  z-index: 1000;
+  width: 300px;
+  color: white;
+  background: #496cf5;
+  font-size: 14px;
+}
+.map-type-area .header {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+.map-type-area .close-ic {
+  margin-left: auto;
+  display: flex;
+}
+.map-type-area .body {
+  display: flex;
+  background: #496cf5;
+  padding: 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn-map-type {
+  border: 2px solid white;
+  width: 60px;
+  height: 60px;
+  padding: 0px;
+}
+.btn-map-type img {
+  width: 60px;
+  height: 60px;
 }

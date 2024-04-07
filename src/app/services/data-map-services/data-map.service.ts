@@ -13,17 +13,16 @@ export class DataMapService {
 
   displayZoom = true;
 
-
   constructor(public _wmsService: WmsService) {}
 
   // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
   InitialDataLayerByName(nameData: any) {
     this.wmsUrl = this._wmsService.wmsUrl;
     var layer = `Landsat_Workspace:${nameData}`;
-
+    // layer = WP + (LC08_L2SP)
     this.defaultLayer[layer] = L.tileLayer.wms(this.wmsUrl,
       {
-        layers:layer,
+        layers: "LC08_L2SP_126045_20220408_20220412_02_T1",
         format: 'image/png', // or any other supported format
         transparent: true, // if transparency is needed
         crs: L.CRS.EPSG3857,
@@ -58,3 +57,5 @@ export class DataMapService {
     }
   }
 }
+
+//
