@@ -13,6 +13,7 @@ import { DataMapService } from '../services/data-map-services/data-map.service';
 export class DataMapComponent {
   map: any;
   displayZoom: any;
+  displayMapSetting = false;
 
   constructor(
     public _dataCatalogueService: DataCatalogueService,
@@ -29,26 +30,7 @@ export class DataMapComponent {
     this._dataMapService.map = L.map('map', { zoomControl: false }).setView([20.048736, 105.89033], 6);
     this.map = this._dataMapService.map;
 
-    // Map chính
-    var WorldPhysicalMap = this.mapTypesLists.WorldPhysicalMap;
-
-    //Google map layer
-    var googleStreets = this.mapTypesLists.googleStreets;
-
-    //Satellite layer
-    var googleSat = this.mapTypesLists.googleSat;
-
-    var Esri_WorldImagery = this.mapTypesLists.Esri_WorldImagery;
-    Esri_WorldImagery.addTo(this.map);
-
-    //Layer Control
-    var baseLayers = {
-      'World Physical Map': WorldPhysicalMap,
-      Satellite: googleSat,
-      'Google Map': googleStreets,
-    };
-
-    // L.control.layers(baseLayers).addTo(this.map);
+    this._dataMapService.InitialMapTileLayer();
 
     // Scale
     L.control.scale({
@@ -126,4 +108,11 @@ export class DataMapComponent {
     var box = document.getElementById("box-panel-info");
     if(box) box.style.zIndex = "-10";
   }
+
+  openMapSetting() {
+    this.displayMapSetting = true;
+  }
+  closeMapSetting() {{
+    this.displayMapSetting = false;
+  }}
 }

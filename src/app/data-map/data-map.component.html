@@ -56,24 +56,36 @@
 </div>
 
 <div class="box-map-setting">
-  <div class="setting-area">
+  <div class="setting-area" (click)="openMapSetting()">
     <i class="fa-solid fa-map-location-dot"></i>
     <span style="margin-left: 10px;" class="setting-btn">Map Settings</span>
   </div>
 
-  <div class="map-type-area" *ngIf="false">
+  <div class="map-type-area" *ngIf="displayMapSetting">
     <div class="header">
       <span>Map types</span>
-      <span class="close-ic">
+      <span class="close-ic" (click)="closeMapSetting()">
         <i class="fa-solid fa-xmark"></i>
       </span>
     </div>
     <div class="body">
-      <button class="btn-map-type">
-        <img src="https://media.istockphoto.com/id/1018680128/photo/east-asia-3d-render-topographic-map-color.jpg?s=612x612&w=0&k=20&c=xL4F8h2dkM8DxO5FqxpeU3n1Vt2dOopSy740luuuBvU=">
-      </button>
-      <button class="btn-map-type"></button>
-      <button class="btn-map-type"></button>
+      <div class="row-1">
+        <button class="btn-map-type" (click)="_dataMapService.chooseDefaultMap()">
+          <img src="https://terria-catalogs-public.storage.googleapis.com/saas-bucket-temp/de-africa/dea-basemaps/EsriWorldImagery.png">
+        </button>
+        <button class="btn-map-type" (click)="_dataMapService.chooseWorldPhysicalMap()">
+          <img src="https://terria-catalogs-public.storage.googleapis.com/saas-bucket-temp/de-africa/dea-basemaps/NaturalEarthII.png">
+        </button>
+        <button class="btn-map-type" (click)="_dataMapService.choosePositronMap()">
+          <img src="https://terria-catalogs-public.storage.googleapis.com/saas-bucket-temp/de-africa/dea-basemaps/Positron(Light).png">
+        </button>
+        <button class="btn-map-type" (click)="_dataMapService.chooseDarkmatterMap()">
+          <img src="https://terria-catalogs-public.storage.googleapis.com/saas-bucket-temp/de-africa/dea-basemaps/DarkMatter.png">
+        </button>
+      </div>
+      <div class="row-2">
+
+      </div>
     </div>
   </div>
 </div>

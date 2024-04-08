@@ -6,6 +6,7 @@
   position: absolute;
   top: 257px;
   background: linear-gradient(90deg, #11579D, #3CAC5A);
+  box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
 }
 .container {
   padding: 0px;
@@ -16,8 +17,8 @@
 
 // details
 .box-summary-datasets {
-  border-top: 1px solid rgb(51, 51, 51);
-  border-bottom: 1px solid rgb(51, 51, 51);
+  border-top: 1px solid White;
+  border-bottom: 1px solid White;
   display: flex;
   position: relative;
   padding-left: 15px;
@@ -40,10 +41,11 @@
   padding-left: 5px;
 }
 .box-details {
-  background: rgb(51, 51, 51);
+  background: #496cf5;
   color: rgb(255, 255, 255);
   border-radius: 4px;
   margin-bottom: 5px;
+  border: 1px solid white;
 }
 .box-details-header {
   display: flex;
@@ -63,7 +65,7 @@
   margin: 5px;
   border-radius: 3px;
   border: 1px solid white;
-  background-color: rgb(51, 51, 51);
+  background-color: #496cf5;
 }
 .icon-grp-area {
   display: flex;
@@ -85,7 +87,7 @@
 }
 .summary-detail {
   border-radius: 3px;
-  background-color: rgb(0, 0, 0);
+  background-color: #002470;;
   color: rgb(255, 255, 255);
   flex-grow: 1;
   height: 32px;
@@ -94,7 +96,7 @@
 }
 .menu-btn {
   border-radius: 3px;
-  background-color: rgb(0, 0, 0);
+  background-color: #002470;;
   color: rgb(255, 255, 255);
 }
 .row-2 {
@@ -130,7 +132,7 @@
   margin: 0px;
   padding: 0px;
   border: 0px;
-  background-color: black;
+  background-color: #002470;;
   flex-grow: 1;
   cursor: pointer;
   color: inherit;
@@ -147,13 +149,17 @@
   padding-bottom: 5px;
 }
 .btn-filter {
-  background-color: grey;
+  background-color: #002470;;
   color: white;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+.row-5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 ::ng-deep p-dropdown {
@@ -194,4 +200,13 @@
 
 ::ng-deep .scroll-bar {
   padding-right: 15px;
+  .ps__thumb-y {
+    background-color:  #0575e6!important;
+  }
+  .ps__thumb-y:hover {
+    background-color: #1d55fc!important;
+  }
+  .ps__rail-y {
+    background-color: #00f260!important;
+  }
 }
