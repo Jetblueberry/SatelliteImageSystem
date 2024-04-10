@@ -14,6 +14,7 @@ export class DataMapComponent {
   map: any;
   displayZoom: any;
   displayMapSetting = false;
+  events2 = ["31/12/2020", "31/12/2021", "31/12/2022", "31/12/2023"];
 
   constructor(
     public _dataCatalogueService: DataCatalogueService,

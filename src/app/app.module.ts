@@ -11,6 +11,7 @@ import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar'
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
+import {TimelineModule} from 'primeng/timeline';
 
 // Components
 import { AppComponent } from './app.component';
@@ -45,6 +46,7 @@ import { MapTypeLists } from './models/map-types';
     TableModule,
     DropdownModule,
     ButtonModule,
+    TimelineModule,
   ],
   providers: [MapTypeLists],
   bootstrap: [AppComponent]

@@ -38,14 +38,17 @@
 .list-details-datasets {
   margin: 5px 0px;
   list-style: none;
-  padding-left: 5px;
+  padding: 0px;
 }
 .box-details {
-  background: #496cf5;
+  background: linear-gradient(90deg, #0156ac, #015f3f);
   color: rgb(255, 255, 255);
   border-radius: 4px;
   margin-bottom: 5px;
   border: 1px solid white;
+  box-shadow: 5px 5px 15px rgb(47 45 45 / 95%);
+  margin-right: 15px;
+  margin-left: 1px;
 }
 .box-details-header {
   display: flex;
@@ -64,8 +67,8 @@
   margin-right: 20px;
   margin: 5px;
   border-radius: 3px;
-  border: 1px solid white;
-  background-color: #496cf5;
+  border: 3px solid white;
+  background-color: #002470;
 }
 .icon-grp-area {
   display: flex;
@@ -74,6 +77,7 @@
   color: white;
   font-size: 14px;
   padding: 5px;
+  cursor: pointer;
 }
 .box-details-body {
   display: flex;
@@ -93,11 +97,21 @@
   height: 32px;
   min-width: 32px;
   box-shadow: none;
+  border: 1px solid white;
+  margin-right: 10px;
 }
 .menu-btn {
   border-radius: 3px;
   background-color: #002470;;
   color: rgb(255, 255, 255);
+  border: 1px solid white;
+}
+.summary-detail:hover, .menu-btn:hover {
+  background: linear-gradient(45deg, #0575e6, #00f260);
+}
+.summary-detail:focus, .menu-btn:focus {
+  background: linear-gradient(45deg, #0575e6, #00f260);
+  outline: rgb(195, 144, 249) solid 3px;
 }
 .row-2 {
   display: flex;
@@ -113,9 +127,8 @@
 }
 .slidercontainer {
   left: 135px;
-}
-.slidercontainer input {
-  width: 185px;
+  display: flex;
+  align-items: center;
 }
 .slider {
   background-color: white;
@@ -132,17 +145,53 @@
   margin: 0px;
   padding: 0px;
   border: 0px;
-  background-color: #002470;;
+  background-color: #002470;
+  display: flex;
   flex-grow: 1;
   cursor: pointer;
+  color: white;
+  margin-right: 10px;
+  height: 32px;
+  border-radius: 6px;
+}
+.date-previous {
+  background: transparent;
+  border: 1px solid white;
+  width: 32px;
+  border-radius: 6px 0px 0px 6px;
   color: inherit;
-  padding: 0px 10px;
+}
+.date-after {
+  background: transparent;
+  border: 1px solid white;
+  width: 32px;
+  border-radius: 0px 6px 6px 0px;
+  color: inherit;
+}
+.date-default {
+  background: transparent;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  color: inherit;
 }
 .time-btn {
   padding: 0px 5px;
   border-radius: 2px;
-  background-color: rgb(238, 175, 48);
+  background: #002470;
   color: rgb(255, 255, 255);
+  margin-right: 10px;
+  height: 32px;
+  border: 1px solid white;
+}
+.date-previous:hover, .date-default:hover, .date-after:hover, .time-btn:hover {
+  background: linear-gradient(45deg, #0575e6, #00f260);
+}
+.date-previous:focus, .date-default:focus, .date-after:focus, .time-btn:focus {
+  background: linear-gradient(45deg, #0575e6, #00f260);
+  outline: rgb(195, 144, 249) solid 3px;
 }
 .row-4 {
   padding-top: 5px;
@@ -156,7 +205,17 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 32px;
+  border: 1px solid white;
 }
+.btn-filter:hover {
+  background: linear-gradient(45deg, #0575e6, #00f260);
+}
+.btn-filter:focus {
+  background: linear-gradient(45deg, #0575e6, #00f260);
+  outline: rgb(195, 144, 249) solid 3px;
+}
+
 .row-5 {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -167,7 +226,15 @@
     border: 1px solid white;
     padding: 5px;
     width: 100%;
-    height: 40px;
+    height: 32px;
+    background: #002470;
+  }
+  .p-dropdown:hover {
+    background: linear-gradient(45deg, #0575e6, #00f260);
+  }
+  .p-dropdown:focus {
+    background: linear-gradient(45deg, #0575e6, #00f260);
+    outline: rgb(195, 144, 249) solid 3px;
   }
   .p-hidden-accessible input {
     border: none;
@@ -176,10 +243,13 @@
   }
   .p-dropdown-label {
     padding: 3px!important;
+    color: white!important;
+    display: flex!important;
+    align-items: center!important;
   }
   .p-dropdown-trigger {
-    background-color: white;
-    color: black;
+    color: white!important;
+    width: 2rem!important;
   }
   .p-dropdown-clearable, .p-disabled {
     width: 100%!important;
@@ -199,7 +269,6 @@
 }
 
 ::ng-deep .scroll-bar {
-  padding-right: 15px;
   .ps__thumb-y {
     background-color:  #0575e6!important;
   }
@@ -210,3 +279,25 @@
     background-color: #00f260!important;
   }
 }
+
+//slider
+::ng-deep .slider {
+  width: 185px!important;
+  border-radius: 20px!important;
+  .p-slider {
+    width: 185px!important;
+    display: flex!important;
+    box-shadow: none;
+  }
+  .p-slider-range {
+    background: #16fff6!important;
+  }
+  .p-slider-handle {
+    background: #07bc82!important;
+    border: 1px solid white!important;
+  }
+  .p-slider-handle:focus {
+    box-shadow: 0 0 2px 2px #BFDBFE!important;
+  }
+}
+

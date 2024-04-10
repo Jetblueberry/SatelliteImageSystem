@@ -17,6 +17,7 @@ export class DataDetailsComponent {
 
   opacityValue = 100;
   displayOnMap = true;
+  displayDetailsBody: any = {};
 
   lstStyles: any[] = [];
   selectedOption: string = "";
@@ -27,6 +28,21 @@ export class DataDetailsComponent {
   ) {}
 
   ngOnInit() {}
+
+  OpenCloseDetailsBody(type: any) {
+    var i = document.getElementById(`${type}-icon`);
+    if(i) {
+      if(this.displayDetailsBody[type]) {
+        this.displayDetailsBody[type] = false;
+        i.style.transform = "rotate(0deg)";
+        i.style.transition = "transform 0.3s ease";
+      } else {
+        this.displayDetailsBody[type] = true;
+        i.style.transform = "rotate(-180deg)";
+        i.style.transition = "transform 0.3s ease";
+      }
+    }
+  }
 
   openSummary() {
     this.openCatalogue.emit(true);
@@ -41,7 +57,7 @@ export class DataDetailsComponent {
         this.displayOnMap = false;
         await this._dataMapService.RemoveDataFromMap(nameData);
       } else {
-        btn.style.backgroundColor = 'rgb(51, 51, 51)';
+        btn.style.backgroundColor = '#002470';
         this.displayOnMap = true;
         this._dataMapService.AddDataToMap(nameData);
       }

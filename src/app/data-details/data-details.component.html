@@ -13,11 +13,11 @@
             <div class="box-details-header">
               <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData)"></button>
               <span class="dataset-name">{{i.tenData}}</span>
-              <div class="icon-grp-area">
-                <i class="fa-solid fa-caret-down"></i>
+              <div class="icon-grp-area" (click)="OpenCloseDetailsBody(i.tenData)">
+                <i class="fa-solid fa-caret-down" id="{{i.tenData}}-icon" ></i>
               </div>
             </div>
-            <div class="box-details-body">
+            <div class="box-details-body" *ngIf="!displayDetailsBody[i.tenData]">
               <div class="row-1 box-summary-details">
                 <button class="summary-detail" (click)="openSummary()">Dataset Summary</button>
                 <button class="menu-btn">
@@ -27,14 +27,22 @@
               <div class="row-2 box-opacity-details">
                 <label class="opacity">Opacity: {{opacityValue}}%</label>
                 <div class="slidercontainer">
-                  <input type="range" class="slider" min="1" max="100" [(ngModel)]="opacityValue" (change)="setOpacity(i.tenData)">
+                  <p-slider class="slider" [min]="0" [max]="100" [(ngModel)]="opacityValue" (onChange)="setOpacity(i.tenData)"></p-slider>
                 </div>
               </div>
               <div class="row-3 box-time-details">
                 <span>Time:</span>
                 <div style="display: flex;">
                   <div class="box-range-time">
-                    <span>{{i.defaultDate | date: "dd/MM/yyyy"}}</span>
+                    <button class="date-previous">
+                      <i class="fa-solid fa-caret-left"></i>
+                    </button>
+                    <button class="date-default">
+                      <span>{{i.defaultDate | date: "dd/MM/yyyy"}}</span>
+                    </button>
+                    <button class="date-after">
+                      <i class="fa-solid fa-caret-right"></i>
+                    </button>
                   </div>
                   <button type="button" class="time-btn">
                     <i class="fa-solid fa-timeline"></i>
@@ -42,11 +50,13 @@
                 </div>
               </div>
               <div class="row-4 box-filter-location">
+                <span>Filter:</span>
                 <button class="btn-filter">
                   <span>Filter by location</span>
                 </button>
               </div>
               <div class="row-5 box-style-list">
+                <span>Styles:</span>
                 <p-dropdown
                   placeholder="Default Layer"
                   [options]="genLstStyles(i.listStyles)"
