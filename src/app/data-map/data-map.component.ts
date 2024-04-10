@@ -30,6 +30,7 @@ export class DataMapComponent {
   async initMap() {
     this._dataMapService.map = L.map('map', { zoomControl: false }).setView([20.048736, 105.89033], 6);
     this.map = this._dataMapService.map;
+    L.marker([20.048736, 105.89033]).addTo(this.map);
 
     this._dataMapService.InitialMapTileLayer();
 

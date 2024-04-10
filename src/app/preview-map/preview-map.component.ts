@@ -20,16 +20,42 @@ export class PreviewMapComponent {
   }
 
   initMap() {
-    this.map = L.map('preview').setView([20.048736, 105.89033], 7);
+    this.map = L.map('preview', {
+      zoomControl: false,
+      dragging: false, // Disable dragging
+      touchZoom: false, // Enable touch zoom, centered
+      scrollWheelZoom: false,
+      renderer: L.canvas(),
+    }).setView([20.048736, 105.89033], 5);
+    this.mapTypesLists.Esri_WorldGrayCanvas.addTo(this.map);
 
-    L.control
-      .scale({
-        metric: true,
-        maxWidth: 100,
-        position: 'topright',
-      })
-      .addTo(this.map);
-    var googleSat = this.mapTypesLists.WorldPhysicalMap;
-    googleSat.addTo(this.map);
+    // var myRenderer = L.canvas({ padding: 0.5 }).addTo(this.map);
+    var line = L.polyline(
+      [
+        [23.5, 101.9],
+        [23.5, 108.9],
+        [16.5, 108.9],
+        [16.5, 101.9],
+        [23.5, 101.9],
+      ],
+      {color: "#349C66"}
+    ).addTo(this.map);
+
+    var zoomedIn = true;
+    this.map.on('click', () => {
+      if (zoomedIn) {
+        this.map.flyTo([20.048736, 105.89033], 4, {
+          animate: true,
+          duration: 1.5,
+        }); // Zoom out if already zoomed in
+        zoomedIn = false;
+      } else {
+        this.map.flyTo([20.048736, 105.89033], 5, {
+          animate: true,
+          duration: 1.5,
+        }); // Zoom in if not already zoomed in
+        zoomedIn = true;
+      }
+    });
   }
 }

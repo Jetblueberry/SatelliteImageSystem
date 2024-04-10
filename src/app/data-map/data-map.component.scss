@@ -1,5 +1,6 @@
 #map {
   height: calc(100vh - 30px);
+  cursor: pointer;
 }
 ::ng-deep #map .leaflet-bottom {
   display: none;
