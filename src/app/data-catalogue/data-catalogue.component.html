@@ -37,8 +37,11 @@
                       <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
                         <span class="btn-text">{{i.tenData}}</span>
                       </button>
-                      <span class="btn-icon" (click)="addDatasetToMap(i.idData)">
-                        <i class="fa-solid fa-circle-plus"></i>
+                      <span *ngIf="!displayMinusIcon[i.idData]" class="btn-icon" (click)="addDatasetToMap(i.idData)">
+                        <i  class="fa-solid fa-circle-plus"></i>
+                      </span>
+                      <span *ngIf="displayMinusIcon[i.idData]" class="btn-icon">
+                        <i  class="fa-solid fa-circle-minus" ></i>
                       </span>
                     </li>
                   </ul>
@@ -68,7 +71,7 @@
         </div>
         <div class="col-md-8">
           <perfect-scrollbar class="scrollbar">
-            <div *ngIf="lsd" class="data-catalogue-details">
+            <div *ngIf="openPreview" class="data-catalogue-details">
               <div>
                 <div class="preview-map">
                   <app-preview-map></app-preview-map>
@@ -210,6 +213,7 @@
 <app-data-details
   *ngIf="openDetails"
   [lst_choosen]="choosen_lst"
+  (idDataSelected)="selectDataset($event)"
   (openCatalogue)="openDataCatalogue($event)"
   (closeDetails)="closeDataDetails($event)"
   >

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import { MapTypeLists } from '../models/map-types';
 import { DataMapService } from '../services/data-map-services/data-map.service';
+import { PreviewMapService } from '../services/preview-map-services/preview-map.service';
 
 @Component({
   selector: 'app-preview-map',
@@ -12,7 +13,8 @@ export class PreviewMapComponent {
   map: any;
   constructor(
     public mapTypesLists: MapTypeLists,
-    public _dataMapService: DataMapService
+    public _dataMapService: DataMapService,
+    public _previewMapService: PreviewMapService
   ) {}
 
   ngOnInit() {
@@ -20,14 +22,16 @@ export class PreviewMapComponent {
   }
 
   initMap() {
-    this.map = L.map('preview', {
+    this._previewMapService.map = L.map('preview', {
       zoomControl: false,
       dragging: false, // Disable dragging
       touchZoom: false, // Enable touch zoom, centered
       scrollWheelZoom: false,
       renderer: L.canvas(),
     }).setView([20.048736, 105.89033], 5);
-    this.mapTypesLists.Esri_WorldGrayCanvas.addTo(this.map);
+    this.map = this._previewMapService.map;
+
+    this._previewMapService.InitialMapPreview();
 
     // var myRenderer = L.canvas({ padding: 0.5 }).addTo(this.map);
     var line = L.polyline(
@@ -58,4 +62,11 @@ export class PreviewMapComponent {
       }
     });
   }
+
+  ngOnDestroy() {
+    if (this.map) {
+        this.map.remove(); // Clean up the map
+        this.map = null; // Clear the map reference
+    }
+}
 }

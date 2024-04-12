@@ -36,7 +36,7 @@
   position: absolute;
   top: 60px;
   left: 500px;
-  z-index: 1000;
+  z-index: 1001!important;
   width: 350px;
   cursor: move;
   z-index: -10;
@@ -260,4 +260,46 @@
     padding: 0px!important;
     height: 30px!important;
   }
+}
+
+// Measure
+.box-linemeasure {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 200px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50px 50px 50px 50px;
+  background: #496cf5;
+  height: 36px;
+  color: white;
+}
+.box-linemeasure:hover {
+  .span-text {
+    display: block;
+  }
+}
+.box-linemeasure:focus {
+  .icon-delete {
+    display: block;
+  }
+}
+.box-expand {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.box-expand .icon-measure, .box-expand .icon-delete {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.span-text {
+  display: none;
+}
+.icon-delete i {
+  scale: 1.3;
 }

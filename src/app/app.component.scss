@@ -30,3 +30,24 @@ app-data-details {
   z-index: 1000;
 }
 
+::ng-deep p-toast {
+  position: absolute;
+  top: 54px;
+  right: 20px;
+  width: 400px;
+
+  .p-message-wrapper {
+    padding: 10px!important;
+  }
+}
+::ng-deep p-toastitem {
+  .p-toast-message-content {
+    padding: 5px!important;
+  }
+  .p-toast-message-icon {
+    height: 42px;
+  }
+  .p-toast-detail {
+    margin: 0rem!important;
+  }
+}

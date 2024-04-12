@@ -14,7 +14,14 @@ export class DataMapComponent {
   map: any;
   displayZoom: any;
   displayMapSetting = false;
+  displayIconDelete = false;
   events2 = ["31/12/2020", "31/12/2021", "31/12/2022", "31/12/2023"];
+  lat: any;
+  lng: any;
+  LineMeasuring = 0;
+  markers: any[] = [] ;
+  lines: any[] = [];
+  totalDistance = 0;
 
   constructor(
     public _dataCatalogueService: DataCatalogueService,
@@ -56,20 +63,47 @@ export class DataMapComponent {
 
     });
 
-    //Coordinate panel
+    // Panel
     await this.map.on('click', (e: any) => {
-       var box = document.getElementById("box-panel-info");
-       if(box) box.style.zIndex = "1001";
-       //latitude
-       var cord_lat = document.getElementById('point-lat');
-       const lat = this.customLatitudeValue(e.latlng.lat.toFixed(5));
-       if (cord_lat) cord_lat.innerHTML = `${lat}`;
+      if(this.LineMeasuring==0 || this.LineMeasuring==1) { // Panel coordinates
+        this.LineMeasuring = 1; // đang =0 tức chưa bật panel, =1 là bật panel rồi
 
-       //longtitude
-       var cord_lng = document.getElementById('point-lng');
-       const lng = this.customLongtitudeValue(e.latlng.lng.toFixed(5));
-       if (cord_lng) cord_lng.innerHTML = `${lng}`;
-       console.warn(lat, lng);
+        //latitude
+        var cord_lat = document.getElementById('point-lat');
+        this.lat = this.customLatitudeValue(e.latlng.lat.toFixed(5));
+        if (cord_lat) cord_lat.innerHTML = `${this.lat}`;
+
+        //longtitude
+        var cord_lng = document.getElementById('point-lng');
+        this.lng = this.customLongtitudeValue(e.latlng.lng.toFixed(5));
+        if (cord_lng) cord_lng.innerHTML = `${this.lng}`;
+        console.warn(this.lat, this.lng);
+      }
+      else if(this.LineMeasuring==2) { // Line Measurements
+        const newMarker = L.marker([e.latlng.lat, e.latlng.lng]);
+
+        newMarker.addTo(this.map);
+
+        if (this.markers.length > 0) {
+          const lastMarker = this.markers[this.markers.length - 1];
+          const lastLatLng = lastMarker.getLatLng();
+
+          // line between coordinates
+          const lineCoordinates = [lastLatLng, e.latlng];
+          var lineBetween = L.polyline(lineCoordinates, { color: 'blue' }).addTo(this.map);
+          this.lines.push(lineBetween);
+          // Calculate the distance from the last marker to the new marker
+          const distanceBetween = lastLatLng.distanceTo(e.latlng);
+
+          //Total distance
+          this.totalDistance+=distanceBetween;
+          // Print the distance to the console
+          console.warn(this.totalDistance);
+        }
+        // Add the new marker to the markers array
+        this.markers.push(newMarker);
+
+      }
     });
 
   }
@@ -96,6 +130,11 @@ export class DataMapComponent {
     return Math.abs(lng) + direction;
   }
 
+  customTotalDistance(distance: any) {
+    var d = Math.abs(distance/1000).toFixed(2);
+    return d + " km";
+  }
+
   zoom_in() {
     this.map.zoomIn();
   }
@@ -107,14 +146,49 @@ export class DataMapComponent {
   }
 
   closePanel() {
-    var box = document.getElementById("box-panel-info");
-    if(box) box.style.zIndex = "-10";
+    // var box = document.getElementById("box-panel-info");
+    // if(box) box.style.zIndex = "-10";
+    this.LineMeasuring=0;
   }
 
+  // Map settings
   openMapSetting() {
     this.displayMapSetting = true;
   }
   closeMapSetting() {{
     this.displayMapSetting = false;
   }}
+
+  // Measure
+  openCloseDeleteIcon() {
+      if(!this.displayIconDelete) {
+        this.displayIconDelete = true;
+        this.LineMeasuring = 2;
+        var i = document.getElementById("box-linemeasure")
+        if(i) {
+          i.style.background = "#01d054";
+        }
+      }
+      else {
+        var i = document.getElementById("box-linemeasure")
+        if(i) {
+          i.style.background = "#496cf5";
+        }
+        this.displayIconDelete = false;
+        this.LineMeasuring = 0;
+        this.removeMarkers();
+      }
+  }
+
+  removeMarkers() {
+    this.markers.forEach((marker) => {
+      marker.removeFrom(this.map);
+    });
+    this.markers = [];
+    this.lines.forEach((line) => {
+      line.removeFrom(this.map);
+    })
+    this.lines = [];
+    this.totalDistance = 0;
+  }
 }

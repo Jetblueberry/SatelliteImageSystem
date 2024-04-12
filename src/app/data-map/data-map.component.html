@@ -32,7 +32,8 @@
   </button>
 </div>
 
-<div class="box-panel-info" id="box-panel-info">
+<!--1 là hiện tọa độ-->
+<div *ngIf="LineMeasuring==1" class="box-panel-info" id="box-panel-info"> <!--Panel Coordinates-->
   <div class="panel-header">
     <span style="margin-left: 10px;">Feature Infomation</span>
     <span class="icon-cl" (click)="closePanel()">
@@ -44,11 +45,33 @@
     <div class="dimension-panel">
       <span class="panel-text">Lat/Lng</span>
       <div class="point-area">
-        <span class="coordinate" id="point-lat"></span>
+        <span class="coordinate" id="point-lat">{{lat}}</span>
         <span>/ </span>
-        <span class="coordinate" id="point-lng"></span>
+        <span class="coordinate" id="point-lng">{{lng}}</span>
       </div>
       <span style="margin-right: 5px;">
+        <i class="fa-solid fa-location-dot"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- 2 là hiện khoảng cách -->
+<div *ngIf="LineMeasuring==2" class="box-panel-info" id="box-panel-info"> <!--Panel Distance-->
+  <div class="panel-header">
+    <span style="margin-left: 10px;">Distance Measurements</span>
+    <span class="icon-cl" (click)="closePanel()">
+      <i class="fa-solid fa-xmark"></i>
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="data-details-panel"></div>
+    <div class="dimension-panel">
+      <span class="panel-text">Distance</span>
+      <div class="point-area">
+        <span class="coordinate">{{customTotalDistance(totalDistance)}}</span>
+      </div>
+      <span style="margin-right: 5px;" *ngIf="LineMeasuring!=2">
         <i class="fa-solid fa-location-dot"></i>
       </span>
     </div>
@@ -89,9 +112,20 @@
   </div>
 </div>
 
+<div class="box-linemeasure" (click)="openCloseDeleteIcon()" id="box-linemeasure">
+  <div class="box-expand" >
+    <span class="icon-measure">
+      <i class="fa-solid fa-arrows-left-right-to-line"></i>
+    </span>
+    <span class="span-text" style="margin-left: 4px; margin-right: 10px;">Line measure</span>
+    <span *ngIf="displayIconDelete" class="icon-delete" id="icon-delete">
+      <i class="fa-regular fa-circle-xmark"></i>
+    </span>
+  </div>
+</div>
 
 <div class="box-timeline" *ngIf="false">
-  <div class="btn-story-area"></div>
+  <div class="box-story-area"></div>
   <div class="timeline-area">
     <div class="timeline-chart">
       <p-timeline class="timeline" [value]="events2" layout="horizontal" align="bottom">

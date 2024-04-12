@@ -12,6 +12,7 @@ import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {TimelineModule} from 'primeng/timeline';
+import { ToastModule } from 'primeng/toast';
 
 // Components
 import { AppComponent } from './app.component';
@@ -20,6 +21,9 @@ import { DataCatalogueComponent } from './data-catalogue/data-catalogue.componen
 import { DataDetailsComponent } from './data-details/data-details.component';
 import { DataMapComponent } from './data-map/data-map.component';
 import { PreviewMapComponent } from './preview-map/preview-map.component';
+
+// Service
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 // Models
 import { MapTypeLists } from './models/map-types';
@@ -47,8 +51,9 @@ import { MapTypeLists } from './models/map-types';
     DropdownModule,
     ButtonModule,
     TimelineModule,
+    ToastModule,
   ],
-  providers: [MapTypeLists],
+  providers: [MapTypeLists, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

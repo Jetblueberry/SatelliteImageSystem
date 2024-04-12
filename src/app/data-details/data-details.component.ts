@@ -13,11 +13,14 @@ import { DataDetailsService } from '../services/data-details-services/data-detai
 export class DataDetailsComponent {
   @Input() lst_choosen: any;
   @Output() openCatalogue = new EventEmitter<any>();
+  @Output() idDataSelected = new EventEmitter<any>();
   @Output() closeDetails = new EventEmitter<any>();
 
   opacityValue = 100;
   displayOnMap = true;
   displayDetailsBody: any = {};
+  countDetailsName: any = {};
+  detailsName: any;
 
   lstStyles: any[] = [];
   selectedOption: string = "";
@@ -27,7 +30,9 @@ export class DataDetailsComponent {
     public _dataDetailsService: DataDetailsService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   OpenCloseDetailsBody(type: any) {
     var i = document.getElementById(`${type}-icon`);
@@ -44,8 +49,9 @@ export class DataDetailsComponent {
     }
   }
 
-  openSummary() {
+  openSummary(idData: any) {
     this.openCatalogue.emit(true);
+    this.idDataSelected.emit(idData);
     this._dataMapService.displayZoom = false;
   }
 

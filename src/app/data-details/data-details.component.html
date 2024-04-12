@@ -9,17 +9,17 @@
       </div>
       <ul class="list-details-datasets">
         <perfect-scrollbar style="height: 360px;" class="scroll-bar">
-          <li *ngFor="let i of lst_choosen" class="box-details">
+          <li *ngFor="let i of lst_choosen" class="box-details" >
             <div class="box-details-header">
               <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData)"></button>
-              <span class="dataset-name">{{i.tenData}}</span>
+              <span class="dataset-name" >{{i.tenData}}</span>
               <div class="icon-grp-area" (click)="OpenCloseDetailsBody(i.tenData)">
                 <i class="fa-solid fa-caret-down" id="{{i.tenData}}-icon" ></i>
               </div>
             </div>
             <div class="box-details-body" *ngIf="!displayDetailsBody[i.tenData]">
               <div class="row-1 box-summary-details">
-                <button class="summary-detail" (click)="openSummary()">Dataset Summary</button>
+                <button class="summary-detail" (click)="openSummary(i.idData)">Dataset Summary</button>
                 <button class="menu-btn">
                   <i class="fa-solid fa-bars"></i>
                 </button>

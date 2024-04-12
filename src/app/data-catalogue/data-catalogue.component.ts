@@ -6,6 +6,7 @@ import {sentinel_data} from '../data/sentinel_data';
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import * as L from 'leaflet';
 import { MapTypeLists } from '../models/map-types';
+import { MessagesService } from '../services/message.service';
 
 @Component({
   selector: 'app-data-catalogue',
@@ -20,8 +21,10 @@ export class DataCatalogueComponent {
   lsd: any;
   mymap: any;
   openDetails = false;
+  openPreview = false;
 
   displayData: any = {};
+  displayMinusIcon: any = {};
   landsat_lst: any = [];
   sentinel_lst: any = [];
   total_lst: any = [];
@@ -31,7 +34,8 @@ export class DataCatalogueComponent {
     private _dataCatalogueService: DataCatalogueService,
     public _dataDetailsService: DataDetailsService,
     public _dataMapService: DataMapService,
-    public mapTypesLists: MapTypeLists
+    public mapTypesLists: MapTypeLists,
+    public messageService: MessagesService
   ) {}
 
   ngOnInit() {
@@ -62,6 +66,7 @@ export class DataCatalogueComponent {
   closeDataDetails(closeDetails: any) {
     this.openDetails = closeDetails;
     this.choosen_lst = [];
+    this.displayMinusIcon = {};
   }
 
   // Left catalogue list
@@ -104,10 +109,16 @@ export class DataCatalogueComponent {
     this._dataMapService.AddDataToMap(item.tenData);
 
     this.closeCatalogue.emit(false);
+    this.displayMinusIcon[idData] = true;
     this.openDetails = true;
+    setTimeout(async () => {
+      await this.messageService.addMessageSuccessAdding();
+    }, 500);
+
   }
 
   async selectDataset(idData: any) {
     this.lsd = await this._dataCatalogueService.getDataLandsatById(idData);
+    this.openPreview = true;
   }
 }

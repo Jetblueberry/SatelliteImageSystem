@@ -3,6 +3,7 @@ import { DataMapService } from '../services/data-map-services/data-map.service';
 import { DataMapComponent } from '../data-map/data-map.component';
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
 import { DataDetailsService } from '../services/data-details-services/data-details.service';
+import { MessagesService } from '../services/message.service';
 
 @Component({
   selector: 'app-left-menu',
@@ -18,6 +19,7 @@ export class LeftMenuComponent {
     public _dataCatalogueService: DataCatalogueService,
     public _dataDetailsService: DataDetailsService,
     public _dataMapService: DataMapService,
+    public messageService: MessagesService
   ) {}
   OpenDataCatalogue() {
     this.openCatalogue = true;
