@@ -35,11 +35,12 @@ export class DataMapComponent {
   }
 
   async initMap() {
-    this._dataMapService.map = L.map('map', { zoomControl: false }).setView([20.048736, 105.89033], 6);
+    this._dataMapService.map = L.map('map', { zoomControl: false, minZoom: 2 }).setView([20.048736, 105.89033], 6);
     this.map = this._dataMapService.map;
     L.marker([20.048736, 105.89033]).addTo(this.map);
 
     this._dataMapService.InitialMapTileLayer();
+
 
     // Scale
     L.control.scale({
@@ -160,7 +161,7 @@ export class DataMapComponent {
   }}
 
   // Measure
-  openCloseDeleteIcon() {
+  openCloseMeasureDistance() {
       if(!this.displayIconDelete) {
         this.displayIconDelete = true;
         this.LineMeasuring = 2;
@@ -191,4 +192,48 @@ export class DataMapComponent {
     this.lines = [];
     this.totalDistance = 0;
   }
+
+  // Mouse move box-panel
+  left = 500; // Initial horizontal position (in pixels)
+  top = 60; // Initial vertical position (in pixels)
+
+  isDragging = false;
+  initialMouseX: any;
+  initialMouseY: any;
+  initialBoxLeft: any;
+  initialBoxTop: any;
+
+  onMouseDown(event: MouseEvent): void {
+    // Begin dragging when the mouse button is pressed on the box-panel-info
+    this.isDragging = true;
+    this.initialMouseX = event.clientX;
+    this.initialMouseY = event.clientY;
+    this.initialBoxLeft = this.left;
+    this.initialBoxTop = this.top;
+
+    // Add mousemove and mouseup event listeners on the document
+    document.addEventListener('mousemove', this.onMouseMove);
+    document.addEventListener('mouseup', this.onMouseUp);
+  }
+
+  onMouseMove = (event: MouseEvent): void => {
+    if (this.isDragging) {
+      // Calculate new position based on mouse movement
+      const deltaX = event.clientX - this.initialMouseX;
+      const deltaY = event.clientY - this.initialMouseY;
+
+      this.left = this.initialBoxLeft + deltaX;
+      this.top = this.initialBoxTop + deltaY;
+    }
+  };
+
+  onMouseUp = (): void => {
+    // Stop dragging when the mouse button is released
+    this.isDragging = false;
+
+    // Remove the event listeners to avoid memory leaks
+    document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onMouseUp);
+  };
+
 }

@@ -33,7 +33,10 @@
 </div>
 
 <!--1 là hiện tọa độ-->
-<div *ngIf="LineMeasuring==1" class="box-panel-info" id="box-panel-info"> <!--Panel Coordinates-->
+<div *ngIf="LineMeasuring==1" class="box-panel-info" id="box-panel-info"
+  (mousedown)="onMouseDown($event)"
+  [ngStyle]="{ left: left + 'px', top: top + 'px' }"
+> <!--Panel Coordinates-->
   <div class="panel-header">
     <span style="margin-left: 10px;">Feature Infomation</span>
     <span class="icon-cl" (click)="closePanel()">
@@ -57,22 +60,27 @@
 </div>
 
 <!-- 2 là hiện khoảng cách -->
-<div *ngIf="LineMeasuring==2" class="box-panel-info" id="box-panel-info"> <!--Panel Distance-->
+<div *ngIf="LineMeasuring==2" class="box-panel-info" id="box-panel-info"
+  (mousedown)="onMouseDown($event)"
+  [ngStyle]="{ left: left + 'px', top: top + 'px' }"
+> <!--Panel Distance-->
   <div class="panel-header">
     <span style="margin-left: 10px;">Distance Measurements</span>
-    <span class="icon-cl" (click)="closePanel()">
-      <i class="fa-solid fa-xmark"></i>
+    <span class="icon-cl" (click)="openCloseMeasureDistance()">
+      <button class="btn-done-panel">
+        <span>Done</span>
+      </button>
     </span>
   </div>
   <div class="panel-body">
     <div class="data-details-panel"></div>
     <div class="dimension-panel">
       <span class="panel-text">Distance</span>
-      <div class="point-area">
+      <div class="point-area" >
         <span class="coordinate">{{customTotalDistance(totalDistance)}}</span>
       </div>
-      <span style="margin-right: 5px;" *ngIf="LineMeasuring!=2">
-        <i class="fa-solid fa-location-dot"></i>
+      <span style="margin-right: 5px;" >
+        <i class="fa-solid fa-arrows-left-right-to-line"></i>
       </span>
     </div>
   </div>
@@ -112,7 +120,7 @@
   </div>
 </div>
 
-<div class="box-linemeasure" (click)="openCloseDeleteIcon()" id="box-linemeasure">
+<div class="box-linemeasure" (click)="openCloseMeasureDistance()" id="box-linemeasure">
   <div class="box-expand" >
     <span class="icon-measure">
       <i class="fa-solid fa-arrows-left-right-to-line"></i>

@@ -108,6 +108,8 @@ export class DataCatalogueComponent {
 
     this._dataMapService.AddDataToMap(item.tenData);
 
+    var i = this._dataMapService.InitialDataLayerByName(item.tenData);
+
     this.closeCatalogue.emit(false);
     this.displayMinusIcon[idData] = true;
     this.openDetails = true;

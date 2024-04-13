@@ -68,6 +68,21 @@
   display: flex;
   margin-left: auto;
   margin-right: 10px;
+  height: 50px;
+  align-items: center;
+  cursor: pointer;
+}
+.btn-done-panel {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(45deg, #00f260, #0575e6);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 3px;
+  font-size: 0.9rem;
+  padding: 5px;
+  margin: 10px;
+  height: 30px;
   cursor: pointer;
 }
 

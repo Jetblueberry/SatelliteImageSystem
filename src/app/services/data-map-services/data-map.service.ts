@@ -1,6 +1,8 @@
 import { Injectable, Injector} from '@angular/core';
 import { WmsService } from '../wms.service';
-import * as L from 'leaflet';
+declare const L: any; // --> Works
+import 'leaflet'
+import 'leaflet-side-by-side'
 import { MapTypeLists } from 'src/app/models/map-types';
 
 @Injectable({
@@ -30,6 +32,7 @@ export class DataMapService {
     var Esri_WorldImagery = this.mapTypesLists.Esri_WorldImagery;
     Esri_WorldImagery.addTo(this.map);
 
+    L.control.sideBySide(googleStreets, googleSat).addTo(this.map)
     // var chuThichBanDo = this.mapTypesLists.Stadia_StamenTerrainLabels;
     // chuThichBanDo.addTo(this.map)
   }
@@ -102,6 +105,12 @@ export class DataMapService {
     this.mapTypesLists.CartoDB_Positron.remove();
     this.mapTypesLists.CartoDB_DarkMatter.addTo(this.map).bringToBack();
   }
+
+  // Compare
+  // AddCompare(layer: any) {
+  //   var sideBySide = require('leaflet-side-by-side')
+  //   L.control.sideBySide(layer, layer).addTo(this.map);
+  // }
 }
 
 
