@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import * as L from 'leaflet';
+declare const L: any; // --> Works
+import 'leaflet';
+import 'leaflet-timedimension';
+import 'dist/leaflet-splitmap'
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
 import { MapTypeLists } from '../models/map-types';
 import { DataMapService } from '../services/data-map-services/data-map.service';
@@ -14,11 +17,11 @@ export class DataMapComponent {
   map: any;
   displayZoom: any;
   displayMapSetting = false;
-  displayIconDelete = false;
+  displayIconDelete: any = {};
   events2 = ["31/12/2020", "31/12/2021", "31/12/2022", "31/12/2023"];
   lat: any;
   lng: any;
-  LineMeasuring = 0;
+  typeWorking: any = "NothingWorking";
   markers: any[] = [] ;
   lines: any[] = [];
   totalDistance = 0;
@@ -35,16 +38,14 @@ export class DataMapComponent {
   }
 
   async initMap() {
-    this._dataMapService.map = L.map('map', { zoomControl: false, minZoom: 2 }).setView([20.048736, 105.89033], 6);
+    this._dataMapService.map = L.map('map',  {
+      zoomControl: false,
+      minZoom: 2,
+    }).setView([20.048736, 105.89033], 6);
     this.map = this._dataMapService.map;
     L.marker([20.048736, 105.89033]).addTo(this.map);
 
-    // var sliderControl = L.control.sliderControl({position: 'topright', layer: hurricane, startTime: '2005-08-29T00:00:00', endTime: '2005-08-30T15:00:00', timeStep: 1000*60*60});
-    // this.map.addControl(sliderControl);
-    // sliderControl.startSlider();
-
     this._dataMapService.InitialMapTileLayer();
-
 
     // Scale
     L.control.scale({
@@ -70,8 +71,8 @@ export class DataMapComponent {
 
     // Panel
     await this.map.on('click', (e: any) => {
-      if(this.LineMeasuring==0 || this.LineMeasuring==1) { // Panel coordinates
-        this.LineMeasuring = 1; // đang =0 tức chưa bật panel, =1 là bật panel rồi
+      if(this.typeWorking=="NothingWorking" || this.typeWorking=="CoordinatesWorking") { // Panel coordinates
+        this.typeWorking = "CoordinatesWorking"; // đang =0 tức chưa bật panel, =1 là bật panel rồi
 
         //latitude
         var cord_lat = document.getElementById('point-lat');
@@ -84,7 +85,7 @@ export class DataMapComponent {
         if (cord_lng) cord_lng.innerHTML = `${this.lng}`;
         console.warn(this.lat, this.lng);
       }
-      else if(this.LineMeasuring==2) { // Line Measurements
+      else if(this.typeWorking=="MeasureWorking") { // Line Measurements
         const newMarker = L.marker([e.latlng.lat, e.latlng.lng]);
 
         newMarker.addTo(this.map);
@@ -151,9 +152,7 @@ export class DataMapComponent {
   }
 
   closePanel() {
-    // var box = document.getElementById("box-panel-info");
-    // if(box) box.style.zIndex = "-10";
-    this.LineMeasuring=0;
+    this.typeWorking="NothingWorking";
   }
 
   // Map settings
@@ -165,22 +164,22 @@ export class DataMapComponent {
   }}
 
   // Measure
-  openCloseMeasureDistance() {
-      if(!this.displayIconDelete) {
-        this.displayIconDelete = true;
-        this.LineMeasuring = 2;
-        var i = document.getElementById("box-linemeasure")
+  openCloseMeasureDistance(type: any) {
+      if(!this.displayIconDelete[type]) {
+        this.displayIconDelete[type] = true;
+        this.typeWorking = "MeasureWorking";
+        var i = document.getElementById(`${type}`)
         if(i) {
           i.style.background = "#01d054";
         }
       }
       else {
-        var i = document.getElementById("box-linemeasure")
+        var i = document.getElementById(`${type}`)
         if(i) {
           i.style.background = "#496cf5";
         }
-        this.displayIconDelete = false;
-        this.LineMeasuring = 0;
+        this.displayIconDelete[type] = false;
+        this.typeWorking = "NothingWorking";
         this.removeMarkers();
       }
   }
@@ -195,6 +194,30 @@ export class DataMapComponent {
     })
     this.lines = [];
     this.totalDistance = 0;
+  }
+
+  // Compare
+  openCloseCompareBox(type: any) {
+    var t1 = this.mapTypesLists.googleStreets.addTo(this.map);
+    var t2 = this.mapTypesLists.googleSat.addTo(this.map);
+    var mp = L.control.splitMap(t1, t2)
+    if(!this.displayIconDelete[type]) {
+      this.displayIconDelete[type] = true;
+      this.typeWorking = "";
+      var i = document.getElementById(`${type}`)
+      if(i) {
+        i.style.background = "#01d054";
+      }
+      mp.addTo(this.map)
+    }
+    else {
+      var i = document.getElementById(`${type}`)
+      if(i) {
+        i.style.background = "#496cf5";
+      }
+      this.displayIconDelete[type] = false;
+      this.typeWorking = "NothingWorking";
+    }
   }
 
   // Timeline

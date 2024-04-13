@@ -292,7 +292,13 @@
 }
 .box-linemeasure:hover {
   .span-text {
-    display: block;
+    max-width: 100px;
+    margin-left: 4px;
+    margin-right: 10px;
+    transition: max-width 0.3s ease;
+  }
+  .icon-measure {
+    margin-left: 5px;
   }
 }
 .box-linemeasure:focus {
@@ -312,8 +318,63 @@
   justify-content: center;
   align-items: center;
 }
-.span-text {
-  display: none;
+.box-linemeasure .span-text {
+  white-space: nowrap!important;
+  max-width: 0px;
+  margin: 0px;
+  overflow: hidden;
+  transition: max-width 0.3s ease;
+}
+.icon-delete i {
+  scale: 1.3;
+}
+
+// Box compare
+.box-compare {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 255px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50px 50px 50px 50px;
+  background: #496cf5;
+  height: 36px;
+  color: white;
+}
+.box-compare:hover {
+  .span-text {
+    max-width: 100px;
+    margin-left: 4px;
+    margin-right: 10px;
+    transition: max-width 0.3s ease;
+  }
+  .icon-compare {
+    margin-left: 5px;
+  }
+}
+.box-compare:focus {
+  .icon-delete {
+    display: block;
+  }
+}
+.box-expand {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.box-expand .icon-compare, .box-expand .icon-delete {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box-compare .span-text {
+  max-width: 0px;
+  margin: 0px;
+  overflow: hidden;
+  transition: max-width 0.3s ease;
 }
 .icon-delete i {
   scale: 1.3;

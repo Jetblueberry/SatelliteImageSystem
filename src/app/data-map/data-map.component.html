@@ -33,7 +33,7 @@
 </div>
 
 <!--1 là hiện tọa độ-->
-<div *ngIf="LineMeasuring==1" class="box-panel-info" id="box-panel-info"
+<div *ngIf="typeWorking=='CoordinatesWorking'" class="box-panel-info" id="box-panel-info"
   (mousedown)="onMouseDown($event)"
   [ngStyle]="{ left: left + 'px', top: top + 'px' }"
 > <!--Panel Coordinates-->
@@ -60,13 +60,13 @@
 </div>
 
 <!-- 2 là hiện khoảng cách -->
-<div *ngIf="LineMeasuring==2" class="box-panel-info" id="box-panel-info"
+<div *ngIf="typeWorking=='MeasureWorking'" class="box-panel-info" id="box-panel-info"
   (mousedown)="onMouseDown($event)"
   [ngStyle]="{ left: left + 'px', top: top + 'px' }"
 > <!--Panel Distance-->
   <div class="panel-header">
     <span style="margin-left: 10px;">Distance Measurements</span>
-    <span class="icon-cl" (click)="openCloseMeasureDistance()">
+    <span class="icon-cl" (click)="openCloseMeasureDistance('box-linemeasure')">
       <button class="btn-done-panel">
         <span>Done</span>
       </button>
@@ -120,13 +120,25 @@
   </div>
 </div>
 
-<div class="box-linemeasure" (click)="openCloseMeasureDistance()" id="box-linemeasure">
+<div class="box-linemeasure" (click)="openCloseMeasureDistance('box-linemeasure')" id="box-linemeasure">
   <div class="box-expand" >
     <span class="icon-measure">
       <i class="fa-solid fa-arrows-left-right-to-line"></i>
     </span>
-    <span class="span-text" style="margin-left: 4px; margin-right: 10px;">Line measure</span>
-    <span *ngIf="displayIconDelete" class="icon-delete" id="icon-delete">
+    <span class="span-text">Line measure</span>
+    <span *ngIf="displayIconDelete['box-linemeasure']" class="icon-delete" id="icon-delete">
+      <i class="fa-regular fa-circle-xmark"></i>
+    </span>
+  </div>
+</div>
+
+<div class="box-compare" (click)="openCloseCompareBox('box-compare')" id="box-compare">
+  <div class="box-expand" >
+    <span class="icon-compare">
+      <i class="fa-solid fa-code-compare"></i>
+    </span>
+    <span class="span-text">Compare</span>
+    <span *ngIf="displayIconDelete['box-compare']" class="icon-delete" id="icon-delete">
       <i class="fa-regular fa-circle-xmark"></i>
     </span>
   </div>
@@ -144,3 +156,6 @@
     </div>
   </div>
 </div>
+
+
+
