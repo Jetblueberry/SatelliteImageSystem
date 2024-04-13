@@ -39,6 +39,10 @@ export class DataMapComponent {
     this.map = this._dataMapService.map;
     L.marker([20.048736, 105.89033]).addTo(this.map);
 
+    // var sliderControl = L.control.sliderControl({position: 'topright', layer: hurricane, startTime: '2005-08-29T00:00:00', endTime: '2005-08-30T15:00:00', timeStep: 1000*60*60});
+    // this.map.addControl(sliderControl);
+    // sliderControl.startSlider();
+
     this._dataMapService.InitialMapTileLayer();
 
 
@@ -192,6 +196,8 @@ export class DataMapComponent {
     this.lines = [];
     this.totalDistance = 0;
   }
+
+  // Timeline
 
   // Mouse move box-panel
   left = 500; // Initial horizontal position (in pixels)

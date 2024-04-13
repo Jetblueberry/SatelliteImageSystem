@@ -20,9 +20,31 @@
             <div class="box-details-body" *ngIf="!displayDetailsBody[i.tenData]">
               <div class="row-1 box-summary-details">
                 <button class="summary-detail" (click)="openSummary(i.idData)">Dataset Summary</button>
-                <button class="menu-btn">
+                <button class="menu-btn" (click)="openBoxControl(i.tenData)">
                   <i class="fa-solid fa-bars"></i>
                 </button>
+              </div>
+              <div *ngIf="displayBoxControl[i.tenData]" class="box-view-control" (blur)="closeBoxControl(i.tenData)">
+                <ul style="list-style: none;">
+                  <li>
+                    <button class="btn-control compare">
+                      <span style="margin-right: 5px;"><i class="fa-solid fa-code-compare"></i></span>
+                      <span>Compare</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="btn-control export">
+                      <span style="margin-right: 5px;"><i class="fa-solid fa-file-export"></i></span>
+                      <span>Export</span>
+                    </button>
+                  </li>
+                  <li (click)="removeDetails(i.tenData)">
+                    <button class="btn-control remove" >
+                      <span style="margin-right: 5px;"><i class="fa-solid fa-ban"></i></span>
+                      <span>Remove</span>
+                    </button>
+                  </li>
+                </ul>
               </div>
               <div class="row-2 box-opacity-details">
                 <label class="opacity">Opacity: {{opacityValue}}%</label>

@@ -113,6 +113,37 @@
   background: linear-gradient(45deg, #0575e6, #00f260);
   outline: rgb(195, 144, 249) solid 3px;
 }
+.box-view-control {
+  position: absolute;
+  z-index: 1003;
+  right: 10px;
+  top: 50px;
+  padding: 0px;
+  border-radius: 5px;
+  margin: 0px;
+}
+.box-view-control li {
+  margin-top: 0px;
+}
+.box-view-control .btn-control {
+  display: flex;
+  align-items: center;
+  width: 114px;
+  min-height: 32px;
+  background-color: #1a54f5;
+  margin: 0px;
+  border: 0px;
+  color: white;
+}
+.btn-control:hover {
+  background: linear-gradient(45deg, #0575e6, #00f260);
+}
+.btn-control:focus {
+  background: linear-gradient(45deg, #0575e6, #00f260);
+  outline: rgb(195, 144, 249) solid 3px;
+}
+
+// Row 2
 .row-2 {
   display: flex;
   margin-top: 5px;

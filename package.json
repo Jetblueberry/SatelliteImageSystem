@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve || webpack.config.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -26,7 +26,7 @@
     "chart.js": "^4.4.0",
     "cors": "^2.8.5",
     "leaflet": "^1.9.4",
-    "leaflet-side-by-side": "^2.2.0",
+    "leaflet-timedimension": "^1.1.1",
     "ngx-perfect-scrollbar": "^10.1.1",
     "perfect-scrollbar": "^1.5.5",
     "primeicons": "^6.0.1",
@@ -38,6 +38,8 @@
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^17.0.2",
+    "@angular-builders/dev-server": "^7.3.1",
     "@angular-devkit/build-angular": "^15.1.5",
     "@angular/cli": "~15.1.5",
     "@angular/compiler-cli": "^15.1.0",
@@ -52,6 +54,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "ngx-build-plus": "^17.0.0",
     "style-loader": "^4.0.0",
     "typescript": "~4.9.4"
   }

@@ -1,12 +1,14 @@
 import { Injectable, Injector} from '@angular/core';
 import { WmsService } from '../wms.service';
 declare const L: any; // --> Works
-import 'leaflet'
-import 'leaflet-side-by-side'
+import 'leaflet';
+import 'leaflet-timedimension'
+// import 'leaflet-side-by-side'
 import { MapTypeLists } from 'src/app/models/map-types';
 
 @Injectable({
   providedIn: 'root',
+
 })
 
 export class DataMapService {
@@ -32,7 +34,10 @@ export class DataMapService {
     var Esri_WorldImagery = this.mapTypesLists.Esri_WorldImagery;
     Esri_WorldImagery.addTo(this.map);
 
-    L.control.sideBySide(googleStreets, googleSat).addTo(this.map)
+    var tdWmsLayer = L.timeDimension.layer.wms(Esri_WorldImagery);
+    tdWmsLayer.addTo(this.map);
+
+    //L.control.sideBySide(googleStreets, googleSat).addTo(this.map)
     // var chuThichBanDo = this.mapTypesLists.Stadia_StamenTerrainLabels;
     // chuThichBanDo.addTo(this.map)
   }

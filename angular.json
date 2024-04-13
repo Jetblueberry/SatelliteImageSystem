@@ -18,7 +18,8 @@
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-                "path": "./webpack.config.js"
+              "path": "./webpack.config.js",
+              "replaceDuplicatePlugins": true
             },
             "allowedCommonJsDependencies": [
               "lodash"
@@ -41,13 +42,10 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
-              "node_modules/leaflet-side-by-side/range.css",
-              "node_modules/leaflet-side-by-side/layout.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/leaflet-side-by-side/leaflet-side-by-side.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
 
@@ -79,11 +77,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "customWebpackConfig": {
-                "path": "./webpack.config.js"
-            }
+
           },
           "configurations": {
             "production": {

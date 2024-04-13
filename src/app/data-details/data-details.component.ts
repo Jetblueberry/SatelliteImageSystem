@@ -19,7 +19,9 @@ export class DataDetailsComponent {
   opacityValue = 100;
   displayOnMap = true;
   displayDetailsBody: any = {};
+  displayBoxControl: any = {};
   countDetailsName: any = {};
+
   detailsName: any;
 
   lstStyles: any[] = [];
@@ -82,5 +84,31 @@ export class DataDetailsComponent {
 
   genLstStyles(listStyles: any) {
     return this._dataDetailsService.CustomListChosen(listStyles);
+  }
+
+  // Box-view-control
+  openBoxControl(nameData: any) {
+    if(!this.displayBoxControl[nameData]) {
+      this.displayBoxControl[nameData] = true;
+    }
+    else {
+      this.displayBoxControl[nameData] = false;
+    }
+  }
+  closeBoxControl(nameData: any) {
+    this.displayBoxControl[nameData] = false;
+  }
+
+  removeDetails(nameData: any) {
+    for (let i = 0; i < this.lst_choosen.length; i++) {
+      if (this.lst_choosen[i].tenData === nameData) {
+          this.lst_choosen.splice(i, 1);
+          this.displayBoxControl[nameData] = false;
+          break;
+      }
+    }
+    if(this.lst_choosen.length === 0) {
+      this.closeDetails.emit(false);
+    }
   }
 }

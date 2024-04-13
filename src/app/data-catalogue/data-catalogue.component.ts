@@ -122,5 +122,6 @@ export class DataCatalogueComponent {
   async selectDataset(idData: any) {
     this.lsd = await this._dataCatalogueService.getDataLandsatById(idData);
     this.openPreview = true;
+    this.displayData['landsat'] = true;
   }
 }
