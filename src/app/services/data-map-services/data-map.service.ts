@@ -2,7 +2,6 @@ import { Injectable, Injector} from '@angular/core';
 import { WmsService } from '../wms.service';
 declare const L: any; // --> Works
 import 'leaflet';
-import 'leaflet-timedimension';
 import { MapTypeLists } from 'src/app/models/map-types';
 
 @Injectable({
@@ -43,15 +42,16 @@ export class DataMapService {
   InitialDataLayerByName(nameData: any) {
     this.wmsUrl = this._wmsService.wmsUrl;
     var layer = `Landsat_Workspace:${nameData}`;
-    // layer = WP + (LC08_L2SP)
+
     this.defaultLayer[layer] = L.tileLayer.wms(this.wmsUrl,
       {
-        layers: "LC08_L2SP_126045_20220408_20220412_02_T1",
+        layers: nameData,
         format: 'image/png', // or any other supported format
         transparent: true, // if transparency is needed
         crs: L.CRS.EPSG3857,
       }
     );
+
     return this.defaultLayer[layer];
   }
 
@@ -64,6 +64,7 @@ export class DataMapService {
   // Thêm layer vào bản đồ thì phải khởi tạo trc đã
   async AddDataToMap(nameData: any) {
     if (this.map) {
+
       await this.InitialDataLayerByName(nameData).addTo(this.map);
     }
   }
@@ -108,11 +109,6 @@ export class DataMapService {
     this.mapTypesLists.CartoDB_DarkMatter.addTo(this.map).bringToBack();
   }
 
-  // Compare
-  // AddCompare(layer: any) {
-  //   var sideBySide = require('leaflet-side-by-side')
-  //   L.control.sideBySide(layer, layer).addTo(this.map);
-  // }
 }
 
 

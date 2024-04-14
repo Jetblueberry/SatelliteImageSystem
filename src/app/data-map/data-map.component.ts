@@ -37,6 +37,7 @@ export class DataMapComponent {
     this.initMap();
   }
 
+
   async initMap() {
     this._dataMapService.map = L.map('map',  {
       zoomControl: false,
@@ -111,7 +112,6 @@ export class DataMapComponent {
 
       }
     });
-
   }
 
   customLatitudeValue(lat: any) {
@@ -148,7 +148,7 @@ export class DataMapComponent {
     this.map.zoomOut();
   }
   set_zoom_home() {
-    this.map.setView([20.048736, 105.89033], 7);
+    this.map.setView([20.048736, 105.89033], 6);
   }
 
   closePanel() {

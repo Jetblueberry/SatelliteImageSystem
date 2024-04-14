@@ -21,8 +21,9 @@ export class DataDetailsComponent {
   displayDetailsBody: any = {};
   displayBoxControl: any = {};
   countDetailsName: any = {};
-
   detailsName: any;
+
+  minDate = new Date("2022-02-13");
 
   lstStyles: any[] = [];
   selectedOption: string = "";
@@ -33,7 +34,13 @@ export class DataDetailsComponent {
   ) {}
 
   ngOnInit() {
+    this.customDetailsBeforeInit();
+  }
 
+  customDetailsBeforeInit() {
+    for(var x of this.lst_choosen) {
+      x.defaultDate = new Date(x.defaultDate);
+    }
   }
 
   OpenCloseDetailsBody(type: any) {
@@ -71,9 +78,9 @@ export class DataDetailsComponent {
       }
     }
   }
-  removeAllDetails() {
+  async removeAllDetails() {
     for(let x of this.lst_choosen) {
-      this._dataMapService.RemoveDataFromMap(x.tenData);
+      await this._dataMapService.RemoveDataFromMap(x.tenData);
     }
     this.closeDetails.emit(false);
   }
@@ -99,10 +106,11 @@ export class DataDetailsComponent {
     this.displayBoxControl[nameData] = false;
   }
 
-  removeDetails(nameData: any) {
+   removeDetails(nameData: any) {
     for (let i = 0; i < this.lst_choosen.length; i++) {
       if (this.lst_choosen[i].tenData === nameData) {
           this.lst_choosen.splice(i, 1);
+          this._dataMapService.RemoveDataFromMap(nameData);
           this.displayBoxControl[nameData] = false;
           break;
       }
@@ -111,4 +119,16 @@ export class DataDetailsComponent {
       this.closeDetails.emit(false);
     }
   }
+
+  // Date time
+  getDisabledDates(minDate: any): Date[] {
+    const disabledDates = [];
+
+    // Loop from current date to minDate (exclusive)
+    for (let d = new Date(minDate); d < this.minDate; d.setDate(d.getDate() + 1)) {
+        disabledDates.push(new Date(d));
+    }
+
+    return disabledDates;
+}
 }

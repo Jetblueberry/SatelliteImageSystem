@@ -12,7 +12,8 @@ import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {TimelineModule} from 'primeng/timeline';
-import { ToastModule } from 'primeng/toast';
+import {ToastModule} from 'primeng/toast';
+import {CalendarModule} from 'primeng/calendar';
 
 // Components
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { MapTypeLists } from './models/map-types';
     ButtonModule,
     TimelineModule,
     ToastModule,
+    CalendarModule,
   ],
   providers: [MapTypeLists, MessageService],
   bootstrap: [AppComponent]

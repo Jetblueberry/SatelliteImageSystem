@@ -332,3 +332,30 @@
   }
 }
 
+::ng-deep .detail-calendar {
+  .p-calendar input {
+    padding: 0px!important;
+    background: transparent;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .p-calendar input:focus {
+    box-shadow: none;
+  }
+  .p-datepicker {
+    top: 30px!important;
+    left: -10px!important;
+  }
+  .p-datepicker-header {
+    padding: 0px!important;
+  }
+  .p-datepicker-title button {
+    padding: 0px!important;
+  }
+  .p-datepicker table td {
+    padding: 0px!important;
+  }
+}
+

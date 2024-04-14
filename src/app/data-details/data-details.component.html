@@ -60,7 +60,11 @@
                       <i class="fa-solid fa-caret-left"></i>
                     </button>
                     <button class="date-default">
-                      <span>{{i.defaultDate | date: "dd/MM/yyyy"}}</span>
+                      <p-calendar class="detail-calendar"
+                        [(ngModel)]="i.defaultDate"
+                        [minDate]="minDate"
+                        [maxDate]="i.defaultDate"
+                      ></p-calendar>
                     </button>
                     <button class="date-after">
                       <i class="fa-solid fa-caret-right"></i>
