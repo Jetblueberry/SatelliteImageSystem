@@ -5,12 +5,27 @@ module.exports = {
   module: {
     rules: [
         {
-            test: /\.css$/i,
+            test: /\.css$/,
             use: [
                 MiniCssExtractPlugin.loader, // Extracts CSS to files
-                'css-loader', // Interprets @import and url() like import/require() and resolves them
-
+                {
+                  loader: 'style-loader'
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 0, // Adjust this based on your needs
+                        sourceMap: true, // Enable if you need source maps
+                        modules: {
+                          auto: /\.module\.\w+$/i, // Enable CSS Modules only for `.module.css` files
+                      },
+                    },
+                },
+                {
+                  loader: 'raw-loader'
+                }
             ],
+            include: /\.module\.css$/,
         },
       ],
   },

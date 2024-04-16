@@ -3,10 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 declare const L: any; // --> Works
 import 'leaflet';
 import 'leaflet-timedimension';
-import 'dist/leaflet-splitmap'
+import 'dist/leaflet-splitmap';
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
 import { MapTypeLists } from '../models/map-types';
 import { DataMapService } from '../services/data-map-services/data-map.service';
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import ThreeGlobe from 'three-globe';
 
 @Component({
   selector: 'app-data-map',
@@ -46,9 +48,24 @@ export class DataMapComponent {
     this.map = this._dataMapService.map;
     L.marker([20.048736, 105.89033]).addTo(this.map);
 
-
-
     this._dataMapService.InitialMapTileLayer();
+
+
+    // geosearch
+    const provider = new OpenStreetMapProvider();
+    const searchControl = new (GeoSearchControl as any)({
+      provider: provider,
+      retainZoomLevel: true,
+      marker: {
+        icon: new L.Icon.Default(),
+        draggable: false
+      },
+
+    });
+    this.map.addControl(searchControl);
+
+    // Cesium
+
 
     // Scale
     L.control.scale({
