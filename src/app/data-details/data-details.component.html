@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" id="container-details">
   <div class="container">
     <div class="layout-details-block">
       <div class="box-summary-datasets">
@@ -56,17 +56,17 @@
                 <span>Time:</span>
                 <div style="display: flex;">
                   <div class="box-range-time">
-                    <button class="date-previous">
+                    <button class="date-previous" [disabled]="disablePreviousDate" (click)="getPreviousDate(this.minDate, i.idData)">
                       <i class="fa-solid fa-caret-left"></i>
                     </button>
                     <button class="date-default">
                       <p-calendar class="detail-calendar"
-                        [(ngModel)]="i.defaultDate"
+                        [(ngModel)]="i.currentDate"
                         [minDate]="minDate"
-                        [maxDate]="i.defaultDate"
-                      ></p-calendar>
+                        [maxDate]="maxDate"
+                      >{{i.currentDate}}</p-calendar>
                     </button>
-                    <button class="date-after">
+                    <button class="date-after" [disabled]="disableAfterDate" (click)="getAfterDate(this.maxDate, i.idData)">
                       <i class="fa-solid fa-caret-right"></i>
                     </button>
                   </div>

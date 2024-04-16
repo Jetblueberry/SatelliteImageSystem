@@ -19,6 +19,33 @@ img {
   margin: 0px;
   padding: 0px;
 }
+// btn-control-leftmenu
+.btn-control-leftmenu {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  top: 40px;
+  left: 350px;
+  width: 20px;
+  height: 60px;
+  background-color: #00356a;
+  color: white;
+  border-radius: 0px 10px 10px 0px;
+  border: 1px solid white;
+  border-left: none;
+}
+
+.map-area {
+  width: calc(100vw - 350px);
+}
+
+// app
+app-left-menu {
+  width: 350px;
+}
 app-data-catalogue {
   position: absolute;
   top: 30px;
@@ -35,6 +62,7 @@ app-data-details {
   top: 54px;
   right: 20px;
   width: 400px;
+  z-index: 1001!important;
 
   .p-message-wrapper {
     padding: 10px!important;

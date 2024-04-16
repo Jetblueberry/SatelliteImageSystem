@@ -1,12 +1,18 @@
 <div class="container">
   <img src="https://e1.pxfuel.com/desktop-wallpaper/248/756/desktop-wallpaper-satellite-satellite-satellite.jpg">
   <div class="contain-all">
-    <app-left-menu></app-left-menu>
-    <div class="map-area">
+    <app-left-menu id="app-left-menu"></app-left-menu>
+    <div class="map-area" id="map-area">
       <app-data-map></app-data-map>
     </div>
   </div>
+  <div class="btn-control-leftmenu" id="control-leftmenu" (click)="openHideLeftMenu()">
+    <span>
+      <i class="fa-solid fa-caret-left" id="caret"></i>
+    </span>
+  </div>
 </div>
+
 
 <p-toast position="top-right" key="msgError" class="msgError"></p-toast>
 <p-toast position="top-right" key="msgSuccess" class="msgSuccess"></p-toast>

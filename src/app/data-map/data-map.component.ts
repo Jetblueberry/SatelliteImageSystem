@@ -46,6 +46,8 @@ export class DataMapComponent {
     this.map = this._dataMapService.map;
     L.marker([20.048736, 105.89033]).addTo(this.map);
 
+
+
     this._dataMapService.InitialMapTileLayer();
 
     // Scale

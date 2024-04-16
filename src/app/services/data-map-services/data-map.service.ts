@@ -81,6 +81,9 @@ export class DataMapService {
       await this.getDataLayerByName(nameData).setOpacity(opacityValue);
     }
   }
+  onMapReady() {
+    this.map.invalidateSize();
+  }
 
   // Chọn loại bản đồ
   chooseDefaultMap() {
@@ -88,7 +91,6 @@ export class DataMapService {
     this.mapTypesLists.CartoDB_Positron.remove();
     this.mapTypesLists.CartoDB_DarkMatter.remove();
     this.mapTypesLists.Esri_WorldImagery.addTo(this.map).bringToBack();
-
   }
   chooseWorldPhysicalMap() {
     this.mapTypesLists.Esri_WorldImagery.remove();

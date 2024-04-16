@@ -22,8 +22,12 @@ export class DataDetailsComponent {
   displayBoxControl: any = {};
   countDetailsName: any = {};
   detailsName: any;
+  disablePreviousDate = false;
+  disableAfterDate = false;
 
-  minDate = new Date("2022-02-13");
+  minDate = new Date("2022/02/13");
+  maxDate = new Date();
+  currentDate = new Date();
 
   lstStyles: any[] = [];
   selectedOption: string = "";
@@ -39,7 +43,19 @@ export class DataDetailsComponent {
 
   customDetailsBeforeInit() {
     for(var x of this.lst_choosen) {
-      x.defaultDate = new Date(x.defaultDate);
+      x.currentDate = new Date(x.defaultDate);
+      this.maxDate = x.currentDate
+
+      console.warn(this.maxDate);
+      console.warn(this.minDate);
+      if(x.currentDate <= this.minDate) {
+        this.disablePreviousDate = true;
+      }
+      if(x.currentDate >= this.maxDate) {
+        this.disableAfterDate = true;
+      }
+      console.warn(this.disablePreviousDate);
+      console.warn(this.disableAfterDate);
     }
   }
 
@@ -121,14 +137,37 @@ export class DataDetailsComponent {
   }
 
   // Date time
-  getDisabledDates(minDate: any): Date[] {
+  getAbledDates(minDate: any, maxDate: any): Date[] {
     const disabledDates = [];
 
     // Loop from current date to minDate (exclusive)
-    for (let d = new Date(minDate); d < this.minDate; d.setDate(d.getDate() + 1)) {
+    for (let d = new Date(minDate); d > minDate && d < maxDate; d.setDate(d.getDate() + 1)) {
         disabledDates.push(new Date(d));
     }
 
     return disabledDates;
-}
+  }
+  getPreviousDate(minDate: Date, idData: any) {
+      var btnFile = document.getElementsByClassName('p-datepicker-prev')[0];
+      if (btnFile) {
+        if (
+          btnFile instanceof HTMLInputElement ||
+          btnFile instanceof HTMLElement
+        ) {
+          btnFile.click();
+        }
+      }
+
+  }
+  getAfterDate(maxDate: Date, idData: any) {
+    var btnFile = document.getElementsByClassName('p-datepicker-next')[0];
+      if (btnFile) {
+        if (
+          btnFile instanceof HTMLInputElement ||
+          btnFile instanceof HTMLElement
+        ) {
+          btnFile.click();
+        }
+      }
+  }
 }

@@ -15,12 +15,8 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "ngx-build-plus:browser",
           "options": {
-            "customWebpackConfig": {
-              "path": "./webpack.config.js",
-              "replaceDuplicatePlugins": true
-            },
             "allowedCommonJsDependencies": [
               "lodash"
             ],
@@ -43,9 +39,11 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "src/styles.scss"
+
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
+
             ]
           },
 
@@ -77,8 +75,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "ngx-build-plus:dev-server",
           "options": {
+            "browserTarget": "satellite_image_system:build"
 
           },
           "configurations": {
@@ -92,9 +91,10 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ngx-build-plus:extract-i18n",
           "options": {
-            "browserTarget": "QuanLyHopDong:build"
+            "browserTarget": "QuanLyHopDong:build",
+            "extraWebpackConfig": "webpack.config.js"
           }
         },
         "test": {
