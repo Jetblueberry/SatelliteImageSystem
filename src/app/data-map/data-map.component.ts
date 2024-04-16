@@ -8,7 +8,6 @@ import { DataCatalogueService } from '../services/data-catalogue-services/data-c
 import { MapTypeLists } from '../models/map-types';
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
-import ThreeGlobe from 'three-globe';
 
 @Component({
   selector: 'app-data-map',

@@ -384,12 +384,77 @@
 // Geosearch map
 ::ng-deep .geosearch {
   background: white;
+  margin-left: 200px!important;
+  margin-top: 12px!important;
+  background: transparent;
+  border: none!important;
+  form {
+    background: transparent;
+    border: none;
+    outline: none;
+  }
   .glass  {
-    width: 680px;
-    height: 30px;
+    margin-top: 1px;
+    width: 400px;
+    height: 32px;
+    padding: 0px;
+    border: 2px solid #ffffff;
+    border-radius: 10px 0px 0px 10px;
+    color: white!important;
+    background: #496cf5;
+    outline: none;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 700;
+    text-wrap: nowrap;
+  }
+  .glass::placeholder {
+    color: white;
+    font-size: 15px;
   }
   .reset {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
+    border: 2px solid white;
+    border-radius: 0px 10px 10px 0px;
+    color: white!important;
+    background: #496cf5;
+    font-size: 15px;
+  }
+  .results {
+    width: 400px;
+    background-color: white;
+    color: rgb(48, 48, 48);
+    font-size: 15px;
+    margin-top: 5px;
+    border-radius: 10px;
+  }
+  form .active {
+    border: 4px solid #496cf5;
+    border-radius: 10px;
+    padding: 3px;
+  }
+  .results div {
+    padding: 10px;
+  }
+  .results div:hover {
+    color: white;
+    background: linear-gradient(45deg, #00f260, #0575e6);
+  }
+  .results .active {
+    border: none!important;
+    color: white!important;
+    background: linear-gradient(45deg, #00f260, #0575e6)!important;
+    outline: rgb(195, 144, 249) solid 3px!important;
+  }
+  .results .active:hover {
+    color: white!important;
+    border: none!important;
+    background: linear-gradient(45deg, #00f260, #0575e6)!important;
+    outline: rgb(195, 144, 249) solid 3px!important;
+  }
+  .leaflet-bar-part {
+    display: none;
   }
 }

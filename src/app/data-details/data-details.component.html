@@ -64,6 +64,7 @@
                         [(ngModel)]="i.currentDate"
                         [minDate]="minDate"
                         [maxDate]="maxDate"
+                        dateFormat="dd.mm.yy"
                       >{{i.currentDate}}</p-calendar>
                     </button>
                     <button class="date-after" [disabled]="disableAfterDate" (click)="getAfterDate(this.maxDate, i.idData)">

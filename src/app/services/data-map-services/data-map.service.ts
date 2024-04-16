@@ -81,8 +81,8 @@ export class DataMapService {
       await this.getDataLayerByName(nameData).setOpacity(opacityValue);
     }
   }
-  onMapReady() {
-    this.map.invalidateSize();
+  async onMapReady() {
+    await this.map.invalidateSize();
   }
 
   // Chọn loại bản đồ
