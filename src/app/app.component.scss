@@ -78,3 +78,10 @@ app-data-details {
     margin: 0rem!important;
   }
 }
+
+::ng-deep .leaflet-control-simpleMapScreenshoter {
+  display: none!important;
+}
+::ng-deep .leaflet-control-browser-print {
+  display: none!important;
+}

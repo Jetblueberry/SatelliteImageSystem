@@ -154,6 +154,8 @@
   top: 80px;
   right: 20px;
   z-index: 1000;
+  border: 2px solid white;
+  border-radius: 20px;
 }
 .btn-zoomIn, .btn-zoomOut, .btn-home {
   display: block;
@@ -175,8 +177,9 @@
 // Map setting
 .setting-area {
   position: absolute;
+  border: 2px solid white;
   right: 150px;
-  top: 10px;
+  top: 12px;
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -279,6 +282,7 @@
 
 // Measure
 .box-linemeasure {
+  border: 2px solid white;
   position: absolute;
   display: flex;
   align-items: center;
@@ -331,6 +335,7 @@
 
 // Box compare
 .box-compare {
+  border: 2px solid white;
   position: absolute;
   display: flex;
   align-items: center;
@@ -457,4 +462,86 @@
   .leaflet-bar-part {
     display: none;
   }
+}
+
+// print-screenshot
+.btn-print-area {
+  position: absolute;
+  border: 2px solid white;
+  right: 300px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  height: 32px;
+  border-radius: 50px 50px 50px 50px;
+  background: #496cf5;
+  z-index: 1000;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+.print-screenshot-area {
+  position: absolute;
+  top: 56px;
+  right: 300px;
+  z-index: 1000;
+  color: white;
+  background: linear-gradient(45deg, #01d054, #0163c4);
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid white;
+  width: 332px;
+}
+.print-header-area {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+.print-screenshot-area .close-ic {
+  margin-left: auto;
+  display: flex;
+  cursor: pointer;
+}
+.row-btn {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+.row-btn .btn-screenshot, .row-btn .btn-print {
+  height: 30px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00356a;
+  color: white;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+.type-print-header {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid white;
+}
+.type-print-body {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+ .print-type {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00356a;
+  color: white;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid white;
 }

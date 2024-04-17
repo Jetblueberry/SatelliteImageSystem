@@ -32,6 +32,7 @@ export class DataMapService {
     var Esri_WorldImagery = this.mapTypesLists.Esri_WorldImagery;
     Esri_WorldImagery.addTo(this.map);
 
+    //var browserControl = L.control.browserPrint().addTo(this.map);
     // if(Esri_WorldImagery)
     // var tdWmsLayer = L.timeDimension.layer.wms(Esri_WorldImagery);
     // if(tdWmsLayer)
@@ -111,6 +112,34 @@ export class DataMapService {
     this.mapTypesLists.CartoDB_DarkMatter.addTo(this.map).bringToBack();
   }
 
+  // Screenshot
+  screenshot() {
+    let pluginOptions = {
+      cropImageByInnerWH: true, // crop blank opacity from image borders
+      hidden: false, // hide screen icon
+      preventDownload: false, // prevent download on button click
+      domtoimageOptions: {}, // see options for dom-to-image
+      position: 'topleft', // position of take screen icon
+      screenName: 'screen', // string or function
+      hideElementsWithSelectors: ['.leaflet-control-container'], // by default hide map controls All els must be child of _map._container
+      mimeType: 'image/png', // used if format == image,
+      caption: null, // string or function, added caption to bottom of screen
+      captionFontSize: 15,
+      captionFont: 'Arial',
+      captionColor: 'black',
+      captionBgColor: 'white',
+      captionOffset: 5,
+      // callback for manually edit map if have warn: "May be map size very big on that zoom level, we have error"
+      // and screenshot not created
+   }
+
+   var simpleMapScreenshoter = L.simpleMapScreenshoter(pluginOptions).addTo(this.map)
+   let format = 'blob' // 'image' - return base64, 'canvas' - return canvas
+   let overridedPluginOptions = {
+     mimeType: 'image/jpeg'
+   }
+   simpleMapScreenshoter.takeScreen(format, overridedPluginOptions)
+  }
 }
 
 

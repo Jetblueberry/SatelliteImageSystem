@@ -35,6 +35,7 @@
     "jk-cesium-navigation-es6": "^1.0.1",
     "leaflet": "^1.9.4",
     "leaflet-control-geocoder": "^1.8.3",
+    "leaflet-easyprint": "^2.1.9",
     "leaflet-geosearch": "^3.11.1",
     "leaflet-side-by-side2": "^2.2.0",
     "leaflet-splitmap": "^1.0.3",

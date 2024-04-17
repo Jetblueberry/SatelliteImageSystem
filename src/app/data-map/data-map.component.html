@@ -145,6 +145,53 @@
   </div>
 </div>
 
+<div class="box-print-screenshot">
+  <div class="btn-print-area" (click)="openPrintScreenshot()">
+    <i class="fa-solid fa-photo-film"></i>
+    <span style="margin-left: 10px;">Print / Screenshot</span>
+  </div>
+
+  <div class="print-screenshot-area" *ngIf="displayPrintScreenshot">
+    <div class="print-header-area">
+      <span>Print Map</span>
+      <span class="close-ic" (click)="closePrintScreenshot()">
+        <i class="fa-solid fa-xmark"></i>
+      </span>
+    </div>
+    <div class="print-body-area">
+      <div class="row-btn">
+        <button class="btn-screenshot" (click)="clickScreenShot()">
+          <i class="fa-solid fa-camera-retro"></i>
+          <span style="margin-left: 10px;">Map Screenshot</span>
+        </button>
+        <button class="btn-print" (click)="openClosePrintTypes()">
+          <i class="fa-solid fa-print"></i>
+          <span style="margin-left: 10px;">Print Map</span>
+        </button>
+      </div>
+      <div class="row-type-print" *ngIf="displayPrintType">
+        <div class="type-print-header">
+          <span>Choose print types</span>
+        </div>
+        <div class="type-print-body">
+          <button class="btn-landscape print-type" (click)="clickPrintLandscape()">
+            <span>Landscape</span>
+          </button>
+          <button class="btn-portrait print-type" (click)="clickPrintPortrait()">
+            <span>Portrait</span>
+          </button>
+          <button class="btn-auto print-type" (click)="clickPrintAuto()">
+            <span>Auto</span>
+          </button>
+          <button class="btn-custom print-type" (click)="clickPrintCustom()">
+            <span>Custom</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="box-timeline" *ngIf="false">
   <div class="box-story-area"></div>
   <div class="timeline-area">

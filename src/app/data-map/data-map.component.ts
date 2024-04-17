@@ -4,6 +4,8 @@ declare const L: any; // --> Works
 import 'leaflet';
 import 'leaflet-timedimension';
 import 'dist/leaflet-splitmap';
+import 'dist/leaflet-simple-map-screenshoter'
+import 'dist/leaflet.browser.print.min'
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
 import { MapTypeLists } from '../models/map-types';
 import { DataMapService } from '../services/data-map-services/data-map.service';
@@ -18,6 +20,8 @@ export class DataMapComponent {
   map: any;
   displayZoom: any;
   displayMapSetting = false;
+  displayPrintScreenshot = false;
+  displayPrintType = false;
   displayIconDelete: any = {};
   events2 = ["31/12/2020", "31/12/2021", "31/12/2022", "31/12/2023"];
   lat: any;
@@ -49,6 +53,10 @@ export class DataMapComponent {
 
     this._dataMapService.InitialMapTileLayer();
 
+    // Screenshoot
+    this._dataMapService.screenshot();
+
+    var browserControl = L.control.browserPrint().addTo(this.map);
 
     // geosearch
     const provider = new OpenStreetMapProvider();
@@ -176,10 +184,68 @@ export class DataMapComponent {
   // Map settings
   openMapSetting() {
     this.displayMapSetting = true;
+    this.displayPrintScreenshot = false;
   }
   closeMapSetting() {{
     this.displayMapSetting = false;
   }}
+
+  // Print screenshot
+  openPrintScreenshot() {
+    this.displayPrintScreenshot = true;
+    this.displayMapSetting = false;
+  }
+  closePrintScreenshot() {{
+    this.displayPrintScreenshot = false;
+  }}
+  openClosePrintTypes() {
+    if(!this.displayPrintType) {
+      this.displayPrintType = true;
+    }
+    else {
+      this.displayPrintType = false;
+    }
+  }
+  clickScreenShot() {
+    var btnS = document.getElementsByClassName("leaflet-control-simpleMapScreenshoter-btn")[0];
+    if (btnS) {
+      if (btnS instanceof HTMLInputElement || btnS instanceof HTMLElement) {
+        btnS.click();
+      }
+    }
+  }
+  clickPrintLandscape() {
+    var btnP = document.getElementsByClassName("browser-print-holder")[0];
+    if (btnP) {
+      if (btnP instanceof HTMLInputElement || btnP instanceof HTMLElement) {
+        btnP.click();
+      }
+    }
+  }
+  clickPrintPortrait() {
+    var btnP = document.getElementsByClassName("browser-print-holder")[1];
+    if (btnP) {
+      if (btnP instanceof HTMLInputElement || btnP instanceof HTMLElement) {
+        btnP.click();
+      }
+    }
+  }
+  clickPrintAuto() {
+    var btnP = document.getElementsByClassName("browser-print-holder")[2];
+    if (btnP) {
+      if (btnP instanceof HTMLInputElement || btnP instanceof HTMLElement) {
+        btnP.click();
+      }
+    }
+  }
+  clickPrintCustom() {
+    var btnP = document.getElementsByClassName("browser-print-holder")[3];
+    if (btnP) {
+      if (btnP instanceof HTMLInputElement || btnP instanceof HTMLElement) {
+        btnP.click();
+      }
+    }
+  }
 
   // Measure
   openCloseMeasureDistance(type: any) {
