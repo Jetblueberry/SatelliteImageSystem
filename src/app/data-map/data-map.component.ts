@@ -301,6 +301,9 @@ export class DataMapComponent {
       }
       this.displayIconDelete[type] = false;
       this.typeWorking = "NothingWorking";
+      t1.remove();
+      t2.remove();
+      mp.remove();
     }
   }
 

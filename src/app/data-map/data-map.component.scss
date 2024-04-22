@@ -178,7 +178,7 @@
 .setting-area {
   position: absolute;
   border: 2px solid white;
-  right: 150px;
+  right: 130px;
   top: 12px;
   display: flex;
   align-items: center;
@@ -387,19 +387,25 @@
 
 
 // Geosearch map
+::ng-deep .leaflet-top {
+  position: absolute;
+    top: 12px;
+    right: 0px;
+}
 ::ng-deep .geosearch {
   background: white;
-  margin-left: 200px!important;
-  margin-top: 12px!important;
+  margin: 0px!important;
   background: transparent;
   border: none!important;
+  position: absolute;
+  right: 500px;
+
   form {
     background: transparent;
     border: none;
     outline: none;
   }
   .glass  {
-    margin-top: 1px;
     width: 400px;
     height: 32px;
     padding: 0px;
