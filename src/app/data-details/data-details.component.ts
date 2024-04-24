@@ -4,6 +4,7 @@ import { Component, Input,
 } from '@angular/core';
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import { DataDetailsService } from '../services/data-details-services/data-details.service';
+import { MessagesService } from '../services/message.service';
 
 @Component({
   selector: 'app-data-details',
@@ -20,7 +21,8 @@ export class DataDetailsComponent {
   displayOnMap = true;
   displayDetailsBody: any = {};
   displayBoxControl: any = {};
-  countDetailsName: any = {};
+  displayRowCompare = false;
+  countDetailsname: any = {};
   detailsName: any;
   disablePreviousDate = false;
   disableAfterDate = false;
@@ -35,6 +37,7 @@ export class DataDetailsComponent {
   constructor(
     public _dataMapService: DataMapService,
     public _dataDetailsService: DataDetailsService,
+    public messageService: MessagesService,
   ) {}
 
   ngOnInit() {
@@ -44,6 +47,8 @@ export class DataDetailsComponent {
   customDetailsBeforeInit() {
     for(var x of this.lst_choosen) {
       x.currentDate = new Date(x.defaultDate);
+
+      console.warn(x.displayName);
       this.maxDate = x.currentDate
 
       console.warn(this.maxDate);
@@ -122,13 +127,17 @@ export class DataDetailsComponent {
     this.displayBoxControl[nameData] = false;
   }
 
-   removeDetails(nameData: any) {
+   removeDetails(nameData: any, displayName: any) {
     for (let i = 0; i < this.lst_choosen.length; i++) {
-      if (this.lst_choosen[i].tenData === nameData) {
+      if (this.lst_choosen[i].tenData === nameData && this.lst_choosen[i].displayName === displayName) {
+
           this.lst_choosen.splice(i, 1);
           this._dataMapService.RemoveDataFromMap(nameData);
+
           this.displayBoxControl[nameData] = false;
-          break;
+          this.countDetailsname[nameData] = false;
+          console.warn(this.lst_choosen);
+
       }
     }
     if(this.lst_choosen.length === 0) {
@@ -169,5 +178,29 @@ export class DataDetailsComponent {
           btnFile.click();
         }
       }
+  }
+
+  // Compare
+  compare(nameData: any) {
+    for(var x of this.lst_choosen) {
+      if(x.tenData = nameData) {
+        if(!this.countDetailsname[nameData]) {
+          var obj = { ...x };
+          this.countDetailsname[nameData] = true;
+          obj.displayName = nameData + ` - Copy`;
+          this.lst_choosen.push(obj);
+          this._dataMapService.AddDataToMap(nameData);
+          this.displayBoxControl[nameData] = false;
+          this.displayRowCompare = true;
+        }
+        else {
+          setTimeout(async () => {
+            await this.messageService.addMessageDuplicate();
+            this.displayBoxControl[nameData] = false;
+          }, 500);
+        }
+        break;
+      }
+    }
   }
 }

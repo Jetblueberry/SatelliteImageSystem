@@ -28,10 +28,10 @@ export class DataCatalogueComponent {
   landsat_lst: any = [];
   sentinel_lst: any = [];
   total_lst: any = [];
-  choosen_lst: any = [];
+
 
   constructor(
-    private _dataCatalogueService: DataCatalogueService,
+    public _dataCatalogueService: DataCatalogueService,
     public _dataDetailsService: DataDetailsService,
     public _dataMapService: DataMapService,
     public mapTypesLists: MapTypeLists,
@@ -65,7 +65,7 @@ export class DataCatalogueComponent {
   }
   closeDataDetails(closeDetails: any) {
     this.openDetails = closeDetails;
-    this.choosen_lst = [];
+    this._dataCatalogueService.choosen_lst = [];
     this.displayMinusIcon = {};
   }
 
@@ -103,8 +103,9 @@ export class DataCatalogueComponent {
 
   async addDatasetToMap(idData: any) { // OpenDataDetails
     const item = await this._dataCatalogueService.getDataLandsatById(idData);
-    this.choosen_lst.push(item);
-    console.warn(this.choosen_lst)
+    this._dataCatalogueService.choosen_lst.push(item);
+    item.displayName = item.tenData;
+    console.warn(this._dataCatalogueService.choosen_lst)
 
     this._dataMapService.AddDataToMap(item.tenData);
 

@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class DataCatalogueService extends BaseService {
+  choosen_lst: any = [];
   override serviceUri = 'https://localhost:7021/api/DataLandsat';
   constructor(http: HttpClient, _commonService: CommonService) {
     super(http, _commonService);

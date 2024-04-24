@@ -22,6 +22,7 @@ export class DataMapComponent {
   displayMapSetting = false;
   displayPrintScreenshot = false;
   displayPrintType = false;
+  displayCityLabel = false;
   displayIconDelete: any = {};
   events2 = ["31/12/2020", "31/12/2021", "31/12/2022", "31/12/2023"];
   lat: any;
@@ -49,14 +50,17 @@ export class DataMapComponent {
       minZoom: 2,
     }).setView([20.048736, 105.89033], 6);
     this.map = this._dataMapService.map;
-    L.marker([20.048736, 105.89033]).addTo(this.map);
+    //L.marker([20.048736, 105.89033]).addTo(this.map);
 
     this._dataMapService.InitialMapTileLayer();
 
     // Screenshoot
     this._dataMapService.screenshot();
 
-    var browserControl = L.control.browserPrint().addTo(this.map);
+    var browserControl = L.control.browserPrint({
+      title: 'Just print me!',
+      printLayer: this.map,
+    }).addTo(this.map);
 
     // geosearch
     const provider = new OpenStreetMapProvider();
@@ -70,8 +74,6 @@ export class DataMapComponent {
 
     });
     this.map.addControl(searchControl);
-
-    // Cesium
 
 
     // Scale
@@ -111,6 +113,9 @@ export class DataMapComponent {
         this.lng = this.customLongtitudeValue(e.latlng.lng.toFixed(5));
         if (cord_lng) cord_lng.innerHTML = `${this.lng}`;
         console.warn(this.lat, this.lng);
+
+        var name = e.target.options.name
+        console.warn(name);
       }
       else if(this.typeWorking=="MeasureWorking") { // Line Measurements
         const newMarker = L.marker([e.latlng.lat, e.latlng.lng]);
@@ -189,6 +194,22 @@ export class DataMapComponent {
   closeMapSetting() {{
     this.displayMapSetting = false;
   }}
+  openCloseCitiesLabel() {
+    var btn = document.getElementById("btn-city-label");
+    if(btn) {
+      if(!this.displayCityLabel) {
+        this.displayCityLabel = true;
+        this._dataMapService.chooseDisplayCities();
+        btn.style.backgroundColor = "#34b4eb";
+        btn.style.border = "rgb(195, 144, 249)"
+      }
+      else {
+        this.displayCityLabel = false;
+        this._dataMapService.removeDisplayCities();
+        btn.style.backgroundColor = "#496cf5"
+      }
+    }
+  }
 
   // Print screenshot
   openPrintScreenshot() {
@@ -206,66 +227,67 @@ export class DataMapComponent {
       this.displayPrintType = false;
     }
   }
-  clickScreenShot() {
+  async clickScreenShot() {
     var btnS = document.getElementsByClassName("leaflet-control-simpleMapScreenshoter-btn")[0];
     if (btnS) {
       if (btnS instanceof HTMLInputElement || btnS instanceof HTMLElement) {
-        btnS.click();
+        await btnS.click();
+        this.displayPrintScreenshot = false;
       }
     }
   }
-  clickPrintLandscape() {
+  async clickPrintLandscape() {
     var btnP = document.getElementsByClassName("browser-print-holder")[0];
     if (btnP) {
       if (btnP instanceof HTMLInputElement || btnP instanceof HTMLElement) {
-        btnP.click();
+        await btnP.click();
       }
     }
   }
-  clickPrintPortrait() {
+  async clickPrintPortrait() {
     var btnP = document.getElementsByClassName("browser-print-holder")[1];
     if (btnP) {
       if (btnP instanceof HTMLInputElement || btnP instanceof HTMLElement) {
-        btnP.click();
+        await btnP.click();
       }
     }
   }
-  clickPrintAuto() {
+  async clickPrintAuto() {
     var btnP = document.getElementsByClassName("browser-print-holder")[2];
     if (btnP) {
       if (btnP instanceof HTMLInputElement || btnP instanceof HTMLElement) {
-        btnP.click();
+        await btnP.click();
       }
     }
   }
-  clickPrintCustom() {
+  async clickPrintCustom() {
     var btnP = document.getElementsByClassName("browser-print-holder")[3];
     if (btnP) {
       if (btnP instanceof HTMLInputElement || btnP instanceof HTMLElement) {
-        btnP.click();
+        await btnP.click();
       }
     }
   }
 
   // Measure
   openCloseMeasureDistance(type: any) {
-      if(!this.displayIconDelete[type]) {
-        this.displayIconDelete[type] = true;
-        this.typeWorking = "MeasureWorking";
-        var i = document.getElementById(`${type}`)
-        if(i) {
-          i.style.background = "#01d054";
-        }
+    if(!this.displayIconDelete[type]) {
+      this.displayIconDelete[type] = true;
+      this.typeWorking = "MeasureWorking";
+      var i = document.getElementById(`${type}`)
+      if(i) {
+        i.style.background = "#01d054";
       }
-      else {
-        var i = document.getElementById(`${type}`)
-        if(i) {
-          i.style.background = "#496cf5";
-        }
-        this.displayIconDelete[type] = false;
-        this.typeWorking = "NothingWorking";
-        this.removeMarkers();
+    }
+    else {
+      var i = document.getElementById(`${type}`)
+      if(i) {
+        i.style.background = "#496cf5";
       }
+      this.displayIconDelete[type] = false;
+      this.typeWorking = "NothingWorking";
+      this.removeMarkers();
+    }
   }
 
   removeMarkers() {
@@ -278,6 +300,29 @@ export class DataMapComponent {
     })
     this.lines = [];
     this.totalDistance = 0;
+  }
+
+  // Location user
+  getCloseUserLocation(type: any) {
+    if(!this.displayIconDelete[type]) {
+      this.displayIconDelete[type] = true;
+      this.typeWorking = "LocationWorking";
+      var i = document.getElementById(`${type}`)
+      if(i) {
+        i.style.background = "#01d054";
+      }
+      this._dataMapService.locationUser();
+      console.warn("haha");
+    }
+    else {
+      var i = document.getElementById(`${type}`)
+      if(i) {
+        i.style.background = "#496cf5";
+      }
+      this.displayIconDelete[type] = false;
+      this.typeWorking = "NothingWorking";
+      this._dataMapService.removeLocate();
+    }
   }
 
   // Compare
@@ -303,7 +348,8 @@ export class DataMapComponent {
       this.typeWorking = "NothingWorking";
       t1.remove();
       t2.remove();
-      mp.remove();
+      var mp_slider = document.getElementsByClassName('sbs-slider')[0];
+      mp_slider.remove();
     }
   }
 

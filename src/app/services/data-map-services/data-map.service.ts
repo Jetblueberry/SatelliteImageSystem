@@ -14,6 +14,8 @@ export class DataMapService {
   wmsUrl: any;
   defaultLayer: any = {}; // Khởi tạo layer dạng object dynamic
   defaultMapType: any = false;
+  marker: any;
+  circle: any;
 
   displayZoom = true;
 
@@ -31,6 +33,7 @@ export class DataMapService {
 
     var Esri_WorldImagery = this.mapTypesLists.Esri_WorldImagery;
     Esri_WorldImagery.addTo(this.map);
+
 
     //var browserControl = L.control.browserPrint().addTo(this.map);
     // if(Esri_WorldImagery)
@@ -52,7 +55,6 @@ export class DataMapService {
         crs: L.CRS.EPSG3857,
       }
     );
-
     return this.defaultLayer[layer];
   }
 
@@ -111,6 +113,12 @@ export class DataMapService {
     this.mapTypesLists.CartoDB_Positron.remove();
     this.mapTypesLists.CartoDB_DarkMatter.addTo(this.map).bringToBack();
   }
+  chooseDisplayCities() {
+    this.mapTypesLists.Stadia_StamenTerrainLabels.addTo(this.map).bringToFront();
+  }
+  removeDisplayCities() {
+    this.mapTypesLists.Stadia_StamenTerrainLabels.removeFrom(this.map);
+  }
 
   // Screenshot
   screenshot() {
@@ -139,6 +147,52 @@ export class DataMapService {
      mimeType: 'image/jpeg'
    }
    simpleMapScreenshoter.takeScreen(format, overridedPluginOptions)
+  }
+
+  // Location
+  locationUser() {
+    this.map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
+    .on('locationfound', (e: any) => {
+      this.map.eachLayer((layer: any) => {
+        if (layer instanceof L.Marker || layer instanceof L.Circle) {
+            this.map.removeLayer(layer);
+        }
+      });
+        this.marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
+        this.circle = L.circle([e.latitude, e.longitude], {
+            radius: 200,
+            weight: 1,
+            color: 'blue',
+            fillColor: '#cacaca',
+            fillOpacity: 0.2
+        });
+        this.marker.addTo(this.map)
+        this.circle.addTo(this.map);
+    })
+   .on('locationerror', (e: any) => {
+        console.log(e);
+        alert("Location access denied.");
+    });
+  }
+
+  removeLocate() {
+    this.marker.removeFrom(this.map);
+    this.circle.removeFrom(this.map);
+    // Reset marker and circle variables
+    this.map.setView([20.048736, 105.89033], 6);
+    this.marker = null;
+    this.circle = null;
+    this.map.stopLocate()
+  }
+
+
+  // Compare
+  addCompareLeftlayer(l_left: any) {
+  }
+  addCompareRightlayer(l_right: any) {
+  }
+  addCompareBothLayer(l_both: any) {
+    var mp = L.control.splitMap(l_both, l_both);
   }
 }
 

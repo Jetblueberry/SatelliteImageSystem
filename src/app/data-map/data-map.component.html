@@ -115,7 +115,10 @@
           <img src="/assets/ImageMap/DarkMatter_Map.png">
         </button>
       </div>
-      <div class="row-2">
+      <div class="row-city-label">
+        <button class="btn-city-label" id="btn-city-label" (click)="openCloseCitiesLabel()">
+          <span>Display locations</span>
+        </button>
       </div>
     </div>
   </div>
@@ -140,6 +143,18 @@
     </span>
     <span class="span-text">Compare</span>
     <span *ngIf="displayIconDelete['box-compare']" class="icon-delete" id="icon-delete">
+      <i class="fa-regular fa-circle-xmark"></i>
+    </span>
+  </div>
+</div>
+
+<div class="box-location" (click)="getCloseUserLocation('box-location')" id="box-location">
+  <div class="box-expand" >
+    <span class="icon-location">
+      <i class="fa-solid fa-location-crosshairs"></i>
+    </span>
+    <span class="span-text">Location</span>
+    <span *ngIf="displayIconDelete['box-location']" class="icon-delete" id="icon-delete">
       <i class="fa-regular fa-circle-xmark"></i>
     </span>
   </div>

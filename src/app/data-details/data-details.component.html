@@ -12,7 +12,7 @@
           <li *ngFor="let i of lst_choosen" class="box-details" >
             <div class="box-details-header">
               <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData)"></button>
-              <span class="dataset-name" >{{i.tenData}}</span>
+              <span class="dataset-name" >{{i.displayName}}</span>
               <div class="icon-grp-area" (click)="OpenCloseDetailsBody(i.tenData)">
                 <i class="fa-solid fa-caret-down" id="{{i.tenData}}-icon" ></i>
               </div>
@@ -26,7 +26,7 @@
               </div>
               <div *ngIf="displayBoxControl[i.tenData]" class="box-view-control" (blur)="closeBoxControl(i.tenData)">
                 <ul style="list-style: none;">
-                  <li>
+                  <li (click)="compare(i.tenData)">
                     <button class="btn-control compare">
                       <span style="margin-right: 5px;"><i class="fa-solid fa-code-compare"></i></span>
                       <span>Compare</span>
@@ -38,7 +38,7 @@
                       <span>Export</span>
                     </button>
                   </li>
-                  <li (click)="removeDetails(i.tenData)">
+                  <li (click)="removeDetails(i.tenData, i.displayName)">
                     <button class="btn-control remove" >
                       <span style="margin-right: 5px;"><i class="fa-solid fa-ban"></i></span>
                       <span>Remove</span>
@@ -51,6 +51,17 @@
                 <div class="slidercontainer">
                   <p-slider class="slider" [min]="0" [max]="100" [(ngModel)]="opacityValue" (onChange)="setOpacity(i.tenData)"></p-slider>
                 </div>
+              </div>
+              <div *ngIf="this.displayRowCompare" class="row-compare">
+                <button class="box-compare-left">
+                  <span>Left</span>
+                </button>
+                <button class="box-compare-both">
+                  <span>Both</span>
+                </button>
+                <button class="box-compare-right">
+                  <span>Right</span>
+                </button>
               </div>
               <div class="row-3 box-time-details">
                 <span>Time:</span>

@@ -64,4 +64,24 @@ export class MessagesService {
       detail: 'Cập nhật dữ liệu không thành công!',
     });
   }
+
+  // message details duplicate
+  async addMessageDuplicate() {
+    await this.messageService.add({
+      key: 'msgSuccess',
+      severity: 'info',
+      summary: 'Info Message',
+      detail: 'You have had 2 of this data details in workbench!',
+    });
+  }
+
+  // message details error remove
+  async addMessageErrorRemove() {
+    await this.messageService.add({
+      key: 'msgError',
+      severity: 'warn',
+      summary: 'Warn Message',
+      detail: 'You have to remove the copy of this detail first',
+    });
+  }
 }

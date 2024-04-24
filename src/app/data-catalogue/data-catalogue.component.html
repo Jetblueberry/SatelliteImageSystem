@@ -212,7 +212,7 @@
 
 <app-data-details
   *ngIf="openDetails"
-  [lst_choosen]="choosen_lst"
+  [lst_choosen]="this._dataCatalogueService.choosen_lst"
   (idDataSelected)="selectDataset($event)"
   (openCatalogue)="openDataCatalogue($event)"
   (closeDetails)="closeDataDetails($event)"
