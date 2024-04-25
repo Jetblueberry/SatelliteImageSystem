@@ -105,7 +105,6 @@ export class DataCatalogueComponent {
     const item = await this._dataCatalogueService.getDataLandsatById(idData);
     this._dataCatalogueService.choosen_lst.push(item);
     item.displayName = item.tenData;
-    console.warn(this._dataCatalogueService.choosen_lst)
 
     this._dataMapService.AddDataToMap(item.tenData);
 

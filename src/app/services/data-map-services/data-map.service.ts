@@ -3,6 +3,7 @@ import { WmsService } from '../wms.service';
 declare const L: any; // --> Works
 import 'leaflet';
 import { MapTypeLists } from 'src/app/models/map-types';
+import { DataCatalogueService } from '../data-catalogue-services/data-catalogue.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,33 +14,28 @@ export class DataMapService {
   map: any;
   wmsUrl: any;
   defaultLayer: any = {}; // Khởi tạo layer dạng object dynamic
+  featureGroups: any = {};
   defaultMapType: any = false;
   marker: any;
   circle: any;
 
   displayZoom = true;
 
-  constructor(public _wmsService: WmsService, public mapTypesLists: MapTypeLists) {}
+  constructor(
+    public _wmsService: WmsService,
+    public mapTypesLists: MapTypeLists,
+    public _dataCatalogueService: DataCatalogueService,
+  ) {}
 
   InitialMapTileLayer() {
     // Map chính
     var WorldPhysicalMap = this.mapTypesLists.WorldPhysicalMap;
-
     //Google map layer
     var googleStreets = this.mapTypesLists.googleStreets;
-
     //Satellite layer
     var googleSat = this.mapTypesLists.googleSat;
-
     var Esri_WorldImagery = this.mapTypesLists.Esri_WorldImagery;
     Esri_WorldImagery.addTo(this.map);
-
-
-    //var browserControl = L.control.browserPrint().addTo(this.map);
-    // if(Esri_WorldImagery)
-    // var tdWmsLayer = L.timeDimension.layer.wms(Esri_WorldImagery);
-    // if(tdWmsLayer)
-    // tdWmsLayer.addTo(this.map);
   }
 
   // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
@@ -47,34 +43,51 @@ export class DataMapService {
     this.wmsUrl = this._wmsService.wmsUrl;
     var layer = `Landsat_Workspace:${nameData}`;
 
-    this.defaultLayer[layer] = L.tileLayer.wms(this.wmsUrl,
-      {
-        layers: nameData,
-        format: 'image/png', // or any other supported format
-        transparent: true, // if transparency is needed
-        crs: L.CRS.EPSG3857,
-      }
-    );
-    return this.defaultLayer[layer];
+    if(!this.defaultLayer[nameData]) {
+      this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
+        {
+          layers: layer,
+          format: 'image/png', // or any other supported format
+          transparent: true, // if transparency is needed
+          crs: L.CRS.EPSG3857,
+        }
+      );
+    }
+    else {
+      nameData = nameData + " - Copy"
+      this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
+        {
+          layers: layer,
+          format: 'image/png', // or any other supported format
+          transparent: true, // if transparency is needed
+          crs: L.CRS.EPSG3857,
+        }
+      );
+    }
+
+
+    //this.featureGroups[nameData] = L.featureGroup(this.defaultLayer[nameData]);
+
+    return this.defaultLayer[nameData];
   }
 
   // Khi đã khởi tạo layer rồi
   getDataLayerByName(nameData: any) {
-    var layer = `Landsat_Workspace:${nameData}`;
-    return this.defaultLayer[layer];
+    return this.defaultLayer[nameData];
   }
 
   // Thêm layer vào bản đồ thì phải khởi tạo trc đã
   async AddDataToMap(nameData: any) {
     if (this.map) {
-
       await this.InitialDataLayerByName(nameData).addTo(this.map);
+      console.warn(this._dataCatalogueService.choosen_lst)
     }
   }
 
   // Xóa layer khỏi bản đồ, vi da khoi tao roi nen khi xoa chi can goi ten layer de xoa
   async RemoveDataFromMap(nameData: any) {
     if(this.map) {
+      console.warn(this.defaultLayer[nameData])
       await this.getDataLayerByName(nameData).removeFrom(this.map);
     }
   }
@@ -84,6 +97,7 @@ export class DataMapService {
       await this.getDataLayerByName(nameData).setOpacity(opacityValue);
     }
   }
+
   async onMapReady() {
     await this.map.invalidateSize();
   }

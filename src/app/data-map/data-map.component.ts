@@ -57,6 +57,7 @@ export class DataMapComponent {
     // Screenshoot
     this._dataMapService.screenshot();
 
+    //Print
     var browserControl = L.control.browserPrint({
       title: 'Just print me!',
       printLayer: this.map,
@@ -71,7 +72,6 @@ export class DataMapComponent {
         icon: new L.Icon.Default(),
         draggable: false
       },
-
     });
     this.map.addControl(searchControl);
 
@@ -98,8 +98,14 @@ export class DataMapComponent {
 
     });
 
+
     // Panel
     await this.map.on('click', (e: any) => {
+      for(var x of this._dataCatalogueService.choosen_lst) {
+        this._dataMapService.getDataLayerByName(x.tenData).on('click', () => {
+          console.warn(x.tenData);
+        });
+      }
       if(this.typeWorking=="NothingWorking" || this.typeWorking=="CoordinatesWorking") { // Panel coordinates
         this.typeWorking = "CoordinatesWorking"; // đang =0 tức chưa bật panel, =1 là bật panel rồi
 
@@ -114,8 +120,6 @@ export class DataMapComponent {
         if (cord_lng) cord_lng.innerHTML = `${this.lng}`;
         console.warn(this.lat, this.lng);
 
-        var name = e.target.options.name
-        console.warn(name);
       }
       else if(this.typeWorking=="MeasureWorking") { // Line Measurements
         const newMarker = L.marker([e.latlng.lat, e.latlng.lng]);
@@ -143,6 +147,10 @@ export class DataMapComponent {
 
       }
     });
+
+    var imageUrl = 'https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
+    imageBounds = [[20.712216, 103.22655], [16.773941, 107.12544]];
+    //L.imageOverlay(imageUrl, imageBounds).addTo(this.map);
   }
 
   customLatitudeValue(lat: any) {

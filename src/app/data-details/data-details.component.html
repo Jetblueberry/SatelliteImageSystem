@@ -47,9 +47,9 @@
                 </ul>
               </div>
               <div class="row-2 box-opacity-details">
-                <label class="opacity">Opacity: {{opacityValue}}%</label>
+                <label class="opacity">Opacity: {{opacityValue[i.tenData]}}%</label>
                 <div class="slidercontainer">
-                  <p-slider class="slider" [min]="0" [max]="100" [(ngModel)]="opacityValue" (onChange)="setOpacity(i.tenData)"></p-slider>
+                  <p-slider class="slider" [min]="0" [max]="100" [(ngModel)]="opacityValue[i.tenData]" (onChange)="setOpacity(i.tenData)"></p-slider>
                 </div>
               </div>
               <div *ngIf="this.displayRowCompare" class="row-compare">

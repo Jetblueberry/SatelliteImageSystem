@@ -17,7 +17,7 @@ export class DataDetailsComponent {
   @Output() idDataSelected = new EventEmitter<any>();
   @Output() closeDetails = new EventEmitter<any>();
 
-  opacityValue = 100;
+  opacityValue: any = {};
   displayOnMap = true;
   displayDetailsBody: any = {};
   displayBoxControl: any = {};
@@ -47,20 +47,18 @@ export class DataDetailsComponent {
   customDetailsBeforeInit() {
     for(var x of this.lst_choosen) {
       x.currentDate = new Date(x.defaultDate);
+      if(!this.opacityValue[x.tenData]) {
+        this.opacityValue[x.tenData] = 100
+      }
 
-      console.warn(x.displayName);
       this.maxDate = x.currentDate
-
-      console.warn(this.maxDate);
-      console.warn(this.minDate);
       if(x.currentDate <= this.minDate) {
         this.disablePreviousDate = true;
       }
       if(x.currentDate >= this.maxDate) {
         this.disableAfterDate = true;
       }
-      console.warn(this.disablePreviousDate);
-      console.warn(this.disableAfterDate);
+
     }
   }
 
@@ -107,7 +105,7 @@ export class DataDetailsComponent {
   }
 
   setOpacity(nameData: any) {
-    this._dataMapService.SetOpacityForData(nameData, this.opacityValue / 100);
+    this._dataMapService.SetOpacityForData(nameData, this.opacityValue[nameData] / 100);
   }
 
   genLstStyles(listStyles: any) {
@@ -130,14 +128,13 @@ export class DataDetailsComponent {
    removeDetails(nameData: any, displayName: any) {
     for (let i = 0; i < this.lst_choosen.length; i++) {
       if (this.lst_choosen[i].tenData === nameData && this.lst_choosen[i].displayName === displayName) {
-
+          this._dataMapService.RemoveDataFromMap(this.lst_choosen[i].tenData);
           this.lst_choosen.splice(i, 1);
-          this._dataMapService.RemoveDataFromMap(nameData);
 
           this.displayBoxControl[nameData] = false;
           this.countDetailsname[nameData] = false;
-          console.warn(this.lst_choosen);
 
+          break;
       }
     }
     if(this.lst_choosen.length === 0) {
@@ -189,7 +186,7 @@ export class DataDetailsComponent {
           this.countDetailsname[nameData] = true;
           obj.displayName = nameData + ` - Copy`;
           this.lst_choosen.push(obj);
-          this._dataMapService.AddDataToMap(nameData);
+          this._dataMapService.AddDataToMap(x.tenData);
           this.displayBoxControl[nameData] = false;
           this.displayRowCompare = true;
         }
