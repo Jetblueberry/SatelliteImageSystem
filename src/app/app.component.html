@@ -16,3 +16,15 @@
 
 <p-toast position="top-right" key="msgError" class="msgError"></p-toast>
 <p-toast position="top-right" key="msgSuccess" class="msgSuccess"></p-toast>
+<p-confirmDialog
+  key="cf1"
+  [style]="{ width: '50vw', left: '100px' }"
+  [baseZIndex]="10000"
+  message="Are you sure that you want to proceed?"
+></p-confirmDialog>
+<p-confirmDialog
+  key="cf2"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  message="Can you pick me this please?"
+></p-confirmDialog>

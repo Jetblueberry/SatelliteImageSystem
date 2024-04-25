@@ -10,6 +10,7 @@ import { DataCatalogueService } from '../services/data-catalogue-services/data-c
 import { MapTypeLists } from '../models/map-types';
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import { AppGuideService } from '../services/app-guide-services/app-guide.service';
 
 @Component({
   selector: 'app-data-map',
@@ -36,7 +37,8 @@ export class DataMapComponent {
     public _dataCatalogueService: DataCatalogueService,
     public _dataMapService: DataMapService,
     public http: HttpClient,
-    public mapTypesLists: MapTypeLists
+    public mapTypesLists: MapTypeLists,
+    public _appGuideService: AppGuideService
   ) {}
 
   ngOnInit() {
@@ -192,6 +194,11 @@ export class DataMapComponent {
 
   closePanel() {
     this.typeWorking="NothingWorking";
+  }
+
+  // Help - take a tour
+  takeATour() {
+    this._appGuideService.confirmDialogGuide1()
   }
 
   // Map settings

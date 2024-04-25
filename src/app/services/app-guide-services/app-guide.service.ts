@@ -13,10 +13,12 @@ export class AppGuideService {
   confirmDialogGuide1() {
     this.confirmationService.confirm({
       key: 'cf1',
-      message: 'Are you sure that you want to proceed?',
+      message: 'Getting started with this map?',
 
-      header: 'Confirmation',
+      header: 'Help',
       icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Next',
+      acceptIcon: 'pi pi-arrow-right',
       accept: () => {
         this.confirmDialogGuide2();
       },

@@ -178,13 +178,13 @@
 .setting-area {
   position: absolute;
   border: 2px solid white;
-  right: 130px;
+  right: 120px;
   top: 12px;
   display: flex;
   align-items: center;
   font-size: 14px;
   height: 32px;
-  border-radius: 50px 50px 50px 50px;
+  border-radius: 0px 50px 50px 0px;
   background: #496cf5;
   z-index: 1000;
   color: white;
@@ -466,7 +466,7 @@
   background: transparent;
   border: none!important;
   position: absolute;
-  right: 500px;
+  right: 430px;
 
   form {
     background: transparent;
@@ -542,13 +542,13 @@
 .btn-print-area {
   position: absolute;
   border: 2px solid white;
-  right: 300px;
+  right: 250px;
   top: 12px;
   display: flex;
   align-items: center;
   font-size: 14px;
   height: 32px;
-  border-radius: 50px 50px 50px 50px;
+  border-radius: 50px 0px 0px 50px;
   background: #496cf5;
   z-index: 1000;
   color: white;
@@ -618,4 +618,42 @@
   font-size: 14px;
   border-radius: 10px;
   border: 1px solid white;
+}
+
+// Box-about
+.btn-box-about {
+  position: absolute;
+  border: 2px solid white;
+  right: 950px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  height: 32px;
+  border-radius: 50px 0px 0px 50px;
+  background: #496cf5;
+  z-index: 1000;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+// Box-help
+.btn-box-help {
+  position: absolute;
+  border: 2px solid white;
+  right: 880px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  height: 32px;
+  border-radius: 0px 50px 50px 0px;
+  background: #496cf5;
+  z-index: 1000;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
 }

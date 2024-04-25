@@ -99,13 +99,13 @@ export class DataDetailsComponent {
   }
   async removeAllDetails() {
     for(let x of this.lst_choosen) {
-      await this._dataMapService.RemoveDataFromMap(x.tenData);
+      await this._dataMapService.RemoveDataFromMap(x.displayName);
     }
     this.closeDetails.emit(false);
   }
 
-  setOpacity(nameData: any) {
-    this._dataMapService.SetOpacityForData(nameData, this.opacityValue[nameData] / 100);
+  setOpacity(displayName: any) {
+    this._dataMapService.SetOpacityForData(displayName, this.opacityValue[displayName] / 100);
   }
 
   genLstStyles(listStyles: any) {
@@ -128,7 +128,7 @@ export class DataDetailsComponent {
    removeDetails(nameData: any, displayName: any) {
     for (let i = 0; i < this.lst_choosen.length; i++) {
       if (this.lst_choosen[i].tenData === nameData && this.lst_choosen[i].displayName === displayName) {
-          this._dataMapService.RemoveDataFromMap(this.lst_choosen[i].tenData);
+          this._dataMapService.RemoveDataFromMap(this.lst_choosen[i].displayName);
           this.lst_choosen.splice(i, 1);
 
           this.displayBoxControl[nameData] = false;
@@ -179,12 +179,17 @@ export class DataDetailsComponent {
 
   // Compare
   compare(nameData: any) {
+    this.addCopyDataDetails(nameData);
+  }
+
+  addCopyDataDetails(nameData: any) {
     for(var x of this.lst_choosen) {
       if(x.tenData = nameData) {
         if(!this.countDetailsname[nameData]) {
           var obj = { ...x };
           this.countDetailsname[nameData] = true;
           obj.displayName = nameData + ` - Copy`;
+          this.opacityValue[obj.displayName] = 100
           this.lst_choosen.push(obj);
           this._dataMapService.AddDataToMap(x.tenData);
           this.displayBoxControl[nameData] = false;

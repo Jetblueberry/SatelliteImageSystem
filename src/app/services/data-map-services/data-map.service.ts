@@ -64,8 +64,6 @@ export class DataMapService {
         }
       );
     }
-
-
     //this.featureGroups[nameData] = L.featureGroup(this.defaultLayer[nameData]);
 
     return this.defaultLayer[nameData];
