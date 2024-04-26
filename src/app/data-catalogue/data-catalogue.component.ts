@@ -103,9 +103,10 @@ export class DataCatalogueComponent {
 
   async addDatasetToMap(idData: any) { // OpenDataDetails
     const item = await this._dataCatalogueService.getDataLandsatById(idData);
-    this._dataCatalogueService.choosen_lst.push(item);
-    item.displayName = item.tenData;
+    item.displayName = item.tenData; // set displayName when add details
+    this._dataDetailsService.opacityValue[item.displayName] = 100; // set opacity when add details
 
+    this._dataCatalogueService.choosen_lst.push(item); // add in lst
     this._dataMapService.AddDataToMap(item.tenData);
 
     this.closeCatalogue.emit(false);

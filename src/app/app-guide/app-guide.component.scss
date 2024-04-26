@@ -1,0 +1,175 @@
+::ng-deep .dialog1 {
+  .p-confirm-dialog {
+    background: linear-gradient(45deg, #0c59a8, #00b648);
+    position: absolute;
+    bottom: 45px;
+    right: 25px;
+    left: auto!important;
+    padding: 20px;
+    width: 400px!important;
+    height: 210px;
+    border: 1px solid white
+  }
+  .p-dialog-header {
+    padding: 0px;
+    background: transparent;
+    color: white!important;
+  }
+  .p-dialog-content {
+    padding: 0px;
+    font-size: 14px;
+    background: transparent;
+    color: white!important;
+  }
+  .p-dialog-footer {
+    padding: 0px;
+    font-size: 14px;
+    display: flex;
+    background: transparent;
+  }
+  .p-confirm-dialog-reject {
+    font-size: 14px;
+    height: 40px;
+    width: 50%!important;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+  }
+  .p-confirm-dialog-accept {
+    font-size: 14px;
+    height: 40px;
+    width: 50%!important;
+    border-radius: 50px;
+    background: #0d63f0;
+    border: 1px solid #0d63f0;
+    margin: 0px;
+  }
+  .p-confirm-dialog-reject:hover, .p-confirm-dialog-accept:hover {
+    background: linear-gradient(90deg, #00356a, #018234);
+    outline: rgb(195, 144, 249) solid 3px;
+  }
+  .p-confirm-dialog-accept i {
+    display: none;
+  }
+  @keyframes rotate {
+    from {
+      transform: rotate3d(1,-1,0,0deg);
+    }
+    to {
+      transform: rotate3d(1,-1,0,360deg);
+    }
+  }
+  .p-confirm-dialog-icon {
+    animation: rotate 2s linear infinite;
+  }
+  .p-dialog-header-icon:enabled:hover {
+    background: transparent!important;
+  }
+  timesicon {
+    color: white;
+    font-weight: 600;
+  }
+}
+
+.btn-explore {
+  position: absolute;
+  z-index: 100000;
+  width: 330px;
+  height: 40px;
+  background-color: #0d63f0;
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  top: 207px;
+  left: 10px;
+}
+.icon-plus {
+  display: flex;
+  padding: 10px;
+  margin-left: 10px;
+}
+.icon-globe {
+  padding: 10px;
+  display: flex;
+  margin-right: 10px;
+  margin-left: auto;
+}
+.icon-plus i, .icon-globe i {
+  transform: scale(2.5);
+}
+.text-span {
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+::ng-deep .dialog2 {
+  .p-confirm-dialog {
+    background: linear-gradient(45deg, #0c59a8, #00b648);
+    position: absolute;
+    top: 258px;
+    left: 100px!important;
+    padding: 20px;
+    width: 400px!important;
+    height: 210px;
+    border: 1px solid white
+  }
+  .p-dialog-header {
+    padding: 0px;
+    background: transparent;
+    color: white!important;
+  }
+  .p-dialog-content {
+    padding: 0px;
+    font-size: 14px;
+    background: transparent;
+    color: white!important;
+  }
+  .p-dialog-footer {
+    padding: 0px;
+    font-size: 14px;
+    display: flex;
+    background: transparent;
+  }
+  .p-confirm-dialog-reject {
+    display: none;
+  }
+  .p-confirm-dialog-accept {
+    font-size: 14px;
+    height: 40px;
+    margin-right: 0px!important;
+    margin-left: auto!important;
+    width: 30% !important;
+    border-radius: 50px;
+    background: #0d63f0;
+    border: 1px solid #0d63f0;
+    margin: 0px;
+  }
+  .p-confirm-dialog-accept:hover {
+    background: linear-gradient(90deg, #00356a, #018234);
+    outline: rgb(195, 144, 249) solid 3px;
+  }
+  .p-confirm-dialog-accept i {
+    display: none;
+  }
+  // @keyframes rotate {
+  //   from {
+  //     transform: rotate3d(1,-1,0,0deg);
+  //   }
+  //   to {
+  //     transform: rotate3d(1,-1,0,360deg);
+  //   }
+  // }
+  // .p-confirm-dialog-icon {
+  //   animation: rotate 2s linear infinite;
+  // }
+  .p-dialog-header-icon:enabled:hover {
+    background: transparent!important;
+  }
+  timesicon {
+    color: white;
+    font-weight: 600;
+  }
+}

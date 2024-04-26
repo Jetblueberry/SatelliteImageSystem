@@ -56,6 +56,10 @@ app-data-details {
   z-index: 1000;
 }
 
+app-guide {
+  position: absolute;
+}
+
 ::ng-deep p-toast {
   position: absolute;
   top: 54px;

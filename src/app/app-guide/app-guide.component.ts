@@ -5,6 +5,7 @@ import { DataCatalogueService } from '../services/data-catalogue-services/data-c
 import { DataDetailsService } from '../services/data-details-services/data-details.service';
 import { MessagesService } from '../services/message.service';
 import { ConfirmationService } from 'primeng/api';
+import { AppGuideService } from '../services/app-guide-services/app-guide.service';
 
 @Component({
   selector: 'app-guide',
@@ -20,6 +21,7 @@ export class AppGuideComponent {
     public _dataCatalogueService: DataCatalogueService,
     public _dataDetailsService: DataDetailsService,
     public _dataMapService: DataMapService,
+    public _appGuideService: AppGuideService,
     public messageService: MessagesService,
     private confirmationService: ConfirmationService,
   ) {}

@@ -17,7 +17,7 @@ export class DataDetailsComponent {
   @Output() idDataSelected = new EventEmitter<any>();
   @Output() closeDetails = new EventEmitter<any>();
 
-  opacityValue: any = {};
+
   displayOnMap = true;
   displayDetailsBody: any = {};
   displayBoxControl: any = {};
@@ -47,8 +47,8 @@ export class DataDetailsComponent {
   customDetailsBeforeInit() {
     for(var x of this.lst_choosen) {
       x.currentDate = new Date(x.defaultDate);
-      if(!this.opacityValue[x.tenData]) {
-        this.opacityValue[x.tenData] = 100
+      if(!this._dataDetailsService.opacityValue[x.tenData]) {
+        this._dataDetailsService.opacityValue[x.tenData] = 100
       }
 
       this.maxDate = x.currentDate
@@ -105,7 +105,7 @@ export class DataDetailsComponent {
   }
 
   setOpacity(displayName: any) {
-    this._dataMapService.SetOpacityForData(displayName, this.opacityValue[displayName] / 100);
+    this._dataMapService.SetOpacityForData(displayName, this._dataDetailsService.opacityValue[displayName] / 100);
   }
 
   genLstStyles(listStyles: any) {
@@ -189,7 +189,7 @@ export class DataDetailsComponent {
           var obj = { ...x };
           this.countDetailsname[nameData] = true;
           obj.displayName = nameData + ` - Copy`;
-          this.opacityValue[obj.displayName] = 100
+          this._dataDetailsService.opacityValue[obj.displayName] = 100
           this.lst_choosen.push(obj);
           this._dataMapService.AddDataToMap(x.tenData);
           this.displayBoxControl[nameData] = false;

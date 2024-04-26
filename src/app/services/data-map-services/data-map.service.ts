@@ -40,7 +40,7 @@ export class DataMapService {
 
   // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
   InitialDataLayerByName(nameData: any) {
-    this.wmsUrl = this._wmsService.wmsUrl;
+    this.wmsUrl = this._wmsService.wmsUrl; //http://localhost:8080/geoserver/Landsat_Workspace/wms
     var layer = `Landsat_Workspace:${nameData}`;
 
     if(!this.defaultLayer[nameData]) {

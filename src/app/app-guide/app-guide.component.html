@@ -1,14 +1,26 @@
 <p-confirmDialog
   key="cf1"
+  class="dialog1"
   [style]="{ width: '50vw', left: '100px' }"
   [baseZIndex]="10000"
-  message="Are you sure that you want to proceed?"
+  label="Right"
 ></p-confirmDialog>
+<div class="btn-explore" *ngIf="this._appGuideService.displayBtnExplore">
+  <div class="icon-plus">
+    <i class="fa-solid fa-circle-plus"></i>
+  </div>
+  <span class="text-span">Explore map</span>
+  <div class="icon-globe">
+    <i class="fa-solid fa-earth-asia"></i>
+  </div>
+</div>
+
+
 <p-confirmDialog
   key="cf2"
+  class="dialog2"
   [style]="{ width: '50vw' }"
   [baseZIndex]="10000"
+  label="Left"
   message="Can you pick me this please?"
 ></p-confirmDialog>
-<!-- <p-button (click)="confirm1()" icon="pi pi-check" label="Confirm"></p-button>
-<p-button (click)="confirm2()" icon="pi pi-times" label="Delete"></p-button> -->
