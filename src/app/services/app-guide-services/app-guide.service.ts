@@ -6,7 +6,10 @@ import { ConfirmationService } from 'primeng/api';
 })
 
 export class AppGuideService {
-  displayBtnExplore = false;
+  displayExploreDialog = false;
+  displayLocationDialog = false;
+  displayMapSettingDialog = false;
+  displayPrintScreenshotDialog = false;
   constructor(
     private confirmationService: ConfirmationService,
   ) {}
@@ -22,7 +25,6 @@ export class AppGuideService {
       rejectLabel: 'Later',
       rejectIcon: 'none',
       accept: () => {
-
         this.confirmDialogGuide2();
       },
 
@@ -30,7 +32,7 @@ export class AppGuideService {
   }
 
   confirmDialogGuide2() {
-    this.displayBtnExplore = true;
+    this.displayExploreDialog = true;
     this.confirmationService.confirm({
       message: 'Click button Explore map to open catalogue - list of data and add one of this to the map here. Afte added, you will see them listed down in workbench below',
       key: 'cf2',
@@ -39,10 +41,29 @@ export class AppGuideService {
       acceptLabel: 'Next',
       acceptIcon: 'pi pi-arrow-right',
       accept: () => {
-        this.displayBtnExplore = false;
+        this.displayExploreDialog = false;
+        this.confirmDialogGuide3()
       },
       reject: () => {
-        this.displayBtnExplore = false;
+        this.displayExploreDialog = false;
+      }
+    });
+  }
+
+  confirmDialogGuide3() {
+    this.displayLocationDialog = true;
+    this.confirmationService.confirm({
+      message: 'Enter a location name, the map will drive you to that address by locating a point ',
+      key: 'cf3',
+      header: 'Location search',
+      icon: 'fa-solid fa-location-dot',
+      acceptLabel: 'Next',
+      acceptIcon: 'pi pi-arrow-right',
+      accept: () => {
+        this.displayLocationDialog = false;
+      },
+      reject: () => {
+        this.displayLocationDialog = false;
       }
     });
   }

@@ -5,16 +5,6 @@
   [baseZIndex]="10000"
   label="Right"
 ></p-confirmDialog>
-<div class="btn-explore" *ngIf="this._appGuideService.displayBtnExplore">
-  <div class="icon-plus">
-    <i class="fa-solid fa-circle-plus"></i>
-  </div>
-  <span class="text-span">Explore map</span>
-  <div class="icon-globe">
-    <i class="fa-solid fa-earth-asia"></i>
-  </div>
-</div>
-
 
 <p-confirmDialog
   key="cf2"
@@ -24,3 +14,31 @@
   label="Left"
   message="Can you pick me this please?"
 ></p-confirmDialog>
+<i *ngIf="this._appGuideService.displayExploreDialog" class="fa-solid fa-caret-up cf2-icon"></i>
+<div class="btn-explore" *ngIf="this._appGuideService.displayExploreDialog">
+  <div class="icon-plus">
+    <i class="fa-solid fa-circle-plus"></i>
+  </div>
+  <span class="text-span">Explore map</span>
+  <div class="icon-globe">
+    <i class="fa-solid fa-earth-asia"></i>
+  </div>
+</div>
+
+<p-confirmDialog
+  key="cf3"
+  class="dialog3"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  label="Left"
+  message="Can you pick me this please?"
+></p-confirmDialog>
+<i *ngIf="this._appGuideService.displayLocationDialog" class="fa-solid fa-caret-up cf3-icon"></i>
+<div class="box-search" *ngIf="this._appGuideService.displayLocationDialog">
+  <div class="input-search">
+    <span>Enter address</span>
+  </div>
+  <div class="icon-delete">
+    <span>x</span>
+  </div>
+</div>
