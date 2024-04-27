@@ -1,3 +1,4 @@
+<!--Dialog1 - Start a tour-->
 <p-confirmDialog
   key="cf1"
   class="dialog1"
@@ -6,13 +7,13 @@
   label="Right"
 ></p-confirmDialog>
 
+<!--Dialog2 - Explore map-->
 <p-confirmDialog
   key="cf2"
   class="dialog2"
   [style]="{ width: '50vw' }"
   [baseZIndex]="10000"
   label="Left"
-  message="Can you pick me this please?"
 ></p-confirmDialog>
 <i *ngIf="this._appGuideService.displayExploreDialog" class="fa-solid fa-caret-up cf2-icon"></i>
 <div class="btn-explore" *ngIf="this._appGuideService.displayExploreDialog">
@@ -25,13 +26,13 @@
   </div>
 </div>
 
+<!--Dialog3 - Location-->
 <p-confirmDialog
   key="cf3"
   class="dialog3"
   [style]="{ width: '50vw' }"
   [baseZIndex]="10000"
   label="Left"
-  message="Can you pick me this please?"
 ></p-confirmDialog>
 <i *ngIf="this._appGuideService.displayLocationDialog" class="fa-solid fa-caret-up cf3-icon"></i>
 <div class="box-search" *ngIf="this._appGuideService.displayLocationDialog">
@@ -41,4 +42,32 @@
   <div class="icon-delete">
     <span>x</span>
   </div>
+</div>
+
+<!--Dialog4 - MapSettings-->
+<p-confirmDialog
+  key="cf4"
+  class="dialog4"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  label="Left"
+></p-confirmDialog>
+<i *ngIf="this._appGuideService.displayMapSettingDialog" class="fa-solid fa-caret-up cf4-icon"></i>
+<div class="setting-area" *ngIf="this._appGuideService.displayMapSettingDialog">
+  <i class="fa-solid fa-map-location-dot"></i>
+  <span style="margin-left: 10px;" class="setting-btn">Map Settings</span>
+</div>
+
+<!--Dialog5 - PrintScreenshot-->
+<p-confirmDialog
+  key="cf5"
+  class="dialog5"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  label="Left"
+></p-confirmDialog>
+<i *ngIf="this._appGuideService.displayPrintScreenshotDialog" class="fa-solid fa-caret-up cf5-icon"></i>
+<div class="btn-print-area" *ngIf="this._appGuideService.displayPrintScreenshotDialog">
+  <i class="fa-solid fa-photo-film"></i>
+  <span style="margin-left: 10px;">Print / Screenshot</span>
 </div>
