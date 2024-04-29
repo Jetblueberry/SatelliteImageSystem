@@ -1,0 +1,40 @@
+::ng-deep .dialog-about {
+  position: absolute;
+  z-index: 12000;
+
+  .p-dialog {
+    background: linear-gradient(45deg, #0c59a8, #00b648);
+    color: white;
+    padding: 30px 75px;
+  }
+  .p-dialog-header {
+    background: transparent;
+    color: white;
+  }
+  .p-dialog-header .p-dialog-title {
+    font-size: 30px;
+  }
+  .p-dialog-header-maximize {
+    display: none!important;
+  }
+  timesicon {
+    color: white!important;
+  }
+  .p-dialog-content {
+    background: transparent;
+    color: white;
+    display: flex;
+  }
+}
+.left-content {
+  width: 930px;
+}
+h1 {
+  color: white;
+  font-size: 30px;
+}
+.little-summary {
+  color: white;
+  font-size: 14px;
+  margin-top: 14px;
+}

@@ -5,22 +5,20 @@ import { DataCatalogueService } from '../services/data-catalogue-services/data-c
 import { DataDetailsService } from '../services/data-details-services/data-details.service';
 import { MessagesService } from '../services/message.service';
 import { ConfirmationService } from 'primeng/api';
-import { AppGuideService } from '../services/app-guide-services/app-guide.service';
+import { AppInformationService } from '../services/app-information-services/app-information.service';
 
 @Component({
-  selector: 'app-guide',
-  templateUrl: './app-guide.component.html',
-  styleUrls: ['./app-guide.component.scss']
+  selector: 'app-information',
+  templateUrl: './app-information.component.html',
+  styleUrls: ['./app-information.component.scss']
 })
-export class AppGuideComponent {
-
+export class AppInformationComponent {
   constructor(
     public _dataCatalogueService: DataCatalogueService,
     public _dataDetailsService: DataDetailsService,
     public _dataMapService: DataMapService,
-    public _appGuideService: AppGuideService,
+    public _appInformationService: AppInformationService,
     public messageService: MessagesService,
-    private confirmationService: ConfirmationService,
   ) {}
 
 

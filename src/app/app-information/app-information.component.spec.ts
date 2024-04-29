@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppGuideComponent } from './app-guide.component';
+import { AppInformationComponent } from './app-information.component';
 
-describe('AppGuideComponent', () => {
-  let component: AppGuideComponent;
-  let fixture: ComponentFixture<AppGuideComponent>;
+describe('AppInformationComponent', () => {
+  let component: AppInformationComponent;
+  let fixture: ComponentFixture<AppInformationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppGuideComponent ]
+      declarations: [ AppInformationComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AppGuideComponent);
+    fixture = TestBed.createComponent(AppInformationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -14,11 +14,13 @@ import {ButtonModule} from 'primeng/button';
 import {TimelineModule} from 'primeng/timeline';
 import {ToastModule} from 'primeng/toast';
 import {CalendarModule} from 'primeng/calendar';
+import {DialogModule} from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 // Components
 import { AppComponent } from './app.component';
 import { AppGuideComponent } from './app-guide/app-guide.component';
+import { AppInformationComponent } from './app-information/app-information.component';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { DataCatalogueComponent } from './data-catalogue/data-catalogue.component';
 import { DataDetailsComponent } from './data-details/data-details.component';
@@ -35,6 +37,7 @@ import { MapTypeLists } from './models/map-types';
   declarations: [
     AppComponent,
     AppGuideComponent,
+    AppInformationComponent,
     LeftMenuComponent,
     DataCatalogueComponent,
     DataDetailsComponent,
@@ -57,6 +60,7 @@ import { MapTypeLists } from './models/map-types';
     TimelineModule,
     ToastModule,
     CalendarModule,
+    DialogModule,
     ConfirmDialogModule,
   ],
   providers: [MapTypeLists, MessageService, ConfirmationService],

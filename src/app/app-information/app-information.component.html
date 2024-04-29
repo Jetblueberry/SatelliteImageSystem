@@ -1,0 +1,31 @@
+<p-dialog
+  *ngIf="this._appInformationService.displayDialog"
+  [(visible)]="this._appInformationService.displayDialog"
+  class="dialog-about"
+  [maximizable]="true"
+  [style]="{
+    'max-height': '100vh',
+    width: '100%',
+    height: '100%',
+    'background-color': '#F2F2F2'
+  }"
+>
+  <div class="left-content">
+    <h1>About us</h1>
+    <p class="little-summary">
+      This website is a satellite image management system providing the necessary
+      tools for users to work with different types of satellite image data within
+      the territory of Vietnam.
+    </p>
+    <p class="little-summary">
+      The project team chose the topic of building a system that be able to store
+      and manage satellite image data on the territory of Vietnam, which will
+      serve many research purposes having practical value in the fields of
+      meteorology and geology in Vietnam such as researching rainfall, warning of
+      flood locations, measuring temperature of provinces and cities,... like
+      other satellite imaging systems in the world
+    </p>
+  </div>
+  <div class="right-content"></div>
+
+</p-dialog>
