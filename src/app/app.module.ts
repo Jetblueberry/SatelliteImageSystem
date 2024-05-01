@@ -16,9 +16,11 @@ import {ToastModule} from 'primeng/toast';
 import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {CarouselModule} from 'primeng/carousel';
 
 // Components
 import { AppComponent } from './app.component';
+import { AppDefaultPageComponent } from './app-default-page/app-default-page.component';
 import { AppGuideComponent } from './app-guide/app-guide.component';
 import { AppInformationComponent } from './app-information/app-information.component';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
@@ -36,6 +38,7 @@ import { MapTypeLists } from './models/map-types';
 @NgModule({
   declarations: [
     AppComponent,
+    AppDefaultPageComponent,
     AppGuideComponent,
     AppInformationComponent,
     LeftMenuComponent,
@@ -62,6 +65,7 @@ import { MapTypeLists } from './models/map-types';
     CalendarModule,
     DialogModule,
     ConfirmDialogModule,
+    CarouselModule,
   ],
   providers: [MapTypeLists, MessageService, ConfirmationService],
   bootstrap: [AppComponent]

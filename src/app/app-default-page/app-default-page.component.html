@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <img class="img-back" src="/assets/Image_background_VN/HanoiMap.png">
+  <div class="contain">
+    <div class="header">
+      <div class="btn-area">
+        <button class="btn-explore-map" (click)="this._appDefaultPageService.displayThisMain()">EXPLORE THE MAP</button>
+      </div>
+    </div>
+    <div class="body">
+        <div class="carousel-area">
+          <p-carousel
+            class="carousel"
+            [value]="data_carousel"
+            styleClass="custom-carousel"
+            [numVisible]="1"
+            [numScroll]="1"
+            [circular]="true"
+            [autoplayInterval]="3000"
+          >
+            <ng-template pTemplate="item" let-data>
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div>
+                    <div class="text-overlay">
+                      <p class="text-name">{{data.name}}</p>
+                      <h1 class="text-description">{{data.description}}</h1>
+                    </div>
+                    <div class="overlay-panel"></div>
+                    <img class="carousel-img" src="{{data.imageUrl}}">
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+        <div class="transparent-area"></div>
+        <div class="content-area">
+
+        </div>
+    </div>
+    <div class="footer">
+      <span>hâhahah</span>
+    </div>
+  </div>
+</div>

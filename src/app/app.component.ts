@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DataMapService } from './services/data-map-services/data-map.service';
 import * as L from 'leaflet'
 import { MapTypeLists } from './models/map-types';
+import { AppDefaultPageService } from './services/app-default-page/app-default-page.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent {
 
   constructor(
     public _datamapService: DataMapService,
-    public mapTypesLists: MapTypeLists
+    public mapTypesLists: MapTypeLists,
+    public _appDefaultPage: AppDefaultPageService,
   ) {}
 
   async openHideLeftMenu() {

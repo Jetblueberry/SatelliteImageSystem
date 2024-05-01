@@ -1,0 +1,144 @@
+.container-fluid {
+  padding: 0px;
+  width: 100vw;
+  overflow: hidden!important;
+}
+.img-back {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.contain {
+  padding: 0px;
+  z-index: 10;
+  margin: 0px;
+  width: 100vw;
+  position: absolute;
+  left: 0px;
+}
+
+// header
+.header {
+  height: 80px;
+  width: 100%;
+  background: linear-gradient(45deg, #0c59a8, #00b648);
+  border-bottom: 2px solid white;
+  position: fixed;
+  z-index: 1000;
+  top: 0px;
+  left: 0px;
+}
+.btn-area {
+  margin-left: 150px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.btn-explore-map {
+  width: 330px;
+  height: 40px;
+  background-color: #002470;
+  padding-left: 20px;
+  font-weight: 700;
+  color: white;
+  border-radius: 20px;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+//body
+.body {
+  margin-top: 80px;
+}
+
+//carousel-area
+.carousel-area {
+  width: 100%;
+  height: 600px;
+}
+
+::ng-deep .carousel {
+  .p-carousel-items-content {
+    position: absolute;
+    border-bottom: 2px solid white;
+  }
+  .p-carousel-prev {
+    position: absolute;
+    left: 20px;
+    top: 284px;
+    z-index: 100;
+    width: 40px!important;
+    height: 40px!important;
+
+  }
+  .p-carousel-prev .carousel-prev-icon {
+    scale: 2;
+    color: white;
+  }
+  .p-carousel-next {
+    position: absolute;
+    right: 20px;
+    top: 284px;
+    z-index: 100;
+    width: 40px!important;
+    height: 40px!important;
+
+  }
+  .p-carousel-next .carousel-prev-icon {
+    color: white;
+    scale: 2;
+  }
+  .p-carousel-prev:hover, .p-carousel-next:hover {
+    background: linear-gradient(45deg, #0c59a8, #00b648)!important;
+  }
+
+  // ng-template
+  .text-name {
+    font-size: 1.3rem;
+    font-weight: 100;
+  }
+  .text-description {
+    font-size: 600;
+    font-weight: 900;
+  }
+  .carousel-img {
+    width: 100%;
+    height: 600px;
+  }
+  .overlay-panel {
+    background: linear-gradient(90deg, rgba(1, 28, 56, 0.336), rgba(0, 68, 27, 0.576));
+    position: absolute;
+    width: 100%;
+    height: 600px;
+    z-index: 20;
+  }
+  .text-overlay {
+    background: rgba(51, 51, 51, 0.7);
+    position: absolute;
+    margin-left: 150px;
+    top: 80px;
+    padding: 20px;
+    z-index: 30;
+    width: 700px;
+    height: 320px;
+    border-radius: 30px;
+    border: 2px solid white;
+    color: white;
+  }
+}
+
+// content-area
+.transparent-area {
+  background: transparent;
+  width: 100%;
+  height: 500px;
+}
+.content-area {
+  width: 100%;
+  height: 520px;
+  background: linear-gradient(45deg, #0c59a8, #00b648);
+}
+

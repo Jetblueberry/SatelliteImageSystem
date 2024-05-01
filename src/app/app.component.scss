@@ -2,6 +2,7 @@
   display: flex;
   margin: 0px;
   padding: 0px;
+  overflow-y: hidden;
 }
 img {
   position: absolute;
@@ -17,6 +18,7 @@ img {
   display: flex;
   margin: 0px;
   padding: 0px;
+  overflow: hidden;
 }
 // btn-control-leftmenu
 .btn-control-leftmenu {
