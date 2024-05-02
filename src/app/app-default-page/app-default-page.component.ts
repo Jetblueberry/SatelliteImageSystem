@@ -6,7 +6,6 @@ import { DataDetailsService } from '../services/data-details-services/data-detai
 import { MessagesService } from '../services/message.service';
 import { ConfirmationService } from 'primeng/api';
 import { AppGuideService } from '../services/app-guide-services/app-guide.service';
-import { AppDefaultPageService } from '../services/app-default-page/app-default-page.service';
 
 @Component({
   selector: 'app-default-page',
@@ -19,7 +18,6 @@ export class AppDefaultPageComponent {
     public _dataDetailsService: DataDetailsService,
     public _dataMapService: DataMapService,
     public _appGuideService: AppGuideService,
-    public _appDefaultPageService: AppDefaultPageService,
     public messageService: MessagesService,
     private confirmationService: ConfirmationService,
   ) {}

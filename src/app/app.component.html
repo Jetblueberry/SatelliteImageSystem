@@ -1,20 +1,5 @@
-<app-default-page *ngIf="this._appDefaultPage.displayMainPage"></app-default-page>
-<div *ngIf="true" class="container">
-  <img src="https://e1.pxfuel.com/desktop-wallpaper/248/756/desktop-wallpaper-satellite-satellite-satellite.jpg">
-  <div class="contain-all">
-    <app-left-menu id="app-left-menu"></app-left-menu>
-    <div class="map-area" id="map-area">
-      <app-data-map></app-data-map>
-    </div>
-    <app-guide></app-guide>
-    <app-information></app-information>
-
-    <div class="btn-control-leftmenu" id="control-leftmenu" (click)="openHideLeftMenu()">
-      <span>
-        <i class="fa-solid fa-caret-left" id="caret"></i>
-      </span>
-    </div>
-  </div>
+<div>
+  <router-outlet></router-outlet>
 </div>
 
 

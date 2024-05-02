@@ -20,6 +20,7 @@ import {CarouselModule} from 'primeng/carousel';
 
 // Components
 import { AppComponent } from './app.component';
+import { AppBasePageComponent } from './app-base-page/app-base-page.component';
 import { AppDefaultPageComponent } from './app-default-page/app-default-page.component';
 import { AppGuideComponent } from './app-guide/app-guide.component';
 import { AppInformationComponent } from './app-information/app-information.component';
@@ -38,6 +39,7 @@ import { MapTypeLists } from './models/map-types';
 @NgModule({
   declarations: [
     AppComponent,
+    AppBasePageComponent,
     AppDefaultPageComponent,
     AppGuideComponent,
     AppInformationComponent,
