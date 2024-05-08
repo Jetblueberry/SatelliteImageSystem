@@ -18,12 +18,12 @@
           <div class="data-catalogue-explorer">
             <div class="input-area">
               <div class="input-block">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input placeholder="Search catalogue">
+                <i class="fa-solid fa-magnifying-glass" style="margin-right: 5px;"></i>
+                <input placeholder="Search catalogue" (keyup)="searchData($event)">
               </div>
             </div>
             <div class="folder-area">
-              <ul class="catalog-group">
+              <ul *ngIf="!openSearchList" class="catalog-group">
                 <li class="data-catalog-group" >
                   <button type="button" class="catalog-group-btn" (click)="OpenCloseListData('landsat')">
                     <i class="fa-solid fa-folder-open"></i>
@@ -33,7 +33,7 @@
                     </span>
                   </button>
                   <ul *ngIf="displayData['landsat']" class="catalog-group-datasets">
-                    <li *ngFor="let i of this.list" class="data-catalog-group-datasets" >
+                    <li *ngFor="let i of this.list_landsat" class="data-catalog-group-datasets" >
                       <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
                         <span class="btn-text">{{i.tenData}}</span>
                       </button>
@@ -61,6 +61,23 @@
                       </button>
                       <span class="btn-icon" (click)="addDatasetToMap(i.id)">
                         <i class="fa-solid fa-circle-plus"></i>
+                      </span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <ul *ngIf="openSearchList" class="catalog-group">
+                <li class="data-catalog-group">
+                  <ul class="catalog-group-datasets">
+                    <li *ngFor="let i of this.list_total_data" class="data-catalog-group-datasets" >
+                      <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
+                        <span class="btn-text">{{i.tenData}}</span>
+                      </button>
+                      <span *ngIf="!displayMinusIcon[i.idData]" class="btn-icon" (click)="addDatasetToMap(i.idData)">
+                        <i  class="fa-solid fa-circle-plus"></i>
+                      </span>
+                      <span *ngIf="displayMinusIcon[i.idData]" class="btn-icon">
+                        <i  class="fa-solid fa-circle-minus" ></i>
                       </span>
                     </li>
                   </ul>

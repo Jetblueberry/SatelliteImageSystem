@@ -11,4 +11,8 @@ export class DataDetailsService {
     var styleArr: any[] = lst_styles.split(',')
     return styleArr;
   }
+
+  openCompareList() {
+
+  }
 }

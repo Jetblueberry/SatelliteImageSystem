@@ -17,11 +17,14 @@ export class DataCatalogueComponent {
   @Input() openCatalogue: any;
   @Output() closeCatalogue = new EventEmitter<any>;
 
-  list: any = [];
+  list_landsat: any = [];
+  list_sentinel: any = [];
+  list_total_data: any = [];
   lsd: any;
   mymap: any;
   openDetails = false;
   openPreview = false;
+  openSearchList = false;
 
   displayData: any = {};
   displayMinusIcon: any = {};
@@ -38,11 +41,13 @@ export class DataCatalogueComponent {
     public messageService: MessagesService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.getDatasetList();
-    this.getDataLandsatList();
+    await this.getDataLandsatList();
+    await this.getTotalDataList();
   }
 
+  // Data List
   getDatasetList() {
     this.landsat_lst = landsat_data.landsat_data_lists;
     this.sentinel_lst = sentinel_data.sentinel_data_lists;
@@ -52,10 +57,15 @@ export class DataCatalogueComponent {
   async getDataLandsatList() {
     const result = await this._dataCatalogueService.getDataLandsat();
     if(result) {
-      this.list = result;
+      this.list_landsat = result;
     }
   }
+  async getTotalDataList() {
+    this.list_total_data = this.list_landsat.concat(this.sentinel_lst);
+    console.warn(this.list_total_data)
+  }
 
+  // Functional
   closeDataCatalogue() {
     this.closeCatalogue.emit(false);
     this.openCatalogue = false;
@@ -122,5 +132,20 @@ export class DataCatalogueComponent {
     this.lsd = await this._dataCatalogueService.getDataLandsatById(idData);
     this.openPreview = true;
     this.displayData['landsat'] = true;
+  }
+
+  async searchData(query: KeyboardEvent) {
+    if (query) {
+      const element = query.target as HTMLInputElement;
+      const value = element.value
+      if(value.length > 0) {
+        this.openSearchList = true;
+
+      }
+      else {
+        this.openSearchList = false;
+      }
+
+    }
   }
 }

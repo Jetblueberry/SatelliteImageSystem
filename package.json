@@ -41,6 +41,7 @@
     "leaflet-splitmap": "^1.0.3",
     "leaflet-splitmap-updated": "^1.0.2",
     "leaflet-timedimension": "^1.1.1",
+    "leaflet.browser.print": "^0.6.11",
     "ngx-build-plus": "^15.0.0",
     "ngx-perfect-scrollbar": "^10.1.1",
     "nodejs": "0.0.0",

@@ -3,3 +3,9 @@ body {
   font-family: Nunito, sans-serif;
   overflow-x: hidden;
 }
+@media print {
+  body {
+    -webkit-print-color-adjust: exact!important;
+    print-color-adjust: exact !important;
+  }
+}

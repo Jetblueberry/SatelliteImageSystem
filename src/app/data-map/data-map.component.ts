@@ -4,6 +4,7 @@ declare const L: any; // --> Works
 import 'leaflet';
 import 'leaflet-timedimension';
 import 'dist/leaflet-splitmap';
+import 'dist/leaflet-side-by-side';
 import 'dist/leaflet-simple-map-screenshoter'
 import 'dist/leaflet.browser.print.min'
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
@@ -47,7 +48,6 @@ export class DataMapComponent {
     this.initMap();
   }
 
-
   async initMap() {
     this._dataMapService.map = L.map('map',  {
       zoomControl: false,
@@ -62,9 +62,9 @@ export class DataMapComponent {
     this._dataMapService.screenshot();
 
     //Print
+
     var browserControl = L.control.browserPrint({
-      title: 'Just print me!',
-      printLayer: this.map,
+      printLayer: Esri_WorldImagery
     }).addTo(this.map);
 
     // geosearch
@@ -78,7 +78,6 @@ export class DataMapComponent {
       },
     });
     this.map.addControl(searchControl);
-
 
     // Scale
     L.control.scale({
@@ -349,9 +348,7 @@ export class DataMapComponent {
 
   // Compare
   openCloseCompareBox(type: any) {
-    var t1 = this.mapTypesLists.googleStreets.addTo(this.map);
-    var t2 = this.mapTypesLists.googleSat.addTo(this.map);
-    var mp = L.control.splitMap(t1, t2)
+    var mp = L.control.sideBySide(this.map, this.map)
     if(!this.displayIconDelete[type]) {
       this.displayIconDelete[type] = true;
       this.typeWorking = "";
@@ -368,10 +365,15 @@ export class DataMapComponent {
       }
       this.displayIconDelete[type] = false;
       this.typeWorking = "NothingWorking";
-      t1.remove();
-      t2.remove();
-      var mp_slider = document.getElementsByClassName('sbs-slider')[0];
-      mp_slider.remove();
+      this.closeSlideCompare();
+    }
+  }
+  async closeSlideCompare() {
+    var mp_slider = document.getElementsByClassName('leaflet-sbs')[0];
+    if (mp_slider) {
+      if (mp_slider instanceof HTMLInputElement || mp_slider instanceof HTMLElement) {
+        await mp_slider.remove();
+      }
     }
   }
 
@@ -419,5 +421,13 @@ export class DataMapComponent {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
   };
-
 }
+
+// Tilelayers
+var Esri_WorldImagery = L.tileLayer(
+  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  {
+    attribution:
+      'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+  }
+);

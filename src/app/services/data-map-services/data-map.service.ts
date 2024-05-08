@@ -4,6 +4,7 @@ declare const L: any; // --> Works
 import 'leaflet';
 import { MapTypeLists } from 'src/app/models/map-types';
 import { DataCatalogueService } from '../data-catalogue-services/data-catalogue.service';
+import { style } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',
@@ -40,18 +41,21 @@ export class DataMapService {
 
   // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
   InitialDataLayerByName(nameData: any) {
-    this.wmsUrl = this._wmsService.wmsUrl; //http://localhost:8080/geoserver/Landsat_Workspace/wms
-    var layer = `Landsat_Workspace:${nameData}`;
+    this.wmsUrl = this._wmsService.wmsLink; //http://localhost:8080/geoserver/Landsat_Workspace/wms
+    //var layer = `Landsat_Workspace:${nameData}`;
+    var layer = 'ls8_c2l2'
 
     if(!this.defaultLayer[nameData]) {
       this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
         {
           layers: layer,
+          styles: 'simple_rgb',
           format: 'image/png', // or any other supported format
-          transparent: true, // if transparency is needed
+          transparent: true,
           crs: L.CRS.EPSG3857,
         }
       );
+      console.warn(this.defaultLayer[nameData]);
     }
     else {
       nameData = nameData + " - Copy"
@@ -87,6 +91,7 @@ export class DataMapService {
     if(this.map) {
       console.warn(this.defaultLayer[nameData])
       await this.getDataLayerByName(nameData).removeFrom(this.map);
+      this.defaultLayer[nameData] = null; // Khi xóa phải trả giá trị về null tức ko tồn tại nữa
     }
   }
 

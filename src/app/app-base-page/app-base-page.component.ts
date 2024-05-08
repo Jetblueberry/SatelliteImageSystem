@@ -15,6 +15,8 @@ export class AppBasePageComponent {
     public mapTypesLists: MapTypeLists,
   ) {}
 
+
+
   async openHideLeftMenu() {
     var leftmenu = document.getElementById("app-left-menu");
     var maparea = document.getElementById("map-area");
@@ -56,4 +58,6 @@ export class AppBasePageComponent {
 
     }
   }
+
+
 }

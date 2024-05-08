@@ -83,13 +83,13 @@ export class DataDetailsComponent {
     this._dataMapService.displayZoom = false;
   }
 
-  async hideShowDataMap(nameData: any) {
+  async hideShowDataMap(nameData: any, displayName: any) {
     var btn = document.getElementById('display-btn');
     if (btn) {
       if (this.displayOnMap) {
         btn.style.backgroundColor = 'white';
         this.displayOnMap = false;
-        await this._dataMapService.RemoveDataFromMap(nameData);
+        await this._dataMapService.RemoveDataFromMap(displayName);
       } else {
         btn.style.backgroundColor = '#002470';
         this.displayOnMap = true;
