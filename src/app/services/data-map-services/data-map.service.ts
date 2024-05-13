@@ -51,6 +51,7 @@ export class DataMapService {
           layers: layer,
           styles: 'simple_rgb',
           format: 'image/png', // or any other supported format
+          time: '2024-04-13',
           transparent: true,
           crs: L.CRS.EPSG3857,
         }
@@ -62,6 +63,7 @@ export class DataMapService {
       this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
         {
           layers: layer,
+          styles: 'simple_rgb',
           format: 'image/png', // or any other supported format
           transparent: true, // if transparency is needed
           crs: L.CRS.EPSG3857,
