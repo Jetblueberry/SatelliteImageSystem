@@ -5,11 +5,13 @@ import { Component, Input,
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import { DataDetailsService } from '../services/data-details-services/data-details.service';
 import { MessagesService } from '../services/message.service';
+import { DataMapComponent } from '../data-map/data-map.component';
 
 @Component({
   selector: 'app-data-details',
   templateUrl: './data-details.component.html',
   styleUrls: ['./data-details.component.scss'],
+  providers: [DataMapComponent],
 })
 export class DataDetailsComponent {
   @Input() lst_choosen: any;
@@ -21,7 +23,6 @@ export class DataDetailsComponent {
   displayOnMap = true;
   displayDetailsBody: any = {};
   displayBoxControl: any = {};
-  displayRowCompare = false;
   countDetailsname: any = {};
   detailsName: any;
   disablePreviousDate = false;
@@ -36,6 +37,7 @@ export class DataDetailsComponent {
 
   constructor(
     public _dataMapService: DataMapService,
+    public _dataMapComponent: DataMapComponent,
     public _dataDetailsService: DataDetailsService,
     public messageService: MessagesService,
   ) {}
@@ -46,7 +48,8 @@ export class DataDetailsComponent {
 
   customDetailsBeforeInit() {
     for(var x of this.lst_choosen) {
-      x.selectedStyle = x.listStyles[0];
+      x.selectedStyle = this._dataDetailsService.CustomListChosen(x.listStyles)[0];
+      console.info(x.selectedStyle);
       x.currentDate = new Date(x.defaultDate);
       if(!this._dataDetailsService.opacityValue[x.tenData]) {
         this._dataDetailsService.opacityValue[x.tenData] = 100
@@ -90,7 +93,7 @@ export class DataDetailsComponent {
       if (this.displayOnMap) {
         btn.style.backgroundColor = 'white';
         this.displayOnMap = false;
-        await this._dataMapService.RemoveDataFromMap(displayName);
+        await this._dataMapService.RemoveDataFromMap(displayName, style);
       } else {
         btn.style.backgroundColor = '#002470';
         this.displayOnMap = true;
@@ -100,7 +103,7 @@ export class DataDetailsComponent {
   }
   async removeAllDetails() {
     for(let x of this.lst_choosen) {
-      await this._dataMapService.RemoveDataFromMap(x.displayName);
+      await this._dataMapService.RemoveDataFromMap(x.displayName, x.selectedStyle);
     }
     this.closeDetails.emit(false);
   }
@@ -129,7 +132,7 @@ export class DataDetailsComponent {
    removeDetails(nameData: any, displayName: any) {
     for (let i = 0; i < this.lst_choosen.length; i++) {
       if (this.lst_choosen[i].tenData === nameData && this.lst_choosen[i].displayName === displayName) {
-          this._dataMapService.RemoveDataFromMap(this.lst_choosen[i].displayName);
+          this._dataMapService.RemoveDataFromMap(this.lst_choosen[i].displayName, this.lst_choosen[i].selectedStyle);
           this.lst_choosen.splice(i, 1);
 
           this.displayBoxControl[nameData] = false;
@@ -181,6 +184,7 @@ export class DataDetailsComponent {
   // Compare
   compare(nameData: any) {
     this.addCopyDataDetails(nameData);
+    this._dataMapComponent.openCloseCompareBox('box-compare', this.lst_choosen);
   }
 
   addCopyDataDetails(nameData: any) {
@@ -194,7 +198,6 @@ export class DataDetailsComponent {
           this.lst_choosen.push(obj);
           this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle);
           this.displayBoxControl[nameData] = false;
-          this.displayRowCompare = true;
         }
         else {
           setTimeout(async () => {
@@ -209,8 +212,9 @@ export class DataDetailsComponent {
 
   // Change styles
   async switchStyleData(x:any, event: any) {
-    x.selectedStyle = event;
-    await this._dataMapService.RemoveDataFromMap(x.displayName)
+    console.warn(x.selectedStyle);
+    await this._dataMapService.RemoveDataFromMap(x.displayName, x.selectedStyle) // xóa trước khi chuyển style
+    //x.selectedStyle = event.value;
     await this._dataMapService.AddDataToMap(x.nameData, x.selectedStyle);
   }
 }

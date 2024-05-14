@@ -52,7 +52,7 @@
                   <p-slider class="slider" [min]="0" [max]="100" [(ngModel)]="this._dataDetailsService.opacityValue[i.displayName]" (onChange)="setOpacity(i.displayName)"></p-slider>
                 </div>
               </div>
-              <div *ngIf="this.displayRowCompare" class="row-compare">
+              <div *ngIf="this._dataDetailsService.displayRowCompare" class="row-compare">
                 <button class="box-compare-left">
                   <span>Left</span>
                 </button>

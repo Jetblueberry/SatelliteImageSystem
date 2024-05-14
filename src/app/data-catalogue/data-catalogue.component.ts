@@ -116,10 +116,11 @@ export class DataCatalogueComponent {
     // Khởi tạo các prop cần truyền từ những dữ liệu lấy trong bảng
     const item = await this._dataCatalogueService.getDataLandsatById(idData);
     item.displayName = item.tenData; // set displayName when add details
+    item.defaultStyle = this._dataDetailsService.CustomListChosen(item.listStyles)[0];
     this._dataDetailsService.opacityValue[item.displayName] = 100; // set opacity when add details
 
     this._dataCatalogueService.choosen_lst.push(item); // add in lst
-    this._dataMapService.AddDataToMap(item.tenData, item.listStyles[0]);
+    this._dataMapService.AddDataToMap(item.tenData, item.defaultStyle);
 
     this.closeCatalogue.emit(false);
     this.displayMinusIcon[idData] = true;

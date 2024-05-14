@@ -13,6 +13,7 @@ import { DataMapService } from '../services/data-map-services/data-map.service';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import { AppGuideService } from '../services/app-guide-services/app-guide.service';
 import { AppInformationService } from '../services/app-information-services/app-information.service';
+import { DataDetailsService } from '../services/data-details-services/data-details.service';
 
 @Component({
   selector: 'app-data-map',
@@ -27,6 +28,7 @@ export class DataMapComponent {
   displayPrintType = false;
   displayCityLabel = false;
   displayIconDelete: any = {};
+  selectedMapTypes: any;
   events2 = ["31/12/2020", "31/12/2021", "31/12/2022", "31/12/2023"];
   lat: any;
   lng: any;
@@ -38,6 +40,7 @@ export class DataMapComponent {
   constructor(
     public _dataCatalogueService: DataCatalogueService,
     public _dataMapService: DataMapService,
+    public _dataDetailsService: DataDetailsService,
     public http: HttpClient,
     public mapTypesLists: MapTypeLists,
     public _appGuideService: AppGuideService,
@@ -62,7 +65,6 @@ export class DataMapComponent {
     this._dataMapService.screenshot();
 
     //Print
-
     var browserControl = L.control.browserPrint({
       printLayer: Esri_WorldImagery
     }).addTo(this.map);
@@ -104,11 +106,6 @@ export class DataMapComponent {
 
     // Panel
     await this.map.on('click', (e: any) => {
-      for(var x of this._dataCatalogueService.choosen_lst) {
-        this._dataMapService.getDataLayerByName(x.tenData).on('click', () => {
-          console.warn(x.tenData);
-        });
-      }
       if(this.typeWorking=="NothingWorking" || this.typeWorking=="CoordinatesWorking") { // Panel coordinates
         this.typeWorking = "CoordinatesWorking"; // đang =0 tức chưa bật panel, =1 là bật panel rồi
 
@@ -347,8 +344,12 @@ export class DataMapComponent {
   }
 
   // Compare
-  openCloseCompareBox(type: any) {
-    var mp = L.control.sideBySide(this.map, this.map)
+  openCloseCompareBox(type: any, lstDataOpened: any) {
+    var mp = L.control.sideBySide();
+    // for(var x of lstDataOpened) {
+    //   mp.leftlayeradd(this._dataMapService.getDataLayerByName(x.tenData, x.selectedStyle));
+    //   mp.rightlayeradd(this._dataMapService.getDataLayerByName(x.tenData, x.selectedStyle));
+    // }
     if(!this.displayIconDelete[type]) {
       this.displayIconDelete[type] = true;
       this.typeWorking = "";
@@ -356,6 +357,7 @@ export class DataMapComponent {
       if(i) {
         i.style.background = "#01d054";
       }
+      this._dataDetailsService.displayRowCompare = true;
       mp.addTo(this.map)
     }
     else {
@@ -364,6 +366,7 @@ export class DataMapComponent {
         i.style.background = "#496cf5";
       }
       this.displayIconDelete[type] = false;
+      this._dataDetailsService.displayRowCompare = false;
       this.typeWorking = "NothingWorking";
       this.closeSlideCompare();
     }
