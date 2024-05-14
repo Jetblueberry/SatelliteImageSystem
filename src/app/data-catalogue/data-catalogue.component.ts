@@ -20,6 +20,7 @@ export class DataCatalogueComponent {
   list_landsat: any = [];
   list_sentinel: any = [];
   list_total_data: any = [];
+  list_search_data: any = [];
   lsd: any;
   mymap: any;
   openDetails = false;
@@ -111,13 +112,14 @@ export class DataCatalogueComponent {
     }
   }
 
-  async addDatasetToMap(idData: any) { // OpenDataDetails
+  async addDatasetToMap(idData: any) {
+    // Khởi tạo các prop cần truyền từ những dữ liệu lấy trong bảng
     const item = await this._dataCatalogueService.getDataLandsatById(idData);
     item.displayName = item.tenData; // set displayName when add details
     this._dataDetailsService.opacityValue[item.displayName] = 100; // set opacity when add details
 
     this._dataCatalogueService.choosen_lst.push(item); // add in lst
-    this._dataMapService.AddDataToMap(item.tenData);
+    this._dataMapService.AddDataToMap(item.tenData, item.listStyles[0]);
 
     this.closeCatalogue.emit(false);
     this.displayMinusIcon[idData] = true;
@@ -134,18 +136,30 @@ export class DataCatalogueComponent {
     this.displayData['landsat'] = true;
   }
 
+  // Search
   async searchData(query: KeyboardEvent) {
     if (query) {
       const element = query.target as HTMLInputElement;
       const value = element.value
       if(value.length > 0) {
         this.openSearchList = true;
-
+        this.searchDataList(value);
       }
       else {
         this.openSearchList = false;
+        this.list_search_data.length = 0;
       }
 
+    }
+  }
+  async searchDataList(query: string) {
+    this.list_search_data.length = 0;
+    for (let i = 0; i < this.list_total_data.length; i++) {
+      if (this.list_total_data[i].tenData.substring(0, query.length).toLocaleLowerCase() === query.toLocaleLowerCase())
+      {
+        //So sánh chuỗi nhập vào với tên sản phẩm
+        this.list_search_data.push(this.list_total_data[i]);
+      }
     }
   }
 }

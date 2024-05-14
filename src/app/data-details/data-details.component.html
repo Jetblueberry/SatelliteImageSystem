@@ -11,7 +11,7 @@
         <perfect-scrollbar style="height: 360px;" class="scroll-bar">
           <li *ngFor="let i of lst_choosen" class="box-details" >
             <div class="box-details-header">
-              <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData, i.displayName)"></button>
+              <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData, i.displayName, i.selectedStyle)"></button>
               <span class="dataset-name" >{{i.displayName}}</span>
               <div class="icon-grp-area" (click)="OpenCloseDetailsBody(i.tenData)">
                 <i class="fa-solid fa-caret-down" id="{{i.tenData}}-icon" ></i>
@@ -95,8 +95,9 @@
                 <p-dropdown
                   placeholder="Default Layer"
                   [options]="genLstStyles(i.listStyles)"
-                  [(ngModel)]="selectedOption"
+                  [(ngModel)]="i.selectedStyle"
                   [filter]="true"
+                  (onChange)="switchStyleData(i, $event)"
                 ></p-dropdown>
               </div>
             </div>

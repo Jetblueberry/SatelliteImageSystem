@@ -40,16 +40,16 @@ export class DataMapService {
   }
 
   // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
-  InitialDataLayerByName(nameData: any) {
-    this.wmsUrl = this._wmsService.wmsLink; //http://localhost:8080/geoserver/Landsat_Workspace/wms
-    //var layer = `Landsat_Workspace:${nameData}`;
-    var layer = 'ls8_c2l2'
+  InitialDataLayerByName(nameData: any, style: any) {
+    this.wmsUrl = this._wmsService.wmsLink;
+    var layer = 'ls8_c2l2' // layer là tên data
+    var choosenStyle = style
 
     if(!this.defaultLayer[nameData]) {
       this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
         {
           layers: layer,
-          styles: 'simple_rgb',
+          styles: choosenStyle,
           format: 'image/png', // or any other supported format
           time: '2024-04-13',
           transparent: true,
@@ -81,9 +81,9 @@ export class DataMapService {
   }
 
   // Thêm layer vào bản đồ thì phải khởi tạo trc đã
-  async AddDataToMap(nameData: any) {
+  async AddDataToMap(nameData: any, style: any) {
     if (this.map) {
-      await this.InitialDataLayerByName(nameData).addTo(this.map);
+      await this.InitialDataLayerByName(nameData, style).addTo(this.map);
       console.warn(this._dataCatalogueService.choosen_lst)
     }
   }

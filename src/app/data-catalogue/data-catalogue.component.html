@@ -69,7 +69,7 @@
               <ul *ngIf="openSearchList" class="catalog-group">
                 <li class="data-catalog-group">
                   <ul class="catalog-group-datasets">
-                    <li *ngFor="let i of this.list_total_data" class="data-catalog-group-datasets" >
+                    <li *ngFor="let i of this.list_search_data" class="data-catalog-group-datasets" >
                       <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
                         <span class="btn-text">{{i.tenData}}</span>
                       </button>

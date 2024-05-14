@@ -32,7 +32,7 @@ export class DataDetailsComponent {
   currentDate = new Date();
 
   lstStyles: any[] = [];
-  selectedOption: string = "";
+  selectedStyle: string = "";
 
   constructor(
     public _dataMapService: DataMapService,
@@ -46,6 +46,7 @@ export class DataDetailsComponent {
 
   customDetailsBeforeInit() {
     for(var x of this.lst_choosen) {
+      x.selectedStyle = x.listStyles[0];
       x.currentDate = new Date(x.defaultDate);
       if(!this._dataDetailsService.opacityValue[x.tenData]) {
         this._dataDetailsService.opacityValue[x.tenData] = 100
@@ -83,7 +84,7 @@ export class DataDetailsComponent {
     this._dataMapService.displayZoom = false;
   }
 
-  async hideShowDataMap(nameData: any, displayName: any) {
+  async hideShowDataMap(nameData: any, displayName: any, style: any) {
     var btn = document.getElementById('display-btn');
     if (btn) {
       if (this.displayOnMap) {
@@ -93,7 +94,7 @@ export class DataDetailsComponent {
       } else {
         btn.style.backgroundColor = '#002470';
         this.displayOnMap = true;
-        this._dataMapService.AddDataToMap(nameData);
+        this._dataMapService.AddDataToMap(nameData, style);
       }
     }
   }
@@ -191,7 +192,7 @@ export class DataDetailsComponent {
           obj.displayName = nameData + ` - Copy`;
           this._dataDetailsService.opacityValue[obj.displayName] = 100
           this.lst_choosen.push(obj);
-          this._dataMapService.AddDataToMap(x.tenData);
+          this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle);
           this.displayBoxControl[nameData] = false;
           this.displayRowCompare = true;
         }
@@ -204,5 +205,12 @@ export class DataDetailsComponent {
         break;
       }
     }
+  }
+
+  // Change styles
+  async switchStyleData(x:any, event: any) {
+    x.selectedStyle = event;
+    await this._dataMapService.RemoveDataFromMap(x.displayName)
+    await this._dataMapService.AddDataToMap(x.nameData, x.selectedStyle);
   }
 }
