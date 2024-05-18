@@ -26,7 +26,8 @@
               <ul *ngIf="!openSearchList" class="catalog-group">
                 <li class="data-catalog-group" >
                   <button type="button" class="catalog-group-btn" (click)="OpenCloseListData('landsat')">
-                    <i class="fa-solid fa-folder-open"></i>
+                    <i *ngIf="!displayData['landsat']" class="fa-solid fa-folder-closed"></i>
+                    <i *ngIf="displayData['landsat']" class="fa-solid fa-folder-open"></i>
                     <span class="btn-text">Landsat</span>
                     <span class="btn-icon-folder">
                       <i class="fa-solid fa-caret-up" id="landsat-icon"></i>
@@ -48,7 +49,8 @@
                 </li>
                 <li class="data-catalog-group">
                   <button type="button" class="catalog-group-btn" (click)="OpenCloseListData('sentinel')">
-                    <i class="fa-solid fa-folder-open"></i>
+                    <i *ngIf="!displayData['sentinel']" class="fa-solid fa-folder-closed"></i>
+                    <i *ngIf="displayData['sentinel']" class="fa-solid fa-folder-open"></i>
                     <span class="btn-text">Sentinel</span>
                     <span class="btn-icon-folder">
                       <i class="fa-solid fa-caret-up" id="sentinel-icon"></i>
@@ -88,6 +90,11 @@
         </div>
         <div class="col-md-8">
           <perfect-scrollbar class="scrollbar">
+            <div *ngIf="!openPreview" class="data-catalogue-empty">
+              <div class="empty-container">
+                <p>Select dataset to see a preview</p>
+              </div>
+            </div>
             <div *ngIf="openPreview" class="data-catalogue-details">
               <div>
                 <div class="preview-map">
