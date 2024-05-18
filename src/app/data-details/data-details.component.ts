@@ -180,9 +180,18 @@ export class DataDetailsComponent {
   }
 
   // Compare
-  compare(nameData: any) {
-    this.addCopyDataDetails(nameData);
-    this._dataMapComponent.openCloseCompareBox('box-compare', this.lst_choosen);
+  setActiveBtnCompare(index: any, displayName: any) {
+    this._dataDetailsService.activeIndex[displayName] = index;
+  }
+  setcompareLeft(displayName: any) {
+    this.setActiveBtnCompare(0, displayName);
+    //this._dataMapService.removeCompareRightlayer();
+    this._dataMapService.addCompareLeftlayer(displayName);
+  }
+  setcompareRight(displayName: any) {
+    this.setActiveBtnCompare(2, displayName)
+    //this._dataMapService.removeCompareLeftlayer();
+    this._dataMapService.addCompareRightlayer(displayName);
   }
 
   addCopyDataDetails(nameData: any) {

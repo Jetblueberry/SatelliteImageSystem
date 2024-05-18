@@ -119,14 +119,16 @@ export class DataCatalogueComponent {
     item.displayName = item.tenData; // set displayName when add details
     //Khởi tạo style được chọn
     item.selectedStyle = this._dataDetailsService.CustomListChosen(item.listStyles)[0];
-    // Khởi tạo date đưuọc chọn
+    // Khởi tạo date được chọn
     item.selectedDate = item.defaultDate;
     item.displayDate = new Date(item.selectedDate);
+    // set opacity when add details
+    this._dataDetailsService.opacityValue[item.displayName] = 100;
+    // set active compare
+    this._dataDetailsService.activeIndex[item.displayName] = 1;
 
-    this._dataDetailsService.opacityValue[item.displayName] = 100; // set opacity when add details
-
-    this._dataCatalogueService.choosen_lst.push(item); // add in lst
-    this._dataMapService.AddDataToMap(item.tenData, item.selectedStyle, item.selectedDate);
+    await this._dataCatalogueService.choosen_lst.push(item); // add in lst
+    await this._dataMapService.AddDataToMap(item.tenData, item.selectedStyle, item.selectedDate);
 
     this.closeCatalogue.emit(false);
     this.displayMinusIcon[idData] = true;
@@ -135,6 +137,19 @@ export class DataCatalogueComponent {
       await this.messageService.addMessageSuccessAdding();
     }, 500);
 
+  }
+
+  removeDetails(displayName: any) {
+    for (let i = 0; i < this._dataCatalogueService.choosen_lst.length; i++) {
+      if (this._dataCatalogueService.choosen_lst[i].displayName === displayName) {
+          this._dataMapService.RemoveDataFromMap(this._dataCatalogueService.choosen_lst[i].displayName);
+          this._dataCatalogueService.choosen_lst.splice(i, 1);
+          break;
+      }
+    }
+    if(this._dataCatalogueService.choosen_lst.length === 0) {
+      this.closeDataDetails(false);
+    }
   }
 
   async selectDataset(idData: any) {

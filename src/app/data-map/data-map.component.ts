@@ -36,6 +36,7 @@ export class DataMapComponent {
   markers: any[] = [] ;
   lines: any[] = [];
   totalDistance = 0;
+  activeIndex = 0;
 
   constructor(
     public _dataCatalogueService: DataCatalogueService,
@@ -228,6 +229,9 @@ export class DataMapComponent {
       }
     }
   }
+  setActiveMapSetting(index: number): void {
+    this.activeIndex = index;
+  }
 
   // Print screenshot
   openPrintScreenshot() {
@@ -345,11 +349,6 @@ export class DataMapComponent {
 
   // Compare
   openCloseCompareBox(type: any, lstDataOpened: any) {
-    var mp = L.control.sideBySide();
-    // for(var x of lstDataOpened) {
-    //   mp.leftlayeradd(this._dataMapService.getDataLayerByName(x.tenData, x.selectedStyle));
-    //   mp.rightlayeradd(this._dataMapService.getDataLayerByName(x.tenData, x.selectedStyle));
-    // }
     if(!this.displayIconDelete[type]) {
       this.displayIconDelete[type] = true;
       this.typeWorking = "";
@@ -358,7 +357,7 @@ export class DataMapComponent {
         i.style.background = "#01d054";
       }
       this._dataDetailsService.displayRowCompare = true;
-      mp.addTo(this.map)
+      this._dataMapService.mp.addTo(this.map)
     }
     else {
       var i = document.getElementById(`${type}`)

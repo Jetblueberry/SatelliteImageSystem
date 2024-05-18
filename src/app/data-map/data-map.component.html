@@ -101,17 +101,17 @@
       </span>
     </div>
     <div class="body">
-      <div class="row-1">
-        <button class="btn-map-type" (click)="_dataMapService.chooseDefaultMap()">
+      <div class="row-1" >
+        <button class="btn-map-type" [class.active]="activeIndex === 0" (click)="_dataMapService.chooseDefaultMap()" (click)="setActiveMapSetting(0)">
           <img src="/assets/ImageMap/Esri_Imaginary_Map.png">
         </button>
-        <button class="btn-map-type" (click)="_dataMapService.chooseWorldPhysicalMap()">
+        <button class="btn-map-type" [class.active]="activeIndex === 1" (click)="_dataMapService.chooseWorldPhysicalMap()" (click)="setActiveMapSetting(1)">
           <img src="/assets/ImageMap/Esri_Physical_Map.png">
         </button>
-        <button class="btn-map-type" (click)="_dataMapService.choosePositronMap()">
+        <button class="btn-map-type" [class.active]="activeIndex === 2" (click)="_dataMapService.choosePositronMap()" (click)="setActiveMapSetting(2)">
           <img src="/assets/ImageMap/Positron_Map.png">
         </button>
-        <button class="btn-map-type" (click)="_dataMapService.chooseDarkmatterMap()">
+        <button class="btn-map-type" [class.active]="activeIndex === 3" (click)="_dataMapService.chooseDarkmatterMap()" (click)="setActiveMapSetting(3)">
           <img src="/assets/ImageMap/DarkMatter_Map.png">
         </button>
       </div>

@@ -22,6 +22,8 @@ export class DataMapService {
 
   displayZoom = true;
 
+  mp = L.control.sideBySide();
+
   constructor(
     public _wmsService: WmsService,
     public mapTypesLists: MapTypeLists,
@@ -212,12 +214,24 @@ export class DataMapService {
 
 
   // Compare
-  addCompareLeftlayer(layer_left: any) {
+  addCompareLeftlayer(layer_left_name: any) {
+    var left = this.getDataLayerByName(layer_left_name);
+    this.mp.setLeftLayers(left);
+  }
+  removeCompareLeftlayer() {
+    this.mp.leftlayerremove();
   }
   addCompareRightlayer(layer_right: any) {
+    var right = this.getDataLayerByName(layer_right);
+    this.mp.setRightLayers(right);
   }
-  addCompareBothLayer(layer_both: any) {
-    var mp = L.control.splitMap(layer_both, layer_both);
+  removeCompareRightlayer() {
+    this.mp.rightlayerremove();
+  }
+  addCompareBothLayer(both_layer_name: any) {
+    var both = this.getDataLayerByName(both_layer_name);
+    this.mp.setLeftLayers(both_layer_name);
+    this.mp.setRightLayers(both_layer_name);
   }
 }
 

@@ -199,7 +199,7 @@
   z-index: 1000;
   width: 300px;
   color: white;
-  background: linear-gradient(45deg, #01d054, #0163c4);
+  background: linear-gradient(45deg, #008234, #01efe7);
   font-size: 14px;
   border-radius: 10px;
   border: 1px solid white;
@@ -221,7 +221,7 @@
   justify-content: space-between;
 }
 .btn-map-type {
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 3px solid rgba(255, 255, 255, 0.5);
   width: 64px;
   height: 64px;
   padding: 0px;
@@ -231,6 +231,10 @@
   width: 60px;
   height: 60px;
   border-radius: 4px;
+}
+.row-1 .active {
+  border: 3px solid rgb(3, 0, 171);
+  box-shadow: 2px 1px 25px 10px white
 }
 .row-city-label {
   display: flex;

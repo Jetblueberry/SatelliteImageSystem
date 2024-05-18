@@ -272,12 +272,19 @@
   border-radius: 10px;
   border: 1px solid white;
 }
+.box-compare-both {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.row-compare .active {
+  background: rgb(1, 168, 140);
+  box-shadow: 1px 1px 10px 2px white
+}
 .box-compare-left:hover, .box-compare-both:hover, .box-compare-right:hover {
   background: linear-gradient(45deg, #0575e6, #00f260);
 }
 .box-compare-left:focus, .box-compare-both:focus, .box-compare-right:focus {
   background: linear-gradient(45deg, #0575e6, #00f260);
-  outline: rgb(195, 144, 249) solid 3px;
 }
 
 ::ng-deep p-dropdown {
