@@ -40,36 +40,30 @@ export class DataMapService {
   }
 
   // Ngay khi truyền Id dữ liệu vào, khởi tạo luôn layer
-  InitialDataLayerByName(nameData: any, style: any) {
+  InitialDataLayerByName(nameData: any, style: any, date: any) {
     this.wmsUrl = this._wmsService.wmsLink;
-    var layer = 'ls8_c2l2' // layer là tên data
+    var layer = nameData // layer là tên data
     var choosenStyle = style
+    var choosenDate = date
 
-    if (!this.defaultLayer) {
-      this.defaultLayer = {};
-    }
-
-    // Check if the layer with the given name and style already exists
-    if (!this.defaultLayer[nameData]) {
-      this.defaultLayer[nameData] = {};
-    }
-
-    if(!this.defaultLayer[nameData][style]) {
-      this.defaultLayer[nameData][style] = L.tileLayer.wms(this.wmsUrl,
+    if(!this.defaultLayer[nameData]) {
+      this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
         {
           layers: layer,
           styles: choosenStyle,
           format: 'image/png', // or any other supported format
-          time: '2024-04-13',
+          time: choosenDate,
+          width: 2048,
+          height: 2048,
           transparent: true,
           crs: L.CRS.EPSG3857,
         }
       );
-      console.warn(this.defaultLayer[nameData][style]);
+      console.warn(this.defaultLayer[nameData]);
     }
     else {
       nameData = nameData + " - Copy"
-      this.defaultLayer[nameData][style] = L.tileLayer.wms(this.wmsUrl,
+      this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
         {
           layers: layer,
           styles: choosenStyle,
@@ -79,39 +73,39 @@ export class DataMapService {
         }
       );
     }
-    //this.featureGroups[nameData] = L.featureGroup(this.defaultLayer[nameData]);
 
-    return this.defaultLayer[nameData][style];
+    return this.defaultLayer[nameData];
   }
 
   // Khi đã khởi tạo layer rồi
-  getDataLayerByName(nameData: any, style: any) {
-    return this.defaultLayer[nameData][style];
+  getDataLayerByName(nameData: any) {
+    return this.defaultLayer[nameData];
   }
 
   // Thêm layer vào bản đồ thì phải khởi tạo trc đã
-  async AddDataToMap(nameData: any, style: any) {
+  async AddDataToMap(nameData: any, style: any, date: any) {
     if (this.map) {
-      await this.InitialDataLayerByName(nameData, style).addTo(this.map);
-      console.warn(this.defaultLayer[nameData][style])
+      console.warn(style);
+      console.warn(date);
+      await this.InitialDataLayerByName(nameData, style, date).addTo(this.map);
+
     }
   }
 
   // Xóa layer khỏi bản đồ, vi da khoi tao roi nen khi xoa chi can goi ten layer de xoa
-  async RemoveDataFromMap(nameData: any, style: any) {
-    if(this.map && this.defaultLayer[nameData][style]) {
-      console.warn(this.defaultLayer[nameData][style])
-      await this.getDataLayerByName(nameData, style).removeFrom(this.map);
-      this.defaultLayer[nameData][style] = null; // Khi xóa phải trả giá trị về null tức ko tồn tại nữa
+  async RemoveDataFromMap(nameData: any) {
+    if(this.map && this.defaultLayer[nameData]) {
+      await this.getDataLayerByName(nameData).removeFrom(this.map);
+      this.defaultLayer[nameData]= null; // Khi xóa phải trả giá trị về null tức ko tồn tại nữa
     }
     else {
-      this.defaultLayer[nameData][style] = null;
+      this.defaultLayer[nameData]= null;
     }
   }
 
   async SetOpacityForData(nameData: any, opacityValue: any) {
     if(this.map) {
-      await this.getDataLayerByName(nameData, style).setOpacity(opacityValue);
+      await this.getDataLayerByName(nameData).setOpacity(opacityValue);
     }
   }
 

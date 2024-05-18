@@ -11,7 +11,7 @@
         <perfect-scrollbar style="height: 360px;" class="scroll-bar">
           <li *ngFor="let i of lst_choosen" class="box-details" >
             <div class="box-details-header">
-              <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData, i.displayName, i.selectedStyle)"></button>
+              <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i.tenData, i.displayName, i.selectedStyle, i.defaultDate)"></button>
               <span class="dataset-name" >{{i.displayName}}</span>
               <div class="icon-grp-area" (click)="OpenCloseDetailsBody(i.tenData)">
                 <i class="fa-solid fa-caret-down" id="{{i.tenData}}-icon" ></i>
@@ -72,11 +72,10 @@
                     </button>
                     <button class="date-default">
                       <p-calendar class="detail-calendar"
-                        [(ngModel)]="i.currentDate"
-                        [minDate]="minDate"
-                        [maxDate]="maxDate"
-                        dateFormat="dd.mm.yy"
-                      >{{i.currentDate}}</p-calendar>
+                        [(ngModel)]="i.displayDate"
+
+                        dateFormat="dd/mm/yy"
+                      >{{i.displayDate}}</p-calendar>
                     </button>
                     <button class="date-after" [disabled]="disableAfterDate" (click)="getAfterDate(this.maxDate, i.idData)">
                       <i class="fa-solid fa-caret-right"></i>

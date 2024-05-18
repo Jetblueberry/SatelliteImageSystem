@@ -39,21 +39,52 @@
         <div class="transparent-area">
           <div class="transparent-container">
             <div class="container-left col-md-6">
-              <div class="box-transparent"></div>
-              <div class="box-transparent"></div>
+              <div class="box-transparent">
+                <img src="/assets/resource_images/water-services.png">
+                <h5>Water Resources</h5>
+              </div>
+              <div class="box-transparent">
+                <img src="/assets/resource_images/coastal-erosion.png">
+                <h5>Coastal Erosion</h5>
+              </div>
             </div>
             <div class="container-right col-md-6">
-              <div class="box-transparent"></div>
-              <div class="box-transparent"></div>
+              <div class="box-transparent">
+                <img src="/assets/resource_images/agriculture-services.png">
+                <h5>Agriculture and Food</h5>
+              </div>
+              <div class="box-transparent">
+                <img src="/assets/resource_images/urbanisation.png">
+                <h5>Urbanisation</h5>
+              </div>
             </div>
           </div>
         </div>
         <div class="content-area">
           <img class="img-content" src="/assets/Image_background_VN/satellite_night_type.jpeg">
         </div>
+        <div class="propanganda-area">
+          <h2 class="propanganda-title">Weekly Articles</h2>
+          <p class="propanganda-story">Some stories of satellite technology application on many living aspects in Viet Nam. May be you will be interested in them</p>
+          <div class="view-content">
+            <div *ngFor="let i of data_articles" class="view-article">
+              <div class="content-container">
+                <img src="{{i.imageUrl}}">
+                <div class="article-overlay">
+                  <h3>{{i.title}}</h3>
+                  <p>{{i.description}}</p>
+                  <a class="btn-read" href="{{i.routerLink}}" target="_blank">Read More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <div class="footer">
-      <span>hâhahah</span>
+      <div class="footer-content">
+        <p>VietNam Satellite Image System is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone, and applying the relevant accessibility standards.</p>
+        <p>All rights reserved.</p>
+      </div>
     </div>
   </div>
 </div>

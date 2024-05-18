@@ -30,10 +30,8 @@ export class DataDetailsComponent {
 
   minDate = new Date("2022/02/13");
   maxDate = new Date();
-  currentDate = new Date();
 
   lstStyles: any[] = [];
-  selectedStyle: string = "";
 
   constructor(
     public _dataMapService: DataMapService,
@@ -48,9 +46,9 @@ export class DataDetailsComponent {
 
   customDetailsBeforeInit() {
     for(var x of this.lst_choosen) {
-      x.selectedStyle = this._dataDetailsService.CustomListChosen(x.listStyles)[0];
       console.info(x.selectedStyle);
-      x.currentDate = new Date(x.defaultDate);
+
+      // Initial opacity
       if(!this._dataDetailsService.opacityValue[x.tenData]) {
         this._dataDetailsService.opacityValue[x.tenData] = 100
       }
@@ -87,23 +85,23 @@ export class DataDetailsComponent {
     this._dataMapService.displayZoom = false;
   }
 
-  async hideShowDataMap(nameData: any, displayName: any, style: any) {
+  async hideShowDataMap(nameData: any, displayName: any, style: any, date: any) {
     var btn = document.getElementById('display-btn');
     if (btn) {
       if (this.displayOnMap) {
         btn.style.backgroundColor = 'white';
         this.displayOnMap = false;
-        await this._dataMapService.RemoveDataFromMap(displayName, style);
+        await this._dataMapService.RemoveDataFromMap(displayName);
       } else {
         btn.style.backgroundColor = '#002470';
         this.displayOnMap = true;
-        this._dataMapService.AddDataToMap(nameData, style);
+        this._dataMapService.AddDataToMap(nameData, style, date);
       }
     }
   }
   async removeAllDetails() {
     for(let x of this.lst_choosen) {
-      await this._dataMapService.RemoveDataFromMap(x.displayName, x.selectedStyle);
+      await this._dataMapService.RemoveDataFromMap(x.displayName);
     }
     this.closeDetails.emit(false);
   }
@@ -132,7 +130,7 @@ export class DataDetailsComponent {
    removeDetails(nameData: any, displayName: any) {
     for (let i = 0; i < this.lst_choosen.length; i++) {
       if (this.lst_choosen[i].tenData === nameData && this.lst_choosen[i].displayName === displayName) {
-          this._dataMapService.RemoveDataFromMap(this.lst_choosen[i].displayName, this.lst_choosen[i].selectedStyle);
+          this._dataMapService.RemoveDataFromMap(this.lst_choosen[i].displayName);
           this.lst_choosen.splice(i, 1);
 
           this.displayBoxControl[nameData] = false;
@@ -196,7 +194,7 @@ export class DataDetailsComponent {
           obj.displayName = nameData + ` - Copy`;
           this._dataDetailsService.opacityValue[obj.displayName] = 100
           this.lst_choosen.push(obj);
-          this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle);
+          this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate);
           this.displayBoxControl[nameData] = false;
         }
         else {
@@ -212,9 +210,18 @@ export class DataDetailsComponent {
 
   // Change styles
   async switchStyleData(x:any, event: any) {
+
+    await this._dataMapService.RemoveDataFromMap(x.displayName) // xóa trước khi chuyển style
+    x.selectedStyle = event.value;
     console.warn(x.selectedStyle);
-    await this._dataMapService.RemoveDataFromMap(x.displayName, x.selectedStyle) // xóa trước khi chuyển style
-    //x.selectedStyle = event.value;
-    await this._dataMapService.AddDataToMap(x.nameData, x.selectedStyle);
+    await this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate);
+  }
+
+  // Change Date
+  async switchDateData(x: any, event: any) {
+    await await this._dataMapService.RemoveDataFromMap(x.displayName)
+    x.selectedDate = event.value;
+    console.warn(x.selectedDate);
+    await this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate)
   }
 }
