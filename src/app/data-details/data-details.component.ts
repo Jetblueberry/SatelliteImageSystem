@@ -85,17 +85,21 @@ export class DataDetailsComponent {
     this._dataMapService.displayZoom = false;
   }
 
-  async hideShowDataMap(nameData: any, displayName: any, style: any, date: any) {
+  async hideShowDataMap(i: any) {
     var btn = document.getElementById('display-btn');
     if (btn) {
       if (this.displayOnMap) {
         btn.style.backgroundColor = 'white';
         this.displayOnMap = false;
-        await this._dataMapService.RemoveDataFromMap(displayName);
+        await this._dataMapService.RemoveDataFromMap(i.displayName);
       } else {
         btn.style.backgroundColor = '#002470';
         this.displayOnMap = true;
-        this._dataMapService.AddDataToMap(nameData, style, date);
+        if(i.loaiData == 'landcover') {
+          this._dataMapService.AddDataLandCover(i.tenData, i.workspace, i.selectedDate);
+        }else {
+          this._dataMapService.AddDataToMap(i.tenData, i.selectedStyle, i.selectedDate);
+        }
       }
     }
   }

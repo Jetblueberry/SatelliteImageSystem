@@ -146,7 +146,31 @@ export class DataCatalogueComponent {
     setTimeout(async () => {
       await this.messageService.addMessageSuccessAdding();
     }, 500);
+  }
+  async addDataLandCoverToMap(idData: any) {
+    // Khởi tạo các prop cần truyền từ những dữ liệu lấy trong bảng
+    const item = await this._dataCatalogueService.getDataLandCoverById(idData);
+    // Khởi tạo tên hiển thị
+    item.displayName = item.tenData; // set displayName when add details
+    //Khởi tạo style được chọn
+    item.selectedStyle = this._dataDetailsService.CustomListChosen(item.listStyles)[0];
+    // Khởi tạo date được chọn
+    item.selectedDate = item.defaultDate;
+    item.displayDate = new Date(item.selectedDate);
+    // set opacity when add details
+    this._dataDetailsService.opacityValue[item.displayName] = 100;
+    // set active compare
+    this._dataDetailsService.activeIndex[item.displayName] = 1;
 
+    await this._dataCatalogueService.choosen_lst.push(item); // add in lst
+    await this._dataMapService.AddDataLandCover(item.tenData, item.workspace, item.selectedDate);
+
+    this.closeCatalogue.emit(false);
+    this.displayMinusIcon[idData] = true;
+    this.openDetails = true;
+    setTimeout(async () => {
+      await this.messageService.addMessageSuccessAdding();
+    }, 500);
   }
 
   removeDetails(displayName: any) {

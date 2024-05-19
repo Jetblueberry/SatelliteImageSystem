@@ -75,7 +75,37 @@ export class DataMapService {
         }
       );
     }
+    return this.defaultLayer[nameData];
+  }
+  InitialDataLandCoverByName(nameData: any, workspace: any, date: any) {
+    this.wmsUrl = this._wmsService.wmsUrlLandcover;
+    var layer = workspace + ':' + nameData // layer là tên data
+    var choosenDate = date
 
+    if(!this.defaultLayer[nameData]) {
+      this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
+        {
+          layers: layer,
+          format: 'image/png', // or any other supported format
+          width: 2048,
+          height: 2048,
+          transparent: true,
+          crs: L.CRS.EPSG3857,
+        }
+      );
+      console.warn(this.defaultLayer[nameData]);
+    }
+    else {
+      nameData = nameData + " - Copy"
+      this.defaultLayer[nameData] = L.tileLayer.wms(this.wmsUrl,
+        {
+          layers: layer,
+          format: 'image/png', // or any other supported format
+          transparent: true, // if transparency is needed
+          crs: L.CRS.EPSG3857,
+        }
+      );
+    }
     return this.defaultLayer[nameData];
   }
 
@@ -90,6 +120,12 @@ export class DataMapService {
       console.warn(style);
       console.warn(date);
       await this.InitialDataLayerByName(nameData, style, date).addTo(this.map);
+
+    }
+  }
+  async AddDataLandCover(nameData: any, workspace: any, date: any) {
+    if (this.map) {
+      await this.InitialDataLandCoverByName(nameData, workspace, date).addTo(this.map);
 
     }
   }

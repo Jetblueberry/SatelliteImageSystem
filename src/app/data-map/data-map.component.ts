@@ -42,6 +42,8 @@ export class DataMapComponent {
   lines: any[] = [];
   totalDistance = 0;
   activeIndex = 0;
+  choosenMap = Esri_WorldImagery;
+  browserControl: any
 
   constructor(
     public _dataCatalogueService: DataCatalogueService,
@@ -71,8 +73,8 @@ export class DataMapComponent {
     this._dataMapService.screenshot();
 
     //Print
-    var browserControl = L.control.browserPrint({
-      printLayer: Esri_WorldImagery
+    this.browserControl = L.control.browserPrint({
+      printLayer: this.choosenMap
     }).addTo(this.map);
 
     // geosearch
@@ -150,42 +152,8 @@ export class DataMapComponent {
         }
         // Add the new marker to the markers array
         this.markers.push(newMarker);
-
       }
     });
-
-    var lci = L.tileLayer.wms("http://localhost:8080/geoserver/Land_cover_workspace/wms",
-      {
-        layers: 'Land_cover_workspace:VLUCD_L1_250m_2020',
-        format: 'image/png',
-        transparent: true,
-        crs: L.CRS.EPSG3857,
-      }
-    )
-    console.warn(lci);
-    lci.addTo(this.map);
-    lci.bringToFront();
-    var imageUrl = '/assets/satellite_land_cover/VLUCD_L1_250m_2020.png',
-    imageBounds = [[20.712216, 103.22655], [16.773941, 107.12544]];
-    //L.imageOverlay(imageUrl, imageBounds).addTo(this.map);
-    // fetch(imageUrl)
-    // .then(response => response.arrayBuffer())
-    // .then(arrayBuffer => {
-    //   parseGeoraster(arrayBuffer).then((georaster: any) => {
-    //   console.log("georaster:", georaster);
-
-    //   var layer = new GeoRasterLayer({
-    //       georaster: georaster,
-    //       opacity: 0.7,
-    //       pixelValuesToColorFn: (values: any) => values[0] === 42 ? '#ffffff' : '#000000',
-    //       resolution: 64 // optional parameter for adjusting display resolution
-    //   });
-    //   layer.addTo(this.map);
-
-    //   this.map.fitBounds(layer.getBounds());
-
-    //   });
-    // });
   }
 
   customLatitudeValue(lat: any) {
@@ -265,6 +233,34 @@ export class DataMapComponent {
   }
   setActiveMapSetting(index: number): void {
     this.activeIndex = index;
+  }
+  chooseDefaultMap() {
+    this._dataMapService.chooseDefaultMap();
+    this.browserControl.remove();
+    this.browserControl = L.control.browserPrint({
+      printLayer: Esri_WorldImagery
+    }).addTo(this.map);
+  }
+  chooseWorldPhysicalMap() {
+    this._dataMapService.chooseWorldPhysicalMap();
+    this.browserControl.remove();
+    this.browserControl = L.control.browserPrint({
+      printLayer: WorldPhysicalMap
+    }).addTo(this.map);
+  }
+  choosePositronMap() {
+    this._dataMapService.choosePositronMap();
+    this.browserControl.remove();
+    this.browserControl = L.control.browserPrint({
+      printLayer: CartoDB_Positron
+    }).addTo(this.map);
+  }
+  chooseDarkmatterMap() {
+    this._dataMapService.chooseDarkmatterMap();
+    this.browserControl.remove();
+    this.browserControl = L.control.browserPrint({
+      printLayer: CartoDB_DarkMatter
+    }).addTo(this.map);
   }
 
   // Print screenshot
@@ -465,5 +461,32 @@ var Esri_WorldImagery = L.tileLayer(
   {
     attribution:
       'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+  }
+);
+var WorldPhysicalMap = L.tileLayer(
+  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}',
+  {
+    attribution: 'Tiles &copy; Esri &mdash; Source: US National Park Service',
+    maxZoom: 8,
+  }
+);
+var CartoDB_Positron = L.tileLayer(
+  'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+  {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 20,
+  }
+);
+
+// Darkmatter
+var CartoDB_DarkMatter = L.tileLayer(
+  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+  {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 20,
   }
 );
