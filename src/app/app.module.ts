@@ -35,6 +35,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 
 // Models
 import { MapTypeLists } from './models/map-types';
+import { ServiceUri } from './models/serviceUri';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,7 @@ import { MapTypeLists } from './models/map-types';
     ConfirmDialogModule,
     CarouselModule,
   ],
-  providers: [MapTypeLists, MessageService, ConfirmationService],
+  providers: [MapTypeLists, MessageService, ConfirmationService, ServiceUri],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

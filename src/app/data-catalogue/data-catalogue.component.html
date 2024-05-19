@@ -67,6 +67,26 @@
                     </li>
                   </ul>
                 </li>
+                <li class="data-catalog-group">
+                  <button type="button" class="catalog-group-btn" (click)="OpenCloseListData('landcover')">
+                    <i *ngIf="!displayData['landcover']" class="fa-solid fa-folder-closed"></i>
+                    <i *ngIf="displayData['landcover']" class="fa-solid fa-folder-open"></i>
+                    <span class="btn-text">Land Cover</span>
+                    <span class="btn-icon-folder">
+                      <i class="fa-solid fa-caret-up" id="landcover-icon"></i>
+                    </span>
+                  </button>
+                  <ul *ngIf="displayData['landcover']" class="catalog-group-datasets">
+                    <li *ngFor="let i of this.list_landcover" class="data-catalog-group-datasets" >
+                      <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
+                        <span class="btn-text">{{i.tenData}}</span>
+                      </button>
+                      <span class="btn-icon" (click)="addDatasetToMap(i.id)">
+                        <i class="fa-solid fa-circle-plus"></i>
+                      </span>
+                    </li>
+                  </ul>
+                </li>
               </ul>
               <ul *ngIf="openSearchList" class="catalog-group">
                 <li class="data-catalog-group">

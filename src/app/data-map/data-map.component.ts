@@ -5,8 +5,12 @@ import 'leaflet';
 import 'leaflet-timedimension';
 import 'dist/leaflet-splitmap';
 import 'dist/leaflet-side-by-side';
-import 'dist/leaflet-simple-map-screenshoter'
-import 'dist/leaflet.browser.print.min'
+import 'dist/leaflet-simple-map-screenshoter';
+import 'dist/leaflet.browser.print.min';
+import 'dist/georaster-layer-for-leaflet.min.js'
+import 'dist/georaster.browser.bundle.min.js';
+
+//import GeoRasterLayer from 'georaster-layer-for-leaflet';
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
 import { MapTypeLists } from '../models/map-types';
 import { DataMapService } from '../services/data-map-services/data-map.service';
@@ -14,6 +18,7 @@ import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import { AppGuideService } from '../services/app-guide-services/app-guide.service';
 import { AppInformationService } from '../services/app-information-services/app-information.service';
 import { DataDetailsService } from '../services/data-details-services/data-details.service';
+import { Layer } from 'leaflet';
 
 @Component({
   selector: 'app-data-map',
@@ -149,9 +154,38 @@ export class DataMapComponent {
       }
     });
 
-    var imageUrl = 'https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
+    var lci = L.tileLayer.wms("http://localhost:8080/geoserver/Land_cover_workspace/wms",
+      {
+        layers: 'Land_cover_workspace:VLUCD_L1_250m_2020',
+        format: 'image/png',
+        transparent: true,
+        crs: L.CRS.EPSG3857,
+      }
+    )
+    console.warn(lci);
+    lci.addTo(this.map);
+    lci.bringToFront();
+    var imageUrl = '/assets/satellite_land_cover/VLUCD_L1_250m_2020.png',
     imageBounds = [[20.712216, 103.22655], [16.773941, 107.12544]];
     //L.imageOverlay(imageUrl, imageBounds).addTo(this.map);
+    // fetch(imageUrl)
+    // .then(response => response.arrayBuffer())
+    // .then(arrayBuffer => {
+    //   parseGeoraster(arrayBuffer).then((georaster: any) => {
+    //   console.log("georaster:", georaster);
+
+    //   var layer = new GeoRasterLayer({
+    //       georaster: georaster,
+    //       opacity: 0.7,
+    //       pixelValuesToColorFn: (values: any) => values[0] === 42 ? '#ffffff' : '#000000',
+    //       resolution: 64 // optional parameter for adjusting display resolution
+    //   });
+    //   layer.addTo(this.map);
+
+    //   this.map.fitBounds(layer.getBounds());
+
+    //   });
+    // });
   }
 
   customLatitudeValue(lat: any) {

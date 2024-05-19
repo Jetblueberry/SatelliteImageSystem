@@ -9,53 +9,52 @@ import { CommonService } from './common.service';
 })
 
 export class BaseService {
-  protected serviceUri: any;
   constructor(
     public http: HttpClient,
     public _commonService: CommonService
     ) {}
 
-    getData(gridInfo: any) {
+    getData(gridInfo: any, serviceUri: any) {
       return this.http
         .post<any>(
-          `${this.serviceUri}/GetData`, gridInfo
+          `${serviceUri}/GetData`, gridInfo
         )
         .toPromise()
     }
 
-    getAllByFilter(gridInfo: any) {
+    getAllByFilter(gridInfo: any, serviceUri: any) {
       return this.http
         .post<any>(
-          `${this.serviceUri}/GetAllByFilter`, gridInfo
+          `${serviceUri}/GetAllByFilter`, gridInfo
         )
         .toPromise()
     }
-    getById(id: any) {
+    getById(id: any, serviceUri: any) {
       return this.http
       .get<any>(
-        `${this.serviceUri}/${id}`
+        `${serviceUri}/${id}`
       )
       .toPromise()
     }
-    add(newOb: any) {
+    add(newOb: any, serviceUri: any) {
       return this.http
       .post<any>(
-        `${this.serviceUri}`, newOb
+        `${serviceUri}`, newOb
       )
       .toPromise()
     }
-    put(id: any, newOb: any) {
+    put(id: any, newOb: any, serviceUri: any) {
       return this.http
       .put<any>(
-        `${this.serviceUri}/${id}`, newOb
+        `${serviceUri}/${id}`, newOb
       )
       .toPromise()
     }
 
-    delete(id: any) {
+    delete(id: any, serviceUri: any) {
       return this.http
         .delete<any>(
-          `${this.serviceUri}/${id}`
+          `${serviceUri}/${id}`
         )
         .toPromise()
     }

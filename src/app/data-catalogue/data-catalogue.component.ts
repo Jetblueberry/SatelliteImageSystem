@@ -19,6 +19,7 @@ export class DataCatalogueComponent {
 
   list_landsat: any = [];
   list_sentinel: any = [];
+  list_landcover: any = [];
   list_total_data: any = [];
   list_search_data: any = [];
   lsd: any;
@@ -31,6 +32,7 @@ export class DataCatalogueComponent {
   displayMinusIcon: any = {};
   landsat_lst: any = [];
   sentinel_lst: any = [];
+
   total_lst: any = [];
 
 
@@ -45,6 +47,7 @@ export class DataCatalogueComponent {
   async ngOnInit() {
     this.getDatasetList();
     await this.getDataLandsatList();
+    await this.getDataLandCoverList();
     await this.getTotalDataList();
   }
 
@@ -61,8 +64,15 @@ export class DataCatalogueComponent {
       this.list_landsat = result;
     }
   }
+  async getDataLandCoverList() {
+  const result = await this._dataCatalogueService.getDataLandCover();
+    if(result) {
+      this.list_landcover = result;
+    }
+  }
   async getTotalDataList() {
-    this.list_total_data = this.list_landsat.concat(this.sentinel_lst);
+    var merge1 = this.list_landsat.concat(this.list_landcover);
+    this.list_total_data = merge1.concat(this.list_sentinel)
     console.warn(this.list_total_data)
   }
 
@@ -153,10 +163,16 @@ export class DataCatalogueComponent {
   }
 
   async selectDataset(idData: any) {
-    this.lsd = await this._dataCatalogueService.getDataLandsatById(idData);
-    this.openPreview = true;
-    this.displayData['landsat'] = true;
+    for(var x of this.list_total_data) {
+      if(x.idData == idData) {
+        this.lsd = x;
+        this.openPreview = true;
+        this.displayData[x.loaiData] = true;
+        break;
+      }
+    }
   }
+
 
   // Search
   async searchData(query: KeyboardEvent) {
@@ -177,10 +193,11 @@ export class DataCatalogueComponent {
   async searchDataList(query: string) {
     this.list_search_data.length = 0;
     for (let i = 0; i < this.list_total_data.length; i++) {
-      if (this.list_total_data[i].tenData.substring(0, query.length).toLocaleLowerCase() === query.toLocaleLowerCase())
+      var q = this.list_total_data[i].tenData.substring(0, query.length).toLocaleLowerCase();
+      if (q === query.toLocaleLowerCase())
       {
         //So sánh chuỗi nhập vào với tên sản phẩm
-        this.list_search_data.push(this.list_total_data[i]);
+        await this.list_search_data.push(this.list_total_data[i]);
       }
     }
   }

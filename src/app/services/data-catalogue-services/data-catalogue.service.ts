@@ -2,18 +2,22 @@ import { Injectable, Injector} from '@angular/core';
 import { CommonService } from '../common.service';
 import { BaseService } from '../base.service';
 import { HttpClient } from '@angular/common/http';
+import { ServiceUri } from 'src/app/models/serviceUri';
 
 @Injectable({
   providedIn: 'root',
 })
 
-export class DataCatalogueService extends BaseService {
+export class DataCatalogueService {
   choosen_lst: any = [];
-  override serviceUri = 'https://localhost:7021/api/DataLandsat';
-  constructor(http: HttpClient, _commonService: CommonService) {
-    super(http, _commonService);
-  }
+  constructor(
+    http: HttpClient,
+     _commonService: CommonService,
+     public _baseService: BaseService,
+     public serviceUri: ServiceUri,
+  ) {}
 
+  // Landsat
   getDataLandsat(): Promise<any>{
     const gridInfo = {
       filters: [],
@@ -28,10 +32,31 @@ export class DataCatalogueService extends BaseService {
         },
       ],
     };
-    return this.getData(gridInfo);
+    return this._baseService.getData(gridInfo, this.serviceUri.LandsatUri);
+  }
+  getDataLandsatById(id: any):Promise<any> {
+    return this._baseService.getById(id, this.serviceUri.LandsatUri);
   }
 
-  getDataLandsatById(id: any):Promise<any> {
-    return this.getById(id);
+  // LandCover
+  getDataLandCover(): Promise<any>{
+    const gridInfo = {
+      filters: [],
+      pageInfo: {
+        page: 1, // Hiển thị ở trang 1
+        pageSize: 60, //Hiển thị số phần tử sẽ hiện ra
+      },
+      sorts: [
+        {
+          field: '',
+          dir: 0,
+        },
+      ],
+    };
+    return this._baseService.getData(gridInfo, this.serviceUri.LandCoverUri);
+  }
+
+  getDataLandCoverById(id: any):Promise<any> {
+    return this._baseService.getById(id, this.serviceUri.LandCoverUri);
   }
 }
