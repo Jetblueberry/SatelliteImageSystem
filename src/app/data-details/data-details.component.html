@@ -75,6 +75,7 @@
                         [(ngModel)]="i.displayDate"
 
                         dateFormat="dd/mm/yy"
+                        (onSelect)="switchDateData(i, $event)"
                       >{{i.displayDate}}</p-calendar>
                     </button>
                     <button class="date-after" [disabled]="disableAfterDate" (click)="getAfterDate(this.maxDate, i.idData)">

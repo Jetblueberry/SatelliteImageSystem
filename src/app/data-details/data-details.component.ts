@@ -228,9 +228,26 @@ export class DataDetailsComponent {
 
   // Change Date
   async switchDateData(x: any, event: any) {
-    await await this._dataMapService.RemoveDataFromMap(x.displayName)
-    x.selectedDate = event.value;
+    await this._dataMapService.RemoveDataFromMap(x.displayName)
+    var dateString = this.convertTimeFromGTM (event);
+    x.selectedDate = dateString;
     console.warn(x.selectedDate);
     await this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate)
+  }
+
+  convertTimeFromGTM(event : any) {
+    let gmtDate = new Date(event);
+
+    // Convert GMT date to UTC and format it as 'YYYY-MM-DDTHH:mm:ss'
+    let year = gmtDate.getUTCFullYear();
+    let month = String(gmtDate.getMonth() + 1).padStart(2, '0');
+    let day = String(gmtDate.getDate()).padStart(2, '0');
+    let hours = String(gmtDate.getHours()).padStart(2, '0');
+    let minutes = String(gmtDate.getMinutes()).padStart(2, '0');
+    let seconds = String(gmtDate.getSeconds()).padStart(2, '0');
+
+    // Construct the UTC date string
+    let utcDateString = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    return utcDateString
   }
 }
