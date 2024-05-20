@@ -59,4 +59,25 @@ export class DataCatalogueService {
   getDataLandCoverById(id: any):Promise<any> {
     return this._baseService.getById(id, this.serviceUri.LandCoverUri);
   }
+
+  getDataSentinel(): Promise<any>{
+    const gridInfo = {
+      filters: [],
+      pageInfo: {
+        page: 1, // Hiển thị ở trang 1
+        pageSize: 60, //Hiển thị số phần tử sẽ hiện ra
+      },
+      sorts: [
+        {
+          field: '',
+          dir: 0,
+        },
+      ],
+    };
+    return this._baseService.getData(gridInfo, this.serviceUri.SentinelUri);
+  }
+
+  getDataSentinelById(id: any):Promise<any> {
+    return this._baseService.getById(id, this.serviceUri.SentinelUri);
+  }
 }

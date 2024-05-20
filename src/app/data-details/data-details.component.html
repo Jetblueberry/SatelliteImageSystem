@@ -13,31 +13,31 @@
             <div class="box-details-header">
               <button class="display-btn" id="display-btn-{{i.displayName}}" (click)="hideShowDataMap(i)"></button>
               <span class="dataset-name" >{{i.displayName}}</span>
-              <div class="icon-grp-area" (click)="OpenCloseDetailsBody(i.tenData)">
-                <i class="fa-solid fa-caret-down" id="{{i.tenData}}-icon" ></i>
+              <div class="icon-grp-area" (click)="OpenCloseDetailsBody(i.displayName)">
+                <i class="fa-solid fa-caret-down" id="{{i.displayName}}-icon" ></i>
               </div>
             </div>
-            <div class="box-details-body" *ngIf="!displayDetailsBody[i.tenData]">
+            <div class="box-details-body" *ngIf="!displayDetailsBody[i.displayName]">
               <div class="row-1 box-summary-details">
                 <button class="summary-detail" (click)="openSummary(i.idData)">Dataset Summary</button>
-                <button class="menu-btn" (click)="openBoxControl(i.tenData)">
+                <button class="menu-btn" (click)="openBoxControl(i.displayName)">
                   <i class="fa-solid fa-bars"></i>
                 </button>
               </div>
-              <div *ngIf="displayBoxControl[i.tenData]" class="box-view-control" (blur)="closeBoxControl(i.tenData)">
+              <div *ngIf="displayBoxControl[i.displayName]" class="box-view-control" (blur)="closeBoxControl(i.displayName)">
                 <ul style="list-style: none;">
                   <li (click)="addCopyDataDetails(i.displayName)">
                     <button class="btn-control compare">
                       <span style="margin-right: 5px;"><i class="fa-solid fa-code-compare"></i></span>
-                      <span>Compare</span>
+                      <span>Duplicate</span>
                     </button>
                   </li>
-                  <li>
+                  <!-- <li>
                     <button class="btn-control export">
                       <span style="margin-right: 5px;"><i class="fa-solid fa-file-export"></i></span>
                       <span>Export</span>
                     </button>
-                  </li>
+                  </li> -->
                   <li (click)="removeDetails(i.tenData, i.displayName)">
                     <button class="btn-control remove" >
                       <span style="margin-right: 5px;"><i class="fa-solid fa-ban"></i></span>
@@ -56,7 +56,7 @@
                 <button class="btn-compare box-compare-left" [class.active]="_dataDetailsService.activeIndex[i.displayName]===0" (click)="setcompareLeft(i.displayName)">
                   <span>Left</span>
                 </button>
-                <button class="btn-compare box-compare-both" [class.active]="_dataDetailsService.activeIndex[i.displayName]===1" >
+                <button class="btn-compare box-compare-both" [class.active]="_dataDetailsService.activeIndex[i.displayName]===1" (click)="setCompareBoth(i)">
                   <span>Both</span>
                 </button>
                 <button class="btn-compare box-compare-right" [class.active]="_dataDetailsService.activeIndex[i.displayName]===2" (click)="setcompareRight(i.displayName)">
@@ -67,7 +67,7 @@
                 <span>Time:</span>
                 <div style="display: flex;">
                   <div class="box-range-time">
-                    <button class="date-previous" [disabled]="disablePreviousDate" (click)="getPreviousDate(this.minDate, i.idData)">
+                    <button class="date-previous" [disabled]="disablePreviousDate">
                       <i class="fa-solid fa-caret-left"></i>
                     </button>
                     <button class="date-default">
@@ -78,7 +78,7 @@
                         (onSelect)="switchDateData(i, $event)"
                       >{{i.displayDate}}</p-calendar>
                     </button>
-                    <button class="date-after" [disabled]="disableAfterDate" (click)="getAfterDate(this.maxDate, i.idData)">
+                    <button class="date-after" [disabled]="disableAfterDate">
                       <i class="fa-solid fa-caret-right"></i>
                     </button>
                   </div>
@@ -89,9 +89,9 @@
                 <div class="box-timeline" *ngIf="!closeTimeLine[i.displayName]">
                   <div class="box-story-area"></div>
                   <div class="timeline-area">
-                    <span class="timeline-title">Available time of data {{i.tenData}}</span>
+                    <span class="timeline-title">Available time of data {{i.displayName}}</span>
                     <div class="timeline-chart">
-                      <p-timeline class="timeline" [value]="this.lstTime" layout="horizontal" align="bottom">
+                      <p-timeline class="timeline" [value]="this._dataDetailsService.convertGTMTime(i.listAvaiableDates)" layout="horizontal" align="bottom">
                         <ng-template pTemplate="marker" let-event>
                           <span
                             class="custom-marker p-shadow-2"

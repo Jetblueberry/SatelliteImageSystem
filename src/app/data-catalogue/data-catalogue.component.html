@@ -36,7 +36,7 @@
                   <ul *ngIf="displayData['landsat']" class="catalog-group-datasets">
                     <li *ngFor="let i of this.list_landsat" class="data-catalog-group-datasets" >
                       <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
-                        <span class="btn-text">{{i.tenData}}</span>
+                        <span class="btn-text">{{i.maData}}</span>
                       </button>
                       <span *ngIf="!displayMinusIcon[i.idData]" class="btn-icon" (click)="addDatasetToMap(i.idData)">
                         <i  class="fa-solid fa-circle-plus"></i>
@@ -57,11 +57,11 @@
                     </span>
                   </button>
                   <ul *ngIf="displayData['sentinel']" class="catalog-group-datasets">
-                    <li *ngFor="let i of this.sentinel_lst" class="data-catalog-group-datasets" >
+                    <li *ngFor="let i of this.list_sentinel" class="data-catalog-group-datasets" >
                       <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
-                        <span class="btn-text">{{i.name}}</span>
+                        <span class="btn-text">{{i.maData}}</span>
                       </button>
-                      <span class="btn-icon" (click)="addDatasetToMap(i.id)">
+                      <span class="btn-icon" (click)="addDataSentinelToMap(i.id)">
                         <i class="fa-solid fa-circle-plus"></i>
                       </span>
                     </li>
@@ -79,7 +79,7 @@
                   <ul *ngIf="displayData['landcover']" class="catalog-group-datasets">
                     <li *ngFor="let i of this.list_landcover" class="data-catalog-group-datasets" >
                       <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
-                        <span class="btn-text">{{i.tenData}}</span>
+                        <span class="btn-text">{{i.maData}}</span>
                       </button>
                       <span *ngIf="!displayMinusIcon[i.idData]" class="btn-icon" (click)="addDataLandCoverToMap(i.idData)">
                         <i class="fa-solid fa-circle-plus"></i>
@@ -96,7 +96,7 @@
                   <ul class="catalog-group-datasets">
                     <li *ngFor="let i of this.list_search_data" class="data-catalog-group-datasets" >
                       <button type="button" class="catalog-group-datasets-btn" (click)="selectDataset(i.idData)">
-                        <span class="btn-text">{{i.tenData}}</span>
+                        <span class="btn-text">{{i.maData}}</span>
                       </button>
                       <span *ngIf="!displayMinusIcon[i.idData]" class="btn-icon" (click)="addDatasetToMap(i.idData)">
                         <i  class="fa-solid fa-circle-plus"></i>
@@ -125,7 +125,8 @@
                 </div>
                 <div class="preview-info">
                   <div class="preview-name">
-                    <h3>{{lsd.tenData}}</h3>
+                    <h3>{{lsd.maData}}</h3>
+                    <p>Code: {{lsd.tenData}}</p>
                   </div>
                   <div class="preview-details">
                     <div class="box-sc">

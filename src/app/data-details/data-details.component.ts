@@ -20,7 +20,7 @@ export class DataDetailsComponent {
   @Output() closeDetails = new EventEmitter<any>();
 
 
-  displayOnMap = true;
+  closedisplayOnMap: any = {};
   displayDetailsBody: any = {};
   displayBoxControl: any = {};
   countDetailsname: any = {};
@@ -31,8 +31,7 @@ export class DataDetailsComponent {
   closeTimeLine: any = {};
   minDate = new Date("2022/02/13");
   maxDate = new Date();
-  events2 = "2021-04-13T00:00:00,2022-04-13T00:00:00,2023-04-13T00:00:00,2024-04-13T00:00:00";
-  lstTime: any[] = [];
+  // lstTime: any[] = [];
 
   lstStyles: any[] = [];
 
@@ -45,7 +44,6 @@ export class DataDetailsComponent {
 
   ngOnInit() {
     this.customDetailsBeforeInit();
-    this.lstTime = this._dataDetailsService.convertGTMTime(this.events2);
   }
 
   customDetailsBeforeInit() {
@@ -92,13 +90,13 @@ export class DataDetailsComponent {
   async hideShowDataMap(i: any) {
     var btn = document.getElementById(`display-btn-${i.displayName}`);
     if (btn) {
-      if (this.displayOnMap) {
+      if (!this.closedisplayOnMap[i.displayName]) {
         btn.style.backgroundColor = 'white';
-        this.displayOnMap = false;
+        this.closedisplayOnMap[i.displayName] = true;
         await this._dataMapService.RemoveDataFromMap(i.displayName);
       } else {
         btn.style.backgroundColor = '#002470';
-        this.displayOnMap = true;
+        this.closedisplayOnMap[i.displayName] = false;
         if(i.loaiData == 'landcover') {
           this._dataMapService.AddDataLandCover(i.tenData, i.workspace, i.selectedDate);
         }else {
@@ -123,12 +121,12 @@ export class DataDetailsComponent {
   }
 
   // Box-view-control
-  openBoxControl(nameData: any) {
-    if(!this.displayBoxControl[nameData]) {
-      this.displayBoxControl[nameData] = true;
+  openBoxControl(displayName: any) {
+    if(!this.displayBoxControl[displayName]) {
+      this.displayBoxControl[displayName] = true;
     }
     else {
-      this.displayBoxControl[nameData] = false;
+      this.displayBoxControl[displayName] = false;
     }
   }
   closeBoxControl(nameData: any) {
@@ -141,7 +139,7 @@ export class DataDetailsComponent {
           this._dataMapService.RemoveDataFromMap(this.lst_choosen[i].displayName);
           this.lst_choosen.splice(i, 1);
 
-          this.displayBoxControl[nameData] = false;
+          this.displayBoxControl[displayName] = false;
           this.countDetailsname[nameData] = false;
 
           break;
@@ -153,39 +151,6 @@ export class DataDetailsComponent {
   }
 
   // Date time
-  getAbledDates(minDate: any, maxDate: any): Date[] {
-    const disabledDates = [];
-
-    // Loop from current date to minDate (exclusive)
-    for (let d = new Date(minDate); d > minDate && d < maxDate; d.setDate(d.getDate() + 1)) {
-        disabledDates.push(new Date(d));
-    }
-
-    return disabledDates;
-  }
-  getPreviousDate(minDate: Date, idData: any) {
-      var btnFile = document.getElementsByClassName('p-datepicker-prev')[0];
-      if (btnFile) {
-        if (
-          btnFile instanceof HTMLInputElement ||
-          btnFile instanceof HTMLElement
-        ) {
-          btnFile.click();
-        }
-      }
-
-  }
-  getAfterDate(maxDate: Date, idData: any) {
-    var btnFile = document.getElementsByClassName('p-datepicker-next')[0];
-      if (btnFile) {
-        if (
-          btnFile instanceof HTMLInputElement ||
-          btnFile instanceof HTMLElement
-        ) {
-          btnFile.click();
-        }
-      }
-  }
   openCloseTimeBtn(i: any) {
     var btn = document.getElementById(`time-btn-${i.displayName}`);
     if(btn) {
@@ -199,11 +164,12 @@ export class DataDetailsComponent {
       }
     }
   }
-  isEventSelected(item: any) {
+  isEventSelected(item: any, lstAvailableDates: any) {
+    var lstTime = this._dataDetailsService.convertGTMTime(lstAvailableDates)
     const formattedDate = this._dataDetailsService.convertTimeStringFormat(item.selectedDate);
-    for(let i = 0; i < this.lstTime.length; i++) {
+    for(let i = 0; i < lstTime.length; i++) {
       var bt = document.getElementsByClassName('custom-marker')[i];
-      if(this.lstTime[i] == formattedDate) {
+      if(lstTime[i] == formattedDate) {
         if(bt) {
           if (
             bt instanceof HTMLInputElement ||
@@ -232,14 +198,17 @@ export class DataDetailsComponent {
   }
   setcompareLeft(displayName: any) {
     this.setActiveBtnCompare(0, displayName);
-    //this._dataMapService.removeCompareRightlayer();
     this._dataMapService.addCompareLeftlayer(displayName);
+  }
+  async setCompareBoth(i: any) {
+    this.setActiveBtnCompare(1, i.displayName);
+    await this._dataMapService.addCompareBothLayer(i);
   }
   setcompareRight(displayName: any) {
     this.setActiveBtnCompare(2, displayName)
-    //this._dataMapService.removeCompareLeftlayer();
     this._dataMapService.addCompareRightlayer(displayName);
   }
+
 
   addCopyDataDetails(nameData: any) {
     for(var x of this.lst_choosen) {
@@ -250,7 +219,12 @@ export class DataDetailsComponent {
           obj.displayName = nameData + ` - Copy`;
           this._dataDetailsService.opacityValue[obj.displayName] = 100
           this.lst_choosen.push(obj);
-          this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate);
+          if(x.loaiData == 'landcover') {
+            this._dataMapService.AddDataLandCover(x.tenData, x.workspace, x.selectedDate);
+          }else {
+            this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate);
+          }
+
           this.displayBoxControl[nameData] = false;
         }
         else {
@@ -278,7 +252,7 @@ export class DataDetailsComponent {
     await this._dataMapService.RemoveDataFromMap(x.displayName)
     var dateString = this.convertTimeFromGTM (event);
     x.selectedDate = dateString;
-    await this.isEventSelected(x);
+    await this.isEventSelected(x, x.lstAvaiableDates);
     console.warn(x.selectedDate);
     await this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate)
   }

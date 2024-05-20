@@ -30,11 +30,6 @@ export class DataCatalogueComponent {
 
   displayData: any = {};
   displayMinusIcon: any = {};
-  landsat_lst: any = [];
-  sentinel_lst: any = [];
-
-  total_lst: any = [];
-
 
   constructor(
     public _dataCatalogueService: DataCatalogueService,
@@ -45,17 +40,10 @@ export class DataCatalogueComponent {
   ) {}
 
   async ngOnInit() {
-    this.getDatasetList();
     await this.getDataLandsatList();
+    await this.getDataSentinelList();
     await this.getDataLandCoverList();
     await this.getTotalDataList();
-  }
-
-  // Data List
-  getDatasetList() {
-    this.landsat_lst = landsat_data.landsat_data_lists;
-    this.sentinel_lst = sentinel_data.sentinel_data_lists;
-    this.total_lst = this.landsat_lst.concat(this.sentinel_lst);
   }
 
   async getDataLandsatList() {
@@ -65,14 +53,19 @@ export class DataCatalogueComponent {
     }
   }
   async getDataLandCoverList() {
-  const result = await this._dataCatalogueService.getDataLandCover();
+    const result = await this._dataCatalogueService.getDataLandCover();
     if(result) {
       this.list_landcover = result;
     }
   }
+  async getDataSentinelList() {
+    const result = await this._dataCatalogueService.getDataSentinel();
+    if(result) {
+      this.list_sentinel = result;
+    }
+  }
   async getTotalDataList() {
-    var merge1 = this.list_landsat.concat(this.list_landcover);
-    this.list_total_data = merge1.concat(this.list_sentinel)
+    this.list_total_data  = this.list_landsat.concat(this.list_sentinel, this.list_landcover);
     console.warn(this.list_total_data)
   }
 
@@ -125,6 +118,31 @@ export class DataCatalogueComponent {
   async addDatasetToMap(idData: any) {
     // Khởi tạo các prop cần truyền từ những dữ liệu lấy trong bảng
     const item = await this._dataCatalogueService.getDataLandsatById(idData);
+    // Khởi tạo tên hiển thị
+    item.displayName = item.tenData; // set displayName when add details
+    //Khởi tạo style được chọn
+    item.selectedStyle = this._dataDetailsService.CustomListChosen(item.listStyles)[0];
+    // Khởi tạo date được chọn
+    item.selectedDate = item.defaultDate;
+    item.displayDate = new Date(item.selectedDate);
+    // set opacity when add details
+    this._dataDetailsService.opacityValue[item.displayName] = 100;
+    // set active compare
+    this._dataDetailsService.activeIndex[item.displayName] = 1;
+
+    await this._dataCatalogueService.choosen_lst.push(item); // add in lst
+    await this._dataMapService.AddDataToMap(item.tenData, item.selectedStyle, item.selectedDate);
+
+    this.closeCatalogue.emit(false);
+    this.displayMinusIcon[idData] = true;
+    this.openDetails = true;
+    setTimeout(async () => {
+      await this.messageService.addMessageSuccessAdding();
+    }, 500);
+  }
+  async addDataSentinelToMap(idData: any) {
+    // Khởi tạo các prop cần truyền từ những dữ liệu lấy trong bảng
+    const item = await this._dataCatalogueService.getDataSentinelById(idData);
     // Khởi tạo tên hiển thị
     item.displayName = item.tenData; // set displayName when add details
     //Khởi tạo style được chọn

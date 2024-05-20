@@ -19,6 +19,8 @@ export class DataMapService {
   defaultMapType: any = false;
   marker: any;
   circle: any;
+  leftL: any = {};
+  rightL: any = {};
 
   displayZoom = true;
 
@@ -105,6 +107,7 @@ export class DataMapService {
           crs: L.CRS.EPSG3857,
         }
       );
+      console.warn(this.defaultLayer[nameData]);
     }
     return this.defaultLayer[nameData];
   }
@@ -126,7 +129,6 @@ export class DataMapService {
   async AddDataLandCover(nameData: any, workspace: any, date: any) {
     if (this.map) {
       await this.InitialDataLandCoverByName(nameData, workspace, date).addTo(this.map);
-
     }
   }
 
@@ -189,7 +191,9 @@ export class DataMapService {
       cropImageByInnerWH: true, // crop blank opacity from image borders
       hidden: false, // hide screen icon
       preventDownload: false, // prevent download on button click
-      domtoimageOptions: {}, // see options for dom-to-image
+      domtoimageOptions: {
+        crossOrigin: 'anonymous',
+      }, // see options for dom-to-image
       position: 'topleft', // position of take screen icon
       screenName: 'screen', // string or function
       hideElementsWithSelectors: ['.leaflet-control-container'], // by default hide map controls All els must be child of _map._container
@@ -252,22 +256,28 @@ export class DataMapService {
   // Compare
   addCompareLeftlayer(layer_left_name: any) {
     var left = this.getDataLayerByName(layer_left_name);
-    this.mp.setLeftLayers(left);
+    //
+    this.mp.setLeftLayers([left]);
+    this.mp.setRightLayers([]);
+    left.addTo(this.map);
   }
-  removeCompareLeftlayer() {
-    this.mp.leftlayerremove();
-  }
+
   addCompareRightlayer(layer_right: any) {
+    //
     var right = this.getDataLayerByName(layer_right);
-    this.mp.setRightLayers(right);
+    this.mp.setRightLayers([right]);
+    this.mp.setLeftLayers([]);
+    right.addTo(this.map);
   }
-  removeCompareRightlayer() {
-    this.mp.rightlayerremove();
-  }
-  addCompareBothLayer(both_layer_name: any) {
-    var both = this.getDataLayerByName(both_layer_name);
-    this.mp.setLeftLayers(both_layer_name);
-    this.mp.setRightLayers(both_layer_name);
+  async addCompareBothLayer(i: any) {
+    await this.RemoveDataFromMap(i.displayName);
+    if(i.loaiData == 'landcover') {
+      await this.AddDataLandCover(i.tenData, i.workspace, i.selectedDate)
+      console.warn(this.defaultLayer[i.tenData])
+    }
+    else {
+      await this.AddDataToMap(i.tenData, i.selectedStyle, i.selectedDate)
+    }
   }
 }
 
