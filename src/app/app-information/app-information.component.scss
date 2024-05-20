@@ -63,9 +63,6 @@ h4 {
 
 
 //right-content
-.right-content {
-
-}
 .logo-area {
   background-color: transparent;
   border-radius: 50%;
@@ -78,7 +75,8 @@ h4 {
 img {
   position: absolute;
   z-index: -10;
-  top: -17px;
+  top: -5px;
   scale: 0.96;
-  right: -229px;
+  right: 30px;
+  border-radius: 50%;
 }
