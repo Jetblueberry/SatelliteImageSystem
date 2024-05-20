@@ -65,7 +65,8 @@ export class DataCatalogueComponent {
     }
   }
   async getTotalDataList() {
-    this.list_total_data  = this.list_landsat.concat(this.list_sentinel, this.list_landcover);
+    var a = this.list_landsat.concat(this.list_sentinel);
+    this.list_total_data = a.concat(this.list_landcover)
     console.warn(this.list_total_data)
   }
 
@@ -235,7 +236,7 @@ export class DataCatalogueComponent {
   async searchDataList(query: string) {
     this.list_search_data.length = 0;
     for (let i = 0; i < this.list_total_data.length; i++) {
-      var q = this.list_total_data[i].tenData.substring(0, query.length).toLocaleLowerCase();
+      var q = this.list_total_data[i].maData.substring(0, query.length).toLocaleLowerCase();
       if (q === query.toLocaleLowerCase())
       {
         //So sánh chuỗi nhập vào với tên sản phẩm
