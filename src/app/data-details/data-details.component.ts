@@ -28,8 +28,11 @@ export class DataDetailsComponent {
   disablePreviousDate = false;
   disableAfterDate = false;
 
+  closeTimeLine: any = {};
   minDate = new Date("2022/02/13");
   maxDate = new Date();
+  events2 = "2021-04-13T00:00:00,2022-04-13T00:00:00,2023-04-13T00:00:00,2024-04-13T00:00:00";
+  lstTime: any[] = [];
 
   lstStyles: any[] = [];
 
@@ -42,6 +45,7 @@ export class DataDetailsComponent {
 
   ngOnInit() {
     this.customDetailsBeforeInit();
+    this.lstTime = this._dataDetailsService.convertGTMTime(this.events2);
   }
 
   customDetailsBeforeInit() {
@@ -86,7 +90,7 @@ export class DataDetailsComponent {
   }
 
   async hideShowDataMap(i: any) {
-    var btn = document.getElementById('display-btn');
+    var btn = document.getElementById(`display-btn-${i.displayName}`);
     if (btn) {
       if (this.displayOnMap) {
         btn.style.backgroundColor = 'white';
@@ -182,6 +186,45 @@ export class DataDetailsComponent {
         }
       }
   }
+  openCloseTimeBtn(i: any) {
+    var btn = document.getElementById(`time-btn-${i.displayName}`);
+    if(btn) {
+      if(!this.closeTimeLine[i.displayName]) {
+        btn.style.backgroundColor = "#002470";
+        this.closeTimeLine[i.displayName] = true;
+      }
+      else {
+        btn.style.background = "rgb(1, 168, 140)";
+        this.closeTimeLine[i.displayName] = false;
+      }
+    }
+  }
+  isEventSelected(item: any) {
+    const formattedDate = this._dataDetailsService.convertTimeStringFormat(item.selectedDate);
+    for(let i = 0; i < this.lstTime.length; i++) {
+      var bt = document.getElementsByClassName('custom-marker')[i];
+      if(this.lstTime[i] == formattedDate) {
+        if(bt) {
+          if (
+            bt instanceof HTMLInputElement ||
+            bt instanceof HTMLElement
+          ) {
+            bt.style.background = "rgb(233 245 0)";
+          }
+        }
+      }
+      else {
+        if(bt) {
+          if (
+            bt instanceof HTMLInputElement ||
+            bt instanceof HTMLElement
+          ) {
+            bt.style.background = "#fff";
+          }
+        }
+      }
+    }
+  }
 
   // Compare
   setActiveBtnCompare(index: any, displayName: any) {
@@ -235,6 +278,7 @@ export class DataDetailsComponent {
     await this._dataMapService.RemoveDataFromMap(x.displayName)
     var dateString = this.convertTimeFromGTM (event);
     x.selectedDate = dateString;
+    await this.isEventSelected(x);
     console.warn(x.selectedDate);
     await this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate)
   }

@@ -26,6 +26,24 @@
     display: flex;
   }
 }
+::ng-deep .scroll-bar-about {
+  background: transparent;
+  color: white;
+  display: flex;
+
+  .ps__thumb-y {
+    background-color: #00f260!important;
+  }
+  .ps__thumb-y:hover {
+    background-color: #3EBF9D!important;
+  }
+  .ps__rail-y {
+    background-color: #0575e6!important;
+  }
+  .ps-content {
+    display: flex;
+  }
+}
 .left-content {
   width: 930px;
 }
@@ -33,8 +51,34 @@ h1 {
   color: white;
   font-size: 30px;
 }
+h4 {
+  color: white;
+  font-size: 18px;
+}
 .little-summary {
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 14px;
+}
+
+
+//right-content
+.right-content {
+
+}
+.logo-area {
+  background-color: transparent;
+  border-radius: 50%;
+  border:4px solid #0ffebf;
+  //4px solid #0084ff
+  height: 300px;
+  width: 300px;
+  position: fixed;
+}
+img {
+  position: absolute;
+  z-index: -10;
+  top: -17px;
+  scale: 0.96;
+  right: -229px;
 }

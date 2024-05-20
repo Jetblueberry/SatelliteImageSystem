@@ -11,7 +11,7 @@
         <perfect-scrollbar style="height: 360px;" class="scroll-bar">
           <li *ngFor="let i of lst_choosen" class="box-details" >
             <div class="box-details-header">
-              <button class="display-btn" id="display-btn" (click)="hideShowDataMap(i)"></button>
+              <button class="display-btn" id="display-btn-{{i.displayName}}" (click)="hideShowDataMap(i)"></button>
               <span class="dataset-name" >{{i.displayName}}</span>
               <div class="icon-grp-area" (click)="OpenCloseDetailsBody(i.tenData)">
                 <i class="fa-solid fa-caret-down" id="{{i.tenData}}-icon" ></i>
@@ -82,9 +82,29 @@
                       <i class="fa-solid fa-caret-right"></i>
                     </button>
                   </div>
-                  <button type="button" class="time-btn">
+                  <button type="button" class="time-btn" id="time-btn-{{i.displayName}}" (click)="openCloseTimeBtn(i)">
                     <i class="fa-solid fa-timeline"></i>
                   </button>
+                </div>
+                <div class="box-timeline" *ngIf="!closeTimeLine[i.displayName]">
+                  <div class="box-story-area"></div>
+                  <div class="timeline-area">
+                    <span class="timeline-title">Available time of data {{i.tenData}}</span>
+                    <div class="timeline-chart">
+                      <p-timeline class="timeline" [value]="this.lstTime" layout="horizontal" align="bottom">
+                        <ng-template pTemplate="marker" let-event>
+                          <span
+                            class="custom-marker p-shadow-2"
+                            [style.backgroundColor]="event === this._dataDetailsService.convertTimeStringFormat(i.selectedDate) ? 'rgb(233 245 0)' : '#fff'"
+                          >
+                          </span>
+                        </ng-template>
+                        <ng-template pTemplate="content" let-event>
+                          &#123;&#123;event&#125;&#125;
+                        </ng-template>
+                      </p-timeline>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="row-4 box-filter-location">
@@ -107,4 +127,5 @@
     </div>
   </div>
 </div>
+
 

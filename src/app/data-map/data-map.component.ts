@@ -34,7 +34,7 @@ export class DataMapComponent {
   displayCityLabel = false;
   displayIconDelete: any = {};
   selectedMapTypes: any;
-  events2 = ["31/12/2020", "31/12/2021", "31/12/2022", "31/12/2023"];
+
   lat: any;
   lng: any;
   typeWorking: any = "NothingWorking";
