@@ -197,6 +197,7 @@ export class DataCatalogueComponent {
       if (this._dataCatalogueService.choosen_lst[i].displayName === displayName) {
           this._dataMapService.RemoveDataFromMap(this._dataCatalogueService.choosen_lst[i].displayName);
           this._dataCatalogueService.choosen_lst.splice(i, 1);
+          this.closeCatalogue.emit(false);
           break;
       }
     }

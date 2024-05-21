@@ -115,7 +115,17 @@
           <perfect-scrollbar class="scrollbar">
             <div *ngIf="!openPreview" class="data-catalogue-empty">
               <div class="empty-container">
-                <p>Select dataset to see a preview</p>
+                <p>Select dataset name in folders to see a preview</p>
+                <p style="display: flex; align-items: center; justify-content: center;">
+                  <span>Click</span>
+                  <i style="margin-right: 5px; margin-left: 5px; color: #0263c4;" class="fa-solid fa-circle-plus"></i>
+                  <span>to add datasets to map</span>
+                </p>
+                <p style="display: flex; align-items: center; justify-content: center;">
+                  <span>If dataset added. Click</span>
+                  <i style="margin-right: 5px; margin-left: 5px; color: #0263c4;" class="fa-solid fa-circle-minus"></i>
+                  <span>to remove dataset from map</span>
+                </p>
               </div>
             </div>
             <div *ngIf="openPreview" class="data-catalogue-details">
@@ -126,7 +136,7 @@
                 <div class="preview-info">
                   <div class="preview-name">
                     <h3>{{lsd.maData}}</h3>
-                    <p>Code: {{lsd.tenData}}</p>
+                    <p>Code name: {{lsd.tenData}}</p>
                   </div>
                   <div class="preview-details">
                     <div class="box-sc">
@@ -262,6 +272,7 @@
   *ngIf="openDetails"
   [lst_choosen]="this._dataCatalogueService.choosen_lst"
   (idDataSelected)="selectDataset($event)"
+  (typeDataSelected)="OpenCloseListData($event)"
   (openCatalogue)="openDataCatalogue($event)"
   (closeDetails)="closeDataDetails($event)"
   >

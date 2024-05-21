@@ -19,7 +19,7 @@
             </div>
             <div class="box-details-body" *ngIf="!displayDetailsBody[i.displayName]">
               <div class="row-1 box-summary-details">
-                <button class="summary-detail" (click)="openSummary(i.idData)">Dataset Summary</button>
+                <button class="summary-detail" (click)="openSummary(i.idData, i.loaiData)">Dataset Summary</button>
                 <button class="menu-btn" (click)="openBoxControl(i.displayName)">
                   <i class="fa-solid fa-bars"></i>
                 </button>

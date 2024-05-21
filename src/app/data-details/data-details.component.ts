@@ -17,6 +17,7 @@ export class DataDetailsComponent {
   @Input() lst_choosen: any;
   @Output() openCatalogue = new EventEmitter<any>();
   @Output() idDataSelected = new EventEmitter<any>();
+  @Output() typeDataSelected = new EventEmitter<any>();
   @Output() closeDetails = new EventEmitter<any>();
 
 
@@ -81,9 +82,10 @@ export class DataDetailsComponent {
     }
   }
 
-  openSummary(idData: any) {
+  openSummary(idData: any, type: any) {
     this.openCatalogue.emit(true);
     this.idDataSelected.emit(idData);
+    this.typeDataSelected.emit(type);
     this._dataMapService.displayZoom = false;
   }
 
@@ -214,6 +216,7 @@ export class DataDetailsComponent {
     for(var x of this.lst_choosen) {
       if(x.tenData = nameData) {
         if(!this.countDetailsname[nameData]) {
+
           var obj = { ...x };
           this.countDetailsname[nameData] = true;
           obj.displayName = nameData + ` - Copy`;
