@@ -25,6 +25,8 @@ export class DataMapService {
   displayZoom = true;
 
   mp = L.control.sideBySide();
+  leftBefore = [];
+  rightBefore = [];
 
   constructor(
     public _wmsService: WmsService,
@@ -57,8 +59,8 @@ export class DataMapService {
           styles: choosenStyle,
           format: 'image/png', // or any other supported format
           time: choosenDate,
-          width: 2048,
-          height: 2048,
+          width: 1024,
+          height: 1024,
           transparent: true,
           crs: L.CRS.EPSG3857,
         }
@@ -258,16 +260,19 @@ export class DataMapService {
     var left = this.getDataLayerByName(layer_left_name);
     //
     this.mp.setLeftLayers([left]);
-    this.mp.setRightLayers([]);
+    this.mp.setRightLayers([this.rightBefore]);
     left.addTo(this.map);
+    this.leftBefore = left;
   }
 
   addCompareRightlayer(layer_right: any) {
     //
     var right = this.getDataLayerByName(layer_right);
     this.mp.setRightLayers([right]);
-    this.mp.setLeftLayers([]);
+    this.mp.setLeftLayers([this.leftBefore]);
+
     right.addTo(this.map);
+    this.rightBefore = right;
   }
   async addCompareBothLayer(i: any) {
     await this.RemoveDataFromMap(i.displayName);

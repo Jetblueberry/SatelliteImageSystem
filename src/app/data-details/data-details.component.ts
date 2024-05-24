@@ -177,7 +177,7 @@ export class DataDetailsComponent {
             bt instanceof HTMLInputElement ||
             bt instanceof HTMLElement
           ) {
-            bt.style.background = "rgb(233 245 0)";
+            bt.style.background = "red";
           }
         }
       }
@@ -255,9 +255,9 @@ export class DataDetailsComponent {
     await this._dataMapService.RemoveDataFromMap(x.displayName)
     var dateString = this.convertTimeFromGTM (event);
     x.selectedDate = dateString;
-    await this.isEventSelected(x, x.lstAvaiableDates);
     console.warn(x.selectedDate);
-    await this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate)
+    await this._dataMapService.AddDataToMap(x.tenData, x.selectedStyle, x.selectedDate);
+    await this.isEventSelected(x, x.lstAvaiableDates);
   }
 
   convertTimeFromGTM(event : any) {

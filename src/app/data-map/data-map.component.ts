@@ -368,7 +368,7 @@ export class DataMapComponent {
     }
     else {
       var i = document.getElementById(`${type}`)
-      if(i) {
+      if(i) { 
         i.style.background = "#496cf5";
       }
       this.displayIconDelete[type] = false;
