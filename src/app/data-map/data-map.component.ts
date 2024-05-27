@@ -9,8 +9,6 @@ import 'dist/leaflet-simple-map-screenshoter';
 import 'dist/leaflet.browser.print.min';
 import 'dist/georaster-layer-for-leaflet.min.js'
 import 'dist/georaster.browser.bundle.min.js';
-
-//import GeoRasterLayer from 'georaster-layer-for-leaflet';
 import { DataCatalogueService } from '../services/data-catalogue-services/data-catalogue.service';
 import { MapTypeLists } from '../models/map-types';
 import { DataMapService } from '../services/data-map-services/data-map.service';
@@ -44,6 +42,8 @@ export class DataMapComponent {
   activeIndex = 0;
   choosenMap = Esri_WorldImagery;
   browserControl: any
+
+  hihi = [];
 
   constructor(
     public _dataCatalogueService: DataCatalogueService,

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataMapService } from '../services/data-map-services/data-map.service';
 import { MapTypeLists } from '../models/map-types';
+import { DataDetailsService } from '../services/data-details-services/data-details.service';
 
 @Component({
   selector: 'app-base-page',
@@ -12,6 +13,7 @@ export class AppBasePageComponent {
 
   constructor(
     public _datamapService: DataMapService,
+    public _dataDetailsService: DataDetailsService,
     public mapTypesLists: MapTypeLists,
   ) {}
 
@@ -35,6 +37,7 @@ export class AppBasePageComponent {
         btn.style.transition = "left 0.5s ease";
         caret.style.transform = "rotate(180deg)";
         caret.style.transition = "transform 0.5s ease";
+        this._dataDetailsService.openSummary = false;
         setTimeout(async () => {
           await this._datamapService.onMapReady();
         }, 500)
@@ -50,6 +53,7 @@ export class AppBasePageComponent {
         btn.style.transition = "left 0.5s ease";
         caret.style.transform = "rotate(0deg)";
         caret.style.transition = "transform 0.5s ease";
+        this._dataDetailsService.openSummary = true;
         setTimeout(async () => {
           await this._datamapService.onMapReady();
         }, 500)

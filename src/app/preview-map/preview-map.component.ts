@@ -28,7 +28,7 @@ export class PreviewMapComponent {
       touchZoom: false, // Enable touch zoom, centered
       scrollWheelZoom: false,
       renderer: L.canvas(),
-    }).setView([20.048736, 105.89033], 5);
+    }).setView([16, 106.9], 5);
     this.map = this._previewMapService.map;
 
     this._previewMapService.InitialMapPreview();
@@ -37,9 +37,9 @@ export class PreviewMapComponent {
     var line = L.polyline(
       [
         [23.5, 101.9],
-        [23.5, 108.9],
-        [16.5, 108.9],
-        [16.5, 101.9],
+        [23.5, 111.9],
+        [8.5, 111.9],
+        [8.5, 101.9],
         [23.5, 101.9],
       ],
       {color: "#349C66"}
@@ -48,13 +48,13 @@ export class PreviewMapComponent {
     var zoomedIn = true;
     this.map.on('click', () => {
       if (zoomedIn) {
-        this.map.flyTo([20.048736, 105.89033], 4, {
+        this.map.flyTo([16, 106.9], 4, {
           animate: true,
           duration: 1.5,
         }); // Zoom out if already zoomed in
         zoomedIn = false;
       } else {
-        this.map.flyTo([20.048736, 105.89033], 5, {
+        this.map.flyTo([16, 106.9], 5, {
           animate: true,
           duration: 1.5,
         }); // Zoom in if not already zoomed in

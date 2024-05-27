@@ -6,6 +6,7 @@ import { DataCatalogueService } from '../data-catalogue-services/data-catalogue.
 })
 
 export class DataDetailsService {
+  openSummary = true;
   opacityValue: any = {};
   displayRowCompare = false;
   activeIndex: any = {};
@@ -19,9 +20,9 @@ export class DataDetailsService {
     return styleArr;
   }
 
-  convertGTMTime(lstTime: any) {
-    var lstTimeCus = [];
-    var ArrTime: any[] = lstTime.split(',');
+  convertGTMTime(lstTime: string) {
+    const lstTimeCus = [];
+    const ArrTime: any[] = lstTime.split(',');
     for(var x of ArrTime) {
       var a = new Date(x);
       lstTimeCus.push(a.toLocaleDateString());
@@ -32,6 +33,5 @@ export class DataDetailsService {
   convertTimeStringFormat(time: string) {
     var a = new Date(time);
     return a.toLocaleDateString();
-
   }
 }

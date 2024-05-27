@@ -1,5 +1,5 @@
 .container-fluid {
-  width: 350px;
+  width: inherit;
   padding: 0px;
   padding: 0px;
   z-index: 1000;
@@ -201,10 +201,8 @@
 }
 .date-default {
   background: transparent;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  border-left: none;
-  border-right: none;
+  border: 1px solid white;
+  border-radius: 6px;
   width: 100%;
   color: inherit;
 }
